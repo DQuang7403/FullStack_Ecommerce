@@ -48,6 +48,7 @@ export default function Nav_bar() {
                 {navbarCategories.map((category) => {
                   return (
                     <li
+                      key={category.name}
                       className="text-lg font-semibold "
                       onClick={() => setSelectedPage(category.name)}
                     >
@@ -71,8 +72,9 @@ export default function Nav_bar() {
       <ul className="navbar-center gap-4 text-black hidden lg:flex">
         {navbarCategories.map((category) => {
           return (
-            <Link to={`${category.url}`}>
+            <Link to={`${category.url}` } key={category.name}>
               <li
+                
                 className={`tab text-black tab-bordered font-semibold text-base ${
                   category.name === selectedPage ? "tab-active" : ""
                 } `}
