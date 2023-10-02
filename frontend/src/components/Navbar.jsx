@@ -6,7 +6,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 export default function Nav_bar() {
   const [selectedPage, setSelectedPage] = useState("Home");
   return (
-    <nav className="navbar border-b-2 border-gray-300 lg:px-12">
+    <nav className="navbar border-b-2 border-gray-300 lg:px-12 py-4">
       <div className="navbar-start">
         <div className="dropdown lg:hidden">
           <div className="drawer">
@@ -87,7 +87,7 @@ export default function Nav_bar() {
             </div>
           </div>
         </div>
-        <div className="text-black font-bold text-2xl hidden min-[425px]:flex ">
+        <div className="text-black font-bold text-2xl hidden lg:ml-20 min-[425px]:flex ">
           Exclusive
         </div>
       </div>
@@ -160,6 +160,9 @@ export default function Nav_bar() {
             </li>
             <li className="">
               <Link>My Order</Link>
+            </li>
+            <li className="">
+              <Link>My Watch list</Link>
             </li>
             <li className="">
               <Link>Log out</Link>

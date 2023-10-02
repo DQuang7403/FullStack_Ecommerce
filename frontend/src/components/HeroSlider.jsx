@@ -13,8 +13,8 @@ export default function HeroSlider() {
   return (
     <>
       <div className="carousel w-full m-0 p-0 ">
-        <div id="slide1" className="carousel-item relative w-full rounded-box">
-          <img src={watchSale} className="w-full aspect-[30/10] rounded-box" />
+        <div id="slide1" className="carousel-item relative w-full aspect-[5]">
+          <img src={watchSale} className="w-full " />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 ">
             <a
               href="#slide4"
@@ -35,7 +35,7 @@ export default function HeroSlider() {
         <div id="slide2" className="carousel-item relative w-full">
           <img
             src={Iphone14Img}
-            className="w-full aspect-[30/10] rounded-box"
+            className="w-full  "
           />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
@@ -57,7 +57,7 @@ export default function HeroSlider() {
         <div id="slide3" className="carousel-item relative w-full">
           <img
             src={EarPhoneHero}
-            className="w-full aspect-[30/10] rounded-box"
+            className="w-full  "
           />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a
@@ -79,7 +79,7 @@ export default function HeroSlider() {
         <div id="slide4" className="carousel-item relative w-full">
           <img
             src={heroSpeaker}
-            className="w-full aspect-[30/10] rounded-box"
+            className="w-full  "
           />
 
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
