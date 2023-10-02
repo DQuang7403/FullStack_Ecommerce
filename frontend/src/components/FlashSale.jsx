@@ -54,7 +54,7 @@ export default function FlashSale() {
         })}
       </div>
       <div className="flex items-center justify-center">
-        <button className="btn bg-[#DB4444] hover:bg-[#ba221d] text-white my-10">
+        <button className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10">
           View all products
         </button>
       </div>

@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+  --primary-color: #DB4444,
+  --gray-color: #808080,
+}
 
 .custom-caurosel{
   display: inline-flex;
@@ -15,7 +19,7 @@
 }
 ::-webkit-scrollbar {
   width: 0.5rem;
-  background-color: var(--primary-color);
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
