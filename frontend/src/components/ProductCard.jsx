@@ -14,9 +14,12 @@ export const ProductCard = ({ product }) => {
   };
   return (
     <div className="card rounded-none pt-4 w-[270px] bg-base-100 shadow-xl carousel-item cursor-pointer">
-      <div className="absolute  bg-[#1FB2A6] text-white py-1 px-3 text-sm left-2 top-2 rounded-lg">
-        - {Math.floor(product?.discountPercentage)} %
-      </div>
+      {product?.discountPercentage ? (
+        <div className="absolute  bg-[#1FB2A6] text-white py-1 px-3 text-sm left-2 top-2 rounded-lg">
+          - {Math.floor(product?.discountPercentage)} %
+        </div>
+      ) : null}
+
       <figure>
         <img
           src={product?.images[0]}
@@ -44,9 +47,11 @@ export const ProductCard = ({ product }) => {
         <h3 className="card-title text-lg">{product?.title}</h3>
         <div className="flex items-center  gap-4">
           <div className="text-[#DB4444] font-bold">${product?.price}</div>
-          <s className="text-[#808080]">
-            ${discountPrice(product?.price, product?.discountPercentage)}
-          </s>
+          {product?.discountPercentage ? (
+            <s className="text-[#808080]">
+              ${discountPrice(product?.price, product?.discountPercentage)}
+            </s>
+          ) : null}
         </div>
         <div>
           <StarRating star={product?.rating} /> <span>({product?.stock})</span>

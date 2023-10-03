@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Countdown from "../utils/Countdown";
-import { fetchAPI } from "../utils/fetchAPI";
-import { ProductCard } from "./ProductCard";
+import Countdown from "../../utils/Countdown";
+import { fetchAPI } from "../../utils/fetchAPI";
+import { ProductCard } from "../ProductCard";
 export default function FlashSale() {
   const [flashSaleProducts, setFlashSaleProducts] = useState([]);
   const flashSaleSlide = useRef(null);

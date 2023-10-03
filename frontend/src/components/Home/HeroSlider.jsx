@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Iphone14Img from "../assets/Iphone14Hero.png";
-import watchSale from "../assets/watchSale.png";
-import heroSpeaker from "../assets/SpeakerHero.png";
-import EarPhoneHero from "../assets/EarPhoneHero.png";
+import Iphone14Img from "../../assets/Iphone14Hero.png";
+import watchSale from "../../assets/watchSale.png";
+import heroSpeaker from "../../assets/SpeakerHero.png";
+import EarPhoneHero from "../../assets/EarPhoneHero.png";
 
 export default function HeroSlider() {
   const [activeSlider, setActiveSlider] = useState("1");

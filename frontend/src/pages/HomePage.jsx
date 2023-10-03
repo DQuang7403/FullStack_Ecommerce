@@ -1,13 +1,15 @@
 import React from "react";
-import HeroSlider from "../components/HeroSlider";
-import FlashSale from "../components/FlashSale";
-import CategoriesSection from "../components/CategoriesSection";
+import HeroSlider from "../components/Home/HeroSlider";
+import FlashSale from "../components/Home/FlashSale";
+import CategoriesSection from "../components/Home/CategoriesSection";
+import AllProduct from "../components/Home/AllProduct";
 export default function HomePage() {
   return (
     <section className="lg:mx-32 md:my-8 mx-1 my-4">
       <HeroSlider />
       <FlashSale />
       <CategoriesSection />
+      <AllProduct />
     </section>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Categories } from "../utils/constants";
-import { fetchAPI } from "../utils/fetchAPI";
+import { Categories } from "../../utils/constants";
+import { fetchAPI } from "../../utils/fetchAPI";
 import { Link } from "react-router-dom";
 export default function CategoriesSection() {
   const category = useRef(null);
