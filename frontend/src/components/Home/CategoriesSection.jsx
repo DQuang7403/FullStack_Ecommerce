@@ -79,7 +79,7 @@ export default function CategoriesSection() {
             <ul className="p-2 w-full join join-vertical">
               {allCategories.map((category) => {
                 return (
-                  <button className="btn hover:bg-[#DB4444] active:bg-[#BB232D] hover:text-white  text-base transition-all join-item ">
+                  <button key={category} className="btn hover:bg-[#DB4444] active:bg-[#BB232D] hover:text-white  text-base transition-all join-item ">
                     <Link to={`/${category}`} className="hover:text-white">{category}</Link>
                   </button>
                 );

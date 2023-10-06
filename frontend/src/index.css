@@ -4,6 +4,7 @@
 :root{
   --primary-color: #DB4444,
   --gray-color: #808080,
+  --ligth-gray: #F2F2F2,
 }
 
 .custom-caurosel{
@@ -23,7 +24,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #dedede;
   border-radius: 100vw;
   margin-inline: 1em;
 }

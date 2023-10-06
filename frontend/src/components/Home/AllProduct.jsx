@@ -7,7 +7,7 @@ export default function AllProduct() {
   useEffect(() => {
     const fetchResult = async () => {
       const data = await fetchAPI(
-        `products?limit=12&skip=10&select=title,price,id,rating,stock,images`
+        `products?limit=12&skip=30&select=title,price,id,rating,stock,images`
       );
       setOurProducts(data?.products);
     };

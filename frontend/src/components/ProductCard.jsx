@@ -2,8 +2,6 @@ import React from "react";
 import {
   AiOutlineHeart,
   AiFillHeart,
-  AiOutlineEye,
-  AiFillEye,
 } from "react-icons/ai";
 import { StarRating } from "../utils/constants";
 export const ProductCard = ({ product }) => {
@@ -33,14 +31,6 @@ export const ProductCard = ({ product }) => {
           <AiFillHeart className="text-lg text-red-500 swap-on  fill-current" />
 
           <AiOutlineHeart className="text-lg swap-off fill-current" />
-        </label>
-
-        <label className="swap btn h-10 bg-[#F5F5F5] aspect-square btn-ghost btn-circle hover:bg-slate-300">
-          <input type="checkbox" />
-
-          <AiFillEye className="text-lg text-blue-500 swap-on fill-current" />
-
-          <AiOutlineEye className="text-lg swap-off fill-current" />
         </label>
       </div>
       <div className="card-body px-4 py-6 bg-[#F5F5F5]">
