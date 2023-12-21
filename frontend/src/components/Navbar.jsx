@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { navbarCategories } from "../utils/constants";
 import { Link, Outlet } from "react-router-dom";
 import { BiUserCircle, BiBell, BiSearch, BiMenuAltLeft } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import CartContext from "../context/CartContext";
 export default function Nav_bar() {
   const [selectedPage, setSelectedPage] = useState(window.location.pathname);
+  const { items } = useContext(CartContext);
   return (
     <nav>
       <div className="navbar border-b-2 border-gray-300 lg:px-12 py-4">
@@ -49,7 +51,7 @@ export default function Nav_bar() {
                     }`}
                   >
                     <div
-                      className="tooltip tooltip-bottom tooltip-info"
+                      className="tooltip tooltip-bottom tooltip-secondary"
                       data-tip="Favorite"
                     >
                       <button className="btn btn-ghost btn-circle ">
@@ -59,17 +61,20 @@ export default function Nav_bar() {
                       </button>
                     </div>
                     <div
-                      className="tooltip tooltip-bottom tooltip-info"
-                      data-tip="Notification"
+                      className="tooltip tooltip-bottom tooltip-secondary"
+                      data-tip="Your cart"
                     >
-                      <button className="btn btn-ghost btn-circle flex">
+                      <Link
+                        to={"/yourcart"}
+                        className="btn btn-ghost btn-circle flex"
+                      >
                         <div className="indicator z-0">
-                          <BiBell className="text-2xl " />
+                          <AiOutlineShoppingCart className="text-2xl " />
                           <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white">
-                            1
+                            {items}
                           </span>
                         </div>
-                      </button>
+                      </Link>
                     </div>
                   </div>
                   {navbarCategories.map((category) => {
@@ -97,19 +102,22 @@ export default function Nav_bar() {
             </div>
           </div>
           <div className="text-black font-bold text-2xl hidden lg:ml-20 min-[425px]:flex ">
-            Exclusive
+            Electrifies
           </div>
         </div>
         <ul className="navbar-center gap-4 text-black hidden lg:flex">
           {navbarCategories.map((category) => {
             return (
               <li
-                className={`tab text-black tab-bordered font-semibold text-base ${
-                  category.url === selectedPage ? "tab-active" : ""
-                } `}
+                key={category.name}
                 onClick={() => setSelectedPage(window.location.pathname)}
               >
-                <Link to={`${category.url}`} key={category.name}>
+                <Link
+                  to={`${category.url}`}
+                  className={`tab text-black tab-bordered font-semibold text-base ${
+                    category.url === selectedPage ? "tab-active" : ""
+                  } `}
+                >
                   {category.name}
                 </Link>
               </li>
@@ -138,7 +146,7 @@ export default function Nav_bar() {
             }`}
           >
             <div
-              className="tooltip tooltip-bottom tooltip-info"
+              className="tooltip tooltip-bottom tooltip-secondary"
               data-tip="Favorite"
             >
               <button className="btn btn-ghost btn-circle hidden md:flex">
@@ -148,18 +156,19 @@ export default function Nav_bar() {
               </button>
             </div>
             <div
-              className="tooltip tooltip-bottom tooltip-info"
-              data-tip="Notification"
+              className="tooltip tooltip-bottom tooltip-secondary"
+              data-tip="Your cart"
             >
-              <button className="btn btn-ghost btn-circle hidden md:flex">
+              <Link to={"/yourcart"} className="btn btn-ghost btn-circle flex">
                 <div className="indicator z-0">
-                  <BiBell className="text-2xl " />
+                  <AiOutlineShoppingCart className="text-2xl " />
                   <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white">
-                    1
+                    {items}
                   </span>
                 </div>
-              </button>
+              </Link>
             </div>
+
             <details className="dropdown dropdown-bottom dropdown-end ">
               <summary className="btn btn-ghost btn-circle">
                 <BiUserCircle className="text-3xl" />

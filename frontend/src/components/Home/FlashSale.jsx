@@ -2,20 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import Countdown from "../../utils/Countdown";
 import { fetchAPI } from "../../utils/fetchAPI";
 import { ProductCard } from "../ProductCard";
+import { Link } from "react-router-dom";
 export default function FlashSale() {
   const [flashSaleProducts, setFlashSaleProducts] = useState([]);
   const flashSaleSlide = useRef(null);
   useEffect(() => {
     const fetchResult = async () => {
-      const data = await fetchAPI(`products?limit=10`);
-      setFlashSaleProducts(data?.products);
+      const data = await fetchAPI(`sale_products?limit=5`);
+      setFlashSaleProducts(data);
     };
     fetchResult();
   }, []);
   return (
-    <section className="my-10 mx-2 border-b-2">
+    <section className="my-10 mx-2 border-b-2 ">
       <div>
-        <h3 className="before:block before:h-10 before:rounded before:aspect-[1/2] before:bg-[#DB4444] flex items-center gap-3 text-[#DB4444] font-semibold">
+        <h3 className="before:block before:h-10 before:rounded before:aspect-[1/2] before:bg-[#DB4444] flex items-center gap-3 text-[#DB4444] font-semibold ">
           Today's
         </h3>
         <div className="mt-5 md:flex items-center gap-10">
@@ -47,16 +48,19 @@ export default function FlashSale() {
 
       <div
         ref={flashSaleSlide}
-        className="custom-caurosel max-w-full carousel-center p-4 space-x-4 bg-neutral rounded-box"
+        className="custom-caurosel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box"
       >
         {flashSaleProducts.map((product) => {
           return <ProductCard key={product?.id} product={product} />;
         })}
       </div>
       <div className="flex items-center justify-center">
-        <button className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10">
+        <Link
+          to={"/products/Flash-sale"}
+          className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
+        >
           View all products
-        </button>
+        </Link>
       </div>
     </section>
   );

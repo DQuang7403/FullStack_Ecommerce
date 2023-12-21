@@ -1,27 +1,37 @@
-import React, {  useRef, useContext } from "react";
-import { Categories } from "../../utils/constants";
-import CategoryContext from "../../context/CategoryContext";
-import { Link } from "react-router-dom";
-export default function CategoriesSection() {
-  const category = useRef(null);
-  const {allCategories} = useContext(CategoryContext)
- 
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { fetchAPI } from "../utils/fetchAPI";
+import { ProductCard } from "../components/ProductCard";
+import CategoryContext from "../context/CategoryContext";
+export default function ProductByCategory() {
+  const Category = useParams();
+  const product = useRef(null);
+  const [products, setProducts] = useState([]);
+  const { allCategories } = useContext(CategoryContext);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await fetchAPI(`products/${Category.name}`);
+      setProducts(data);
+      console.log(data);
+    };
+    fetchProducts();
+  }, [Category.name]);
   return (
-    <section className="my-10 mx-2 border-b-2 ">
+    <section className=" my-10 lg:mx-32 border-b-2 mx-1">
       <div>
         <h3 className="before:block before:h-10 before:rounded before:aspect-[1/2] before:bg-[#DB4444] flex items-center gap-3 text-[#DB4444] font-semibold">
-          Categories
+          Category Products
         </h3>
         <div className="flex items-center justify-between grow mt-4">
           <h1 className="font-bold text-2xl md:text-5xl ">
-            Browse By category
+            Explore Our {Category.name}
           </h1>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="md:hidden items-center gap-2 flex">
             <button
               className="btn btn-circle"
               onClick={() => {
-                category.current.scrollLeft -= 270;
+                product.current.scrollLeft -= 270;
               }}
             >
               ❮
@@ -29,7 +39,7 @@ export default function CategoriesSection() {
             <button
               className="btn btn-circle"
               onClick={() => {
-                category.current.scrollLeft += 270;
+                product.current.scrollLeft += 270;
               }}
             >
               ❯
@@ -37,21 +47,13 @@ export default function CategoriesSection() {
           </div>
         </div>
       </div>
+
       <div
-        ref={category}
-        className="flex items-center justify-between gap-4 py-3 mt-10 custom-caurosel max-w-full carousel-center"
+        ref={product}
+        className="custom-caurosel gap-4 md:flex md:flex-wrap md:justify-evenly max-w-full mt-10 carousel-center p-4  bg-neutral rounded-box"
       >
-        {Categories.map((category) => {
-          return (
-            <Link key={category.name} to={`category/${category.name}`}>
-            <div
-              key={category.name}
-              className="carousel-item btn flex w-40 h-36 flex-col gap-4 items-center justify-center  hover:text-white hover:bg-[#DB4444] transition-all cursor-pointer"
-            >
-              <div className="text-4xl font-thin ">{category.icon}</div>
-              <h3 className="text-base">{category.name}</h3>
-            </div></Link>
-          );
+        {products.map((product) => {
+          return <ProductCard key={product?.id} product={product} />;
         })}
       </div>
       <div className="flex items-center justify-center my-10">
@@ -64,7 +66,6 @@ export default function CategoriesSection() {
         <dialog id="my_modal_3" className="modal">
           <div className="modal-box">
             <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                 ✕
               </button>
@@ -73,9 +74,14 @@ export default function CategoriesSection() {
             <ul className="p-2 w-full join join-vertical">
               {allCategories.map((category) => {
                 return (
-                  <button key={category} className="btn hover:bg-[#DB4444] active:bg-[#BB232D] hover:text-white  text-base transition-all join-item ">
-                    <Link to={`/category/${category}`} className="hover:text-white">{category}</Link>
-                  </button>
+                  <Link
+                    key={category}
+                    to={`/category/${category}`}
+                    className="hover:text-white btn hover:bg-[#DB4444] active:bg-[#BB232D]  text-base transition-all join-item"
+                    
+                  >
+                    {category}
+                  </Link>
                 );
               })}
             </ul>

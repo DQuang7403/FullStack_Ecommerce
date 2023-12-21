@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SignUpWebShopping from "../assets/SignUpWebShopping.svg"
+import SignUpWebShopping from "../../assets/SignUpWebShopping.svg"
 export default function LoginPage() {
   return (
     <section className="flex items-center justify-evenly my-20">

@@ -6,7 +6,6 @@ export default function Footer() {
   const EmailSubmit = (e) =>{
     e.preventDefault();
     if (email === "") return;
-    console.log(email)
     setEmail("");
   }
   return (
@@ -14,7 +13,7 @@ export default function Footer() {
       <div className="footer justify-evenly">
         <form onSubmit={EmailSubmit}>
           <header>
-            <h1 className=" font-bold mb-4 text-2xl">Exclusive</h1>
+            <h1 className=" font-bold mb-4 text-2xl">Electrifies</h1>
             <p className="text-xl">Subscribe</p>
           </header>
           <div className="form-control w-60 gap-2">

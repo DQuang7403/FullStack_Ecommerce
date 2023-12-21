@@ -6,8 +6,7 @@ import AllProduct from "../components/Home/AllProduct";
 import FullServices from "../components/FullServices";
 export default function HomePage() {
   return (
-    <section className="lg:mx-32 md:my-8 mx-1 my-4">
-      <HeroSlider />
+    <section className="lg:mx-32 md:my-8 mx-1 my-4 scroll-smooth">
       <FlashSale />
       <CategoriesSection />
       <AllProduct />

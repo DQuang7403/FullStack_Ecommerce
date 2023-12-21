@@ -6,12 +6,21 @@
   --gray-color: #808080,
   --ligth-gray: #F2F2F2,
 }
-
+/* input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+} */
+html{
+  scroll-behavior: smooth;
+}
 .custom-caurosel{
   display: inline-flex;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
