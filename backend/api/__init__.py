@@ -7,9 +7,9 @@ def create_app():
   app.config["SESSION_COOKIE_SECURE"] = True
 
   from .products import products
-  from .views import views
+  from .cart import cart
   
-  app.register_blueprint(views, url='/')
+  app.register_blueprint(cart, url='/')
   app.register_blueprint(products, url='/')
 
   return app

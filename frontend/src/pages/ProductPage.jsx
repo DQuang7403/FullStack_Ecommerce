@@ -154,7 +154,7 @@ export default function ProductPage() {
               <AiOutlineHeart className="text-lg swap-off fill-current" />
             </label>
           </div>
-          <Link to={"/yourcart"} className="btn mb-4 w-full btn-warning">
+          <Link to={"/yourcart"} className="btn mb-4 w-full btn-accent">
             Go to cart
           </Link>
           <div>
@@ -177,7 +177,7 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-      <div className="my-10 mx-14">
+      <div className="lg:mx-32 md:my-8 mx-1 my-8">
         <h2 className="text-2xl font-semibold">Relates Products</h2>
         <div
           ref={relatedProduct}

@@ -9,7 +9,7 @@ export default function ContactPage() {
             <div className=" flex items-center w-10 h-10 justify-center rounded-full bg-[#DB4444]">
               <BsTelephone className=" text-2xl text-white " />
             </div>
-            <div className=" text-xl font-semibold">Call To Us</div>
+            <div className=" text-xl font-semibold">Call Us</div>
           </div>
           <p>We are available 24/7, 7 days a week.</p>
           <p>Phone: +8801611112222</p>

@@ -24,11 +24,14 @@ export default function FlashSale() {
 
           <div className="flex items-center justify-between grow">
             <Countdown />
-            <div className="hidden items-center gap-2 md:flex">
+            <div className="hidden items-center gap-2 md:flex transition-all">
               <button
                 className="btn btn-circle"
                 onClick={() => {
-                  flashSaleSlide.current.scrollLeft -= 270;
+                  flashSaleSlide.current.scrollToView({
+                    left: flashSaleSlide.current.scrollLeft - 270,
+                    behavior: "smooth",
+                  });
                 }}
               >
                 ❮

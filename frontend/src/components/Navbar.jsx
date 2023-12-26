@@ -11,8 +11,8 @@ export default function Nav_bar() {
     <nav>
       <div className="navbar border-b-2 border-gray-300 lg:px-12 py-4">
         <div className="navbar-start">
-          <div className="dropdown lg:hidden">
-            <div className="drawer">
+          <div className="dropdown lg:hidden ">
+            <div className="drawer z-50">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
                 {/* Page content here */}
@@ -51,7 +51,7 @@ export default function Nav_bar() {
                     }`}
                   >
                     <div
-                      className="tooltip tooltip-bottom tooltip-secondary"
+                      className="tooltip tooltip-bottom tooltip-info"
                       data-tip="Favorite"
                     >
                       <button className="btn btn-ghost btn-circle ">
@@ -61,7 +61,7 @@ export default function Nav_bar() {
                       </button>
                     </div>
                     <div
-                      className="tooltip tooltip-bottom tooltip-secondary"
+                      className="tooltip tooltip-bottom tooltip-info"
                       data-tip="Your cart"
                     >
                       <Link
@@ -102,7 +102,7 @@ export default function Nav_bar() {
             </div>
           </div>
           <div className="text-black font-bold text-2xl hidden lg:ml-20 min-[425px]:flex ">
-            Electrifies
+          TechTopia 
           </div>
         </div>
         <ul className="navbar-center gap-4 text-black hidden lg:flex">
@@ -146,7 +146,7 @@ export default function Nav_bar() {
             }`}
           >
             <div
-              className="tooltip tooltip-bottom tooltip-secondary"
+              className="tooltip tooltip-bottom tooltip-info"
               data-tip="Favorite"
             >
               <button className="btn btn-ghost btn-circle hidden md:flex">
@@ -156,7 +156,7 @@ export default function Nav_bar() {
               </button>
             </div>
             <div
-              className="tooltip tooltip-bottom tooltip-secondary"
+              className="tooltip tooltip-bottom tooltip-info hidden md:block"
               data-tip="Your cart"
             >
               <Link to={"/yourcart"} className="btn btn-ghost btn-circle flex">

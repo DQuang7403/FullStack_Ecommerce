@@ -2,12 +2,12 @@ from flask import Blueprint, request, session, jsonify
 import sqlite3
 from flask_cors import CORS
 
-views = Blueprint("views", __name__)
+cart = Blueprint("cart", __name__)
 sqldbname = "backend/Ecommerce.db"
-CORS(views, origins="http://localhost:5173", supports_credentials=True)
+CORS(cart, origins="http://localhost:5173", supports_credentials=True)
 
 
-@views.route("/cart", methods=["GET"])
+@cart.route("/cart", methods=["GET"])
 def get_cart():
     current_cart = []
     if "cart" in session:
@@ -15,7 +15,7 @@ def get_cart():
     return jsonify(current_cart)
 
 
-@views.route("/cart/add", methods=["POST"])
+@cart.route("/cart/add", methods=["POST"])
 def add_to_cart():
     productId = request.json["product_id"]
     quantity = int(request.json["quantity"])
@@ -45,7 +45,7 @@ def add_to_cart():
     return jsonify({"message": "Product added to cart successfully"}), 200
 
 
-@views.route("/cart/remove", methods=["POST"])
+@cart.route("/cart/remove", methods=["POST"])
 def remove_item():
     productId = request.json["product_id"]
     cart = session.get("cart", [])
@@ -56,3 +56,9 @@ def remove_item():
             new_cart.append(item)
     session["cart"] = new_cart
     return jsonify({"message": "Product removed from cart successfully"}), 200
+
+@cart.route("/cart/update", methods=["POST"])
+def update_cart():
+    cart = request.json["cart"]
+    session["cart"] = cart
+    return jsonify({"message": "Cart updated successfully"}), 200

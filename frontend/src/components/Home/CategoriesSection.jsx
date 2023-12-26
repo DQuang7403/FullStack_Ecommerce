@@ -46,7 +46,7 @@ export default function CategoriesSection() {
             <Link key={category.name} to={`category/${category.name}`}>
             <div
               key={category.name}
-              className="carousel-item btn flex w-40 h-36 flex-col gap-4 items-center justify-center  hover:text-white hover:bg-[#DB4444] transition-all cursor-pointer"
+              className="carousel-item btn flex w-40 h-36 flex-col gap-4 items-center justify-center hover:text-white hover:bg-[#DB4444] transition-all cursor-pointer"
             >
               <div className="text-4xl font-thin ">{category.icon}</div>
               <h3 className="text-base">{category.name}</h3>

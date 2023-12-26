@@ -1,5 +1,5 @@
 import React from "react";
-import { FiSmartphone, FiWatch  } from "react-icons/fi";
+import { FiSmartphone, FiWatch } from "react-icons/fi";
 import { BsLaptop } from "react-icons/bs";
 import { FaTabletScreenButton } from "react-icons/fa6";
 import { RiWirelessChargingFill } from "react-icons/ri";

@@ -5,8 +5,8 @@ export default function FullServices() {
   return (
     <section className="flex items-center justify-evenly flex-wrap gap-10 my-24">
       <div className="flex flex-col items-center gap-6">
-        <div className=" w-20 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
-          <div className=" w-14 aspect-square bg-black rounded-full flex items-center justify-center">
+        <div className=" w-16 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
+          <div className=" w-12 aspect-square bg-black rounded-full flex items-center justify-center">
             <FaTruckFast className="text-white text-3xl" />
           </div>
         </div>
@@ -16,8 +16,8 @@ export default function FullServices() {
         </div>
       </div>
       <div className="flex flex-col items-center gap-6">
-        <div className=" w-20 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
-          <div className=" w-14 aspect-square bg-black rounded-full flex items-center justify-center">
+        <div className=" w-16 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
+          <div className=" w-12 aspect-square bg-black rounded-full flex items-center justify-center">
             <RiCustomerService2Line className="text-white text-3xl" />
           </div>
         </div>
@@ -27,8 +27,8 @@ export default function FullServices() {
         </div>
       </div>
       <div className="flex flex-col items-center gap-6">
-        <div className=" w-20 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
-          <div className=" w-14 aspect-square bg-black rounded-full flex items-center justify-center">
+        <div className=" w-16 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
+          <div className=" w-12 aspect-square bg-black rounded-full flex items-center justify-center">
             <RiShieldCheckLine className="text-white text-3xl" />
           </div>
         </div>
