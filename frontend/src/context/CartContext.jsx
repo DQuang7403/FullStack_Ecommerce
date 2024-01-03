@@ -3,30 +3,26 @@ import { createContext, useState, useEffect, useReducer } from "react";
 const CartContext = createContext();
 export function CartProvider({ children }) {
   const [items, setItems] = useState(0);
-  const cartReducer = (state, action) => {
-    switch (action.type) {
-      case "INCREASEQUANTITY":
-        return {
-          ...state,
-          quantity: state.quantity + 1,
-        };
-      case "DECREASEQUANTITY":
-        return {
-          ...state,
-          quantity: state.quantity > 1 ? state.quantity - 1 : state.quantity,
-        };
-      case "ADD_DETAILS":
-        return {
-          ...state,
-          id: action.payload.id,
-          details: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
+  const formatNumberWithCommas = (number) => {
+    number = Number(number).toFixed(2);
+    const numberString = number.toString();
+
+    // Split the string into the integer and decimal parts
+    const [integerPart, decimalPart] = numberString.split(".");
+
+    // Format the integer part with commas
+    const formattedIntegerPart = integerPart.replace(
+      /\B(?=(\d{3})+(?!\d))/g,
+      ","
+    );
+
+    // Combine the formatted integer part and the decimal part
+    const formattedNumber = `${formattedIntegerPart}.${decimalPart}`;
+
+    return formattedNumber;
+  }
   const contextValue = {
-    cartReducer: cartReducer,
+    formatNumberWithCommas: formatNumberWithCommas,
     setItems: setItems,
     items: items,
   };

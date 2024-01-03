@@ -18,32 +18,38 @@ import YourCart from "./pages/YourCart";
 //import context
 import { CategoryProvider } from "./context/CategoryContext";
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
 function App() {
   return (
     <>
-      <CartProvider>
-        <CategoryProvider>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="/about" element={<AboutPage />}></Route>
-            <Route path="/contact" element={<ContactPage />}></Route>
+      <AuthProvider>
+        <CartProvider>
+          <CategoryProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<HomePage />}></Route>
+              <Route path="/about" element={<AboutPage />}></Route>
+              <Route path="/contact" element={<ContactPage />}></Route>
 
-            <Route path="/product/:id" element={<ProductPage />}></Route>
+              <Route path="/product/:id" element={<ProductPage />}></Route>
 
-            <Route
-              path="/category/:name"
-              element={<ProductByCategory />}
-            ></Route>
-            <Route path="/products/:name" element={<ProductsPage />}></Route>
-
-            <Route path="/signup" element={<SignUpPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/yourcart" element={<YourCart />}></Route>
-          </Routes>
-          <Footer />
-        </CategoryProvider>
-      </CartProvider>
+              <Route
+                path="/category/:name"
+                element={<ProductByCategory />}
+              ></Route>
+              <Route path="/products/:name" element={<ProductsPage />}></Route>
+              <Route
+                path="/products/search/:search"
+                element={<ProductsPage />}
+              ></Route>
+              <Route path="/signup" element={<SignUpPage />}></Route>
+              <Route path="/login" element={<LoginPage />}></Route>
+              <Route path="/yourcart" element={<YourCart />}></Route>
+            </Routes>
+            <Footer />
+          </CategoryProvider>
+        </CartProvider>
+      </AuthProvider>
     </>
   );
 }

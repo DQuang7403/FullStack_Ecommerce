@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../context/CartContext";
 export default function YourCart() {
@@ -6,24 +6,8 @@ export default function YourCart() {
   const [cart, setCart] = useState([]);
   const [oldCart, setOldCart] = useState([]);
   const { setItems } = useContext(CartContext);
-  function formatNumberWithCommas(number) {
-    number = Number(number).toFixed(2);
-    const numberString = number.toString();
-
-    // Split the string into the integer and decimal parts
-    const [integerPart, decimalPart] = numberString.split(".");
-
-    // Format the integer part with commas
-    const formattedIntegerPart = integerPart.replace(
-      /\B(?=(\d{3})+(?!\d))/g,
-      ","
-    );
-
-    // Combine the formatted integer part and the decimal part
-    const formattedNumber = `${formattedIntegerPart}.${decimalPart}`;
-
-    return formattedNumber;
-  }
+  const { formatNumberWithCommas } = useContext(CartContext);
+  const [update, setUpdate] = useState(false);
   const calculateTotal = () => {
     let total = 0;
     cart.forEach((item) => {
@@ -38,7 +22,6 @@ export default function YourCart() {
         .then((data) => {
           setCart(data);
           setOldCart(data);
-          console.log(data);
           setItems(data.length);
         });
     };
@@ -64,6 +47,7 @@ export default function YourCart() {
   const changeQuantity = (id, e) => {
     const value = e.target.value.replace(/\D/g, "");
     // if value is not blank, then test the regex
+
     setCart((current) => {
       return current.map((item) => {
         if (item.id === id) {
@@ -72,6 +56,7 @@ export default function YourCart() {
         return item;
       });
     });
+    setUpdate(true);
   };
   const updateCart = (e) => {
     e.preventDefault();
@@ -86,6 +71,7 @@ export default function YourCart() {
       .then((res) => res.json())
       .then((data) => {
         setReFetch(!refetch);
+        setUpdate(false);
       });
   };
   return (
@@ -160,9 +146,16 @@ export default function YourCart() {
             </Link>
           </button>
           <form method="post" onSubmit={updateCart}>
-            <button type="submit" className="btn btn-accent btn-md text-white">
-              Update
-            </button>
+            {update === true ? (
+              <button
+                type="submit"
+                className="btn btn-accent btn-md text-white"
+              >
+                Update
+              </button>
+            ) : (
+              <button className="btn btn-disabled btn-md ">Updated</button>
+            )}
           </form>
         </div>
       </div>

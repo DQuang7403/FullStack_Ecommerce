@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BsTelephone, BsEnvelope } from "react-icons/bs";
 export default function ContactPage() {
   return (
-    <section className="flex flex-col items-center rounded md:flex-row gap-10 lg:mx-32 md:my-8 mx-1 my-4 justify-evenly">
+    <section className="flex flex-col items-center rounded md:flex-row gap-10 lg:mx-32 md:my-32 mx-1 my-4 justify-evenly">
       <div className=" p-10 w-80 shadow-[2px_1px_13px_0px_rgba(0,0,0,0.1)]">
         <div className="border-b-2 border-black pb-10 mb-10 flex flex-col items-start gap-4">
           <div className="flex items-center gap-4">

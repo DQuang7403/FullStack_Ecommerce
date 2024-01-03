@@ -49,6 +49,7 @@ export default function ProductPage() {
         return [...current, ...data?.images];
       });
       setSelectedImg(data?.thumbnail);
+      setAdded(false)
     };
     fetchProductDetail();
   }, [product.id]);

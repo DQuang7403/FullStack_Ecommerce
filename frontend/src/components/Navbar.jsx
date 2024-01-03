@@ -1,12 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { navbarCategories } from "../utils/constants";
 import { Link, Outlet } from "react-router-dom";
 import { BiUserCircle, BiBell, BiSearch, BiMenuAltLeft } from "react-icons/bi";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import CartContext from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 export default function Nav_bar() {
   const [selectedPage, setSelectedPage] = useState(window.location.pathname);
+  const [searchInput, setSearchInput] = useState("");
   const { items } = useContext(CartContext);
+  const navigate = useNavigate();
+  const { user, logoutUser } = useContext(AuthContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (searchInput === "") {
+      return;
+    }
+    navigate(`/products/search/${searchInput}`);
+    setSearchInput("");
+  };
   return (
     <nav>
       <div className="navbar border-b-2 border-gray-300 lg:px-12 py-4">
@@ -50,7 +63,7 @@ export default function Nav_bar() {
                         : "flex"
                     }`}
                   >
-                    <div
+                    {/* <div
                       className="tooltip tooltip-bottom tooltip-info"
                       data-tip="Favorite"
                     >
@@ -59,7 +72,7 @@ export default function Nav_bar() {
                           <AiOutlineHeart className="text-2xl " />
                         </div>
                       </button>
-                    </div>
+                    </div> */}
                     <div
                       className="tooltip tooltip-bottom tooltip-info"
                       data-tip="Your cart"
@@ -102,7 +115,7 @@ export default function Nav_bar() {
             </div>
           </div>
           <div className="text-black font-bold text-2xl hidden lg:ml-20 min-[425px]:flex ">
-          TechTopia 
+            TechTopia
           </div>
         </div>
         <ul className="navbar-center gap-4 text-black hidden lg:flex">
@@ -126,16 +139,24 @@ export default function Nav_bar() {
         </ul>
         <div className="navbar-end">
           <div className="form-control ">
-            <div className="input-group items-center">
+            <form
+              onSubmit={handleSubmit}
+              method="post"
+              className="input-group items-center"
+            >
               <input
                 type="text"
                 placeholder="Search…"
+                onChange={(e) => setSearchInput(e.target.value)}
                 className="input bg-[#F5F5F5] w-36 lg:w-full h-10"
               />
-              <button className="btn btn-ghost bg-[#F5F5F5] min-h-8 h-10">
+              <button
+                type="submit"
+                className="btn btn-ghost bg-[#F5F5F5] min-h-8 h-10"
+              >
                 <BiSearch className="text-2xl" />
               </button>
-            </div>
+            </form>
           </div>
           <div
             className={`${
@@ -145,16 +166,6 @@ export default function Nav_bar() {
                 : "flex"
             }`}
           >
-            <div
-              className="tooltip tooltip-bottom tooltip-info"
-              data-tip="Favorite"
-            >
-              <button className="btn btn-ghost btn-circle hidden md:flex">
-                <div className="indicator z-0">
-                  <AiOutlineHeart className="text-2xl " />
-                </div>
-              </button>
-            </div>
             <div
               className="tooltip tooltip-bottom tooltip-info hidden md:block"
               data-tip="Your cart"
@@ -168,33 +179,56 @@ export default function Nav_bar() {
                 </div>
               </Link>
             </div>
+            {!user ? (
+              <details className="dropdown dropdown-bottom dropdown-end ">
+                <summary className="btn btn-ghost btn-circle">
+                  <BiUserCircle className="text-3xl" />
+                </summary>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-50 menu p-2 shadow  rounded-box w-52"
+                  style={{
+                    borderRadius: "0.25rem",
+                    background: "rgb(255, 255, 255)",
+                  }}
+                >
+                  <li className="">
+                    <Link to={"/login"}>Log In</Link>
+                  </li>
 
-            <details className="dropdown dropdown-bottom dropdown-end ">
-              <summary className="btn btn-ghost btn-circle">
-                <BiUserCircle className="text-3xl" />
-              </summary>
-              <ul
-                tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow  rounded-box w-52"
-                style={{
-                  borderRadius: "0.25rem",
-                  background: "rgb(255, 255, 255)",
-                }}
-              >
-                <li className="">
-                  <Link>Manage My Account</Link>
-                </li>
-                <li className="">
-                  <Link>My Order</Link>
-                </li>
-                <li className="">
-                  <Link>My Watch list</Link>
-                </li>
-                <li className="">
-                  <Link>Log out</Link>
-                </li>
-              </ul>
-            </details>
+                  <li className="">
+                    <Link to={"/signup"}>Sign Up</Link>
+                  </li>
+                </ul>
+              </details>
+            ) : (
+              <details className="dropdown dropdown-bottom dropdown-end ">
+                <summary className="btn btn-ghost btn-circle">
+                  <BiUserCircle className="text-3xl" />
+                </summary>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-50 menu p-2 shadow  rounded-box w-52"
+                  style={{
+                    borderRadius: "0.25rem",
+                    background: "rgb(255, 255, 255)",
+                  }}
+                >
+                  <li className="">
+                    <Link>Manage My Account</Link>
+                  </li>
+                  <li className="">
+                    <Link>My Order</Link>
+                  </li>
+                  <li className="">
+                    <Link>My Watch list</Link>
+                  </li>
+                  <li className="">
+                    <div onClick={logoutUser} >Log Out</div>
+                  </li>
+                </ul>
+              </details>
+            )}
           </div>
         </div>
       </div>

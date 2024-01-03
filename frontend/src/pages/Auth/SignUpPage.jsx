@@ -1,11 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import SignUpWebShopping from "../../assets/SignUpWebShopping.svg"
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import SignUpWebShopping from "../../assets/SignUpWebShopping.svg";
+import AuthContext from "../../context/AuthContext";
 export default function SignUpPage() {
+  const { SignupUser } = useContext(AuthContext);
+
   return (
     <section className="flex items-center justify-evenly my-20">
-      <img src={SignUpWebShopping} alt="Lets sign up" className=" hidden md:block max-w-[40%] bg-blue-200" />
-      <form action="">
+      <img
+        src={SignUpWebShopping}
+        alt="Lets sign up"
+        className=" hidden md:block max-w-[40%] bg-blue-200"
+      />
+      <form onSubmit={SignupUser}>
         <header>
           <h1 className=" text-4xl font-semibold mb-4">Create an account</h1>
           <h3 className=" text-xl">Enter your details below</h3>
@@ -15,6 +22,8 @@ export default function SignUpPage() {
             <span className="label-text font-semibold">Name: </span>
           </label>
           <input
+            name="username"
+            required
             type="text"
             placeholder="Enter your name"
             className="input input-bordered w-full max-w-xs"
@@ -24,6 +33,8 @@ export default function SignUpPage() {
           </label>
           <input
             type="email"
+            required
+            name="email"
             placeholder="Enter your email address"
             className="input input-bordered w-full max-w-xs"
           />
@@ -32,6 +43,8 @@ export default function SignUpPage() {
           </label>
           <input
             type="password"
+            required
+            name="password"
             placeholder="Enter your password"
             className="input input-bordered w-full max-w-xs"
           />
@@ -46,7 +59,7 @@ export default function SignUpPage() {
         </div>
         <div className=" text-center">
           Already have account?{" "}
-          <Link className=" underline" to={"/login"}>
+          <Link className="underline" to={"/login"}>
             Log in
           </Link>
         </div>

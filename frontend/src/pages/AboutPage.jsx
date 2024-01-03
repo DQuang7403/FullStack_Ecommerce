@@ -20,7 +20,7 @@ export default function AboutPage() {
           </p>
         </div>
         <img
-          src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Surface-Laptop-4-Panel01_FullbleedHero_ImagePlatinum:VP1-539x400"
+          src="https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
           className="max-w-2xl w-full"
         />

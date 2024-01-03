@@ -1,18 +1,19 @@
-from flask import Blueprint, request, session, jsonify
+from flask import Blueprint, request, jsonify
 import sqlite3
 from flask_cors import CORS
-
+from flask_jwt_extended import jwt_required
+from .auth import authenticated_user
 
 products = Blueprint("products", __name__)
 sqldbname = "backend/Ecommerce.db"
 CORS(products, origins="http://localhost:5173")
 
 
-@products.route("/products", methods=["GET"])
-def getproduct():
+@products.route("/products/all/<int:quantity>", methods=["GET"])
+def getproduct(quantity):
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
-    cur.execute("select * from Products")
+    cur.execute("select * from Products Limit 0, ?", (quantity,))
     products = cur.fetchall()
     products_list = []
     for product in products:
@@ -173,19 +174,48 @@ def get_category():
     return jsonify(category)
 
 
+@products.route("/products/search/<search>", methods=["GET"])
+def search(search):
+    conn = sqlite3.connect(sqldbname)
+    cur = conn.cursor()
+    cur.execute(
+        "select * from Products where title like ? or category like ?",
+        ("%" + search + "%", "%" + search + "%"),
+    )
+    products = cur.fetchall()
+    search_list = []
+    for product in products:
+        search_list.append(
+            {
+                "id": product[0],
+                "title": product[1],
+                "price": product[2],
+                "rating": product[3],
+                "stock": product[4],
+                "category": product[5],
+                "thumbnail": product[6],
+                "description": product[7],
+                "totalRating": product[8],
+                "discount": product[9],
+                "images": [product[10], product[11], product[12]],
+            }
+        )
+    return jsonify(search_list)
+
+
 # INSERT INTO Products
 # (title, price, rating, stocks, category, thumbnail, description, totalRating, discount, thumbnail2, thumbnail3, thumbnail4)
 # VALUES
-# ('Galaxy Z Flip5',
-# 600,
-# 4.5,
-# 59,
-# 'smartphones',
-# 'https://image-us.samsung.com/us/smartphones/galaxy-z-flip5/Mint/1.jpg?$product-details-jpg$',
-# 'The Wide Camera on Galaxy Z Flip5 brings more of the scene into frame whether open or closed. Plus, with Nightography video at 60 fps, losing sunlight does not mean losing out on quality.',
-# 20,
+# ('25W 10,000 mAh Battery Pack, Beige',
+# 34.99,
+# 4.2,
+# 10,
+# 'accessories',
+# 'https://image-us.samsung.com/us/smartphones/galaxy-s23-ultra/accessories/images/battery/beige/1.jpg?$product-details-jpg$',
+# 'Power up at a moment’s notice. Whether it’s your phone, buds or both, you can quickly charge whenever you need with a fast and powerful battery pack.',
+# 9,
 # 0,
-# 'https://image-us.samsung.com/us/smartphones/galaxy-z-flip5/configurator/02-Zflip5-Configurator-800x600.jpg?$product-details-jpg$',
-# 'https://image-us.samsung.com/us/smartphones/galaxy-z-flip5/configurator/01-Zflip5-Configurator-800x600.jpg?$product-details-jpg$',
-# 'https://image-us.samsung.com/SamsungUS/PIM/Gallery-B5-800x600_1-Launch_______2.jpg?$product-details-jpg$'
+# 'https://image-us.samsung.com/us/smartphones/galaxy-s23-ultra/accessories/images/battery/beige/2.jpg?$product-details-jpg$',
+# 'https://image-us.samsung.com/us/smartphones/galaxy-s23-ultra/accessories/images/battery/beige/4.jpg?$product-details-jpg$',
+# 'https://image-us.samsung.com/us/smartphones/galaxy-s23-ultra/accessories/images/battery/beige/5.jpg?$product-details-jpg$'
 # )

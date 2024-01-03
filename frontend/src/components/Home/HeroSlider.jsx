@@ -24,20 +24,13 @@ export default function HeroSlider() {
       return index - 1;
     });
   };
-  useEffect(() => {
-    {
-      console.log(SliderData[currentSlide]);
-      SliderData.map((slide) => {
-        console.log(slide);
-      });
-    }
-  }, []);
   return (
     <section className="hidden md:block ">
       <div className="flex overflow-x-hidden relative">
         {SliderData.map((slide) => {
           return (
             <img
+              key={slide}
               src={slide}
               className="w-full aspect-[12/4] flex-grow-0 flex-shrink-0 "
               style={{
@@ -66,7 +59,7 @@ export default function HeroSlider() {
           return (
             <a
               id={index}
-              href={`#slide${index}`}
+              key={index}
               className={`rounded-full h-3 aspect-square hover:bg-red-200 ${
                 currentSlide === index ? "bg-red-500" : "bg-gray-200"
               }`}

@@ -6,7 +6,7 @@ import { FaSackDollar } from "react-icons/fa6";
 export default function Achivement() {
   return (
     <section className="flex items-center justify-evenly my-24 flex-wrap gap-4">
-      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px]">
+      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px] transition">
         <div className=" w-16 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
           <div className=" w-12 aspect-square bg-black rounded-full flex items-center justify-center">
             <BsShop className="text-white text-3xl" />
@@ -17,7 +17,7 @@ export default function Achivement() {
           <p>Sallers active our site</p>
         </div>
       </div>
-      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px]">
+      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px] transition">
         <div className=" w-16 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
           <div className=" w-12 aspect-square bg-black rounded-full flex items-center justify-center">
             <AiOutlineDollar className="text-white text-3xl" />
@@ -28,7 +28,7 @@ export default function Achivement() {
           <p>Monthly Produduct Sale</p>
         </div>
       </div>
-      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px]">
+      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px] transition">
         <div className=" w-16 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
           <div className=" w-12 aspect-square bg-black rounded-full flex items-center justify-center">
             <MdOutlineShoppingBag className="text-white text-3xl" />
@@ -39,7 +39,7 @@ export default function Achivement() {
           <p>Customer active in our site</p>
         </div>
       </div>
-      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px]">
+      <div className="flex hover:bg-[#DB4444] hover:text-white cursor-pointer flex-col items-center gap-6 py-4 w-[270px] border-gray-300 border-[2px] transition">
         <div className=" w-16 aspect-square bg-[#C1C0C1] rounded-full flex items-center justify-center">
           <div className=" w-12 aspect-square bg-black rounded-full flex items-center justify-center">
             <FaSackDollar className="text-white text-3xl" />

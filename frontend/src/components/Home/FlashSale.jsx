@@ -28,10 +28,7 @@ export default function FlashSale() {
               <button
                 className="btn btn-circle"
                 onClick={() => {
-                  flashSaleSlide.current.scrollToView({
-                    left: flashSaleSlide.current.scrollLeft - 270,
-                    behavior: "smooth",
-                  });
+                  flashSaleSlide.current.scrollLeft -= 270;
                 }}
               >
                 ❮
