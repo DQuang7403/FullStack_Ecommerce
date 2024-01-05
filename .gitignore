@@ -30,7 +30,7 @@ __pycache__/
 *.sql
 *.sqlite
 *.db
-
+.env
 # OS generated files #
 ######################
 .DS_Store

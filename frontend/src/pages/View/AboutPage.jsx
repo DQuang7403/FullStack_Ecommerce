@@ -1,6 +1,6 @@
 import React from "react";
-import FullServices from "../components/FullServices";
-import Achivement from "../components/Achivement";
+import FullServices from "../../components/FullServices";
+import Achivement from "../../components/Achivement";
 export default function AboutPage() {
   return (
     <section className="lg:mx-32 md:my-8 mx-4 my-4">
@@ -20,6 +20,7 @@ export default function AboutPage() {
           </p>
         </div>
         <img
+          loading="lazy"
           src="https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
           className="max-w-2xl w-full"
@@ -28,6 +29,7 @@ export default function AboutPage() {
       <Achivement />
       <div className="flex flex-col lg:flex-row gap-10 items-center">
         <img
+          loading="lazy"
           src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt=""
           className="max-w-2xl w-full"

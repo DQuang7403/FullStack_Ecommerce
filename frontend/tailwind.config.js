@@ -4,40 +4,30 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [
-    require("daisyui")
-  ],
+  plugins: [require("daisyui")],
   daisyui: {
-    themes: true,
-    darkTheme: "dark",
-    base: true,
-    styled: true,
-    utils: true,
-    rtl: false,
-    prefix: "",
-    logs: true,
-  },
-  themes: [
-    {
-      mytheme: {
-        primary: "#ffffff",
+    themes: [
+      {
+        mytheme: {
+          primary: "#DB4444",
 
-        secondary: "#f5f5f5",
+          secondary: "#ef4444",
 
-        accent: "#db4444",
+          accent: "#0ea5e9",
 
-        neutral: "#ffffff",
+          neutral: "#93c5fd ",
 
-        "base-100": "#ffffff",
+          "base-100": "#f3f4f6",
 
-        info: "#3abff8",
+          info: "#67e8f9",
 
-        success: "#1fb2A6",
+          success: "#34d399",
 
-        warning: "#fbbd23",
+          warning: "#fcd34d",
 
-        error: "#f87272",
+          error: "#f43f5e",
+        },
       },
-    },
-  ],
+    ],
+  },
 };

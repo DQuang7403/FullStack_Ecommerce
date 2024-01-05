@@ -4,7 +4,7 @@ import { fetchAPI } from "../utils/fetchAPI";
 const CategoryContext = createContext();
 
 export function CategoryProvider({children}) {
-  const [allCategories, setAllCategories] = useState([]);
+  const [allCategories, setAllCategories] = useState(null);
   useEffect(() => {
     const fetchCategory = async () => {
       const data = await fetchAPI("/products/category");

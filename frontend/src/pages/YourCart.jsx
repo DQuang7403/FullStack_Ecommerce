@@ -4,10 +4,10 @@ import CartContext from "../context/CartContext";
 export default function YourCart() {
   const [refetch, setReFetch] = useState(true);
   const [cart, setCart] = useState([]);
-  const [oldCart, setOldCart] = useState([]);
-  const { setItems } = useContext(CartContext);
-  const { formatNumberWithCommas } = useContext(CartContext);
+  const { setItems, formatNumberWithCommas} = useContext(CartContext);
   const [update, setUpdate] = useState(false);
+
+  
   const calculateTotal = () => {
     let total = 0;
     cart.forEach((item) => {
@@ -21,7 +21,6 @@ export default function YourCart() {
         .then((res) => res.json())
         .then((data) => {
           setCart(data);
-          setOldCart(data);
           setItems(data.length);
         });
     };
@@ -98,7 +97,7 @@ export default function YourCart() {
               return (
                 <tr key={item.id}>
                   <th className="flex flex-col items-center sm:flex-row gap-2 md:gap-6 w-full">
-                    <img className="w-14 object-contain" src={item.thumbnail} />
+                    <img loading="lazy" className="w-14 object-contain" src={item.thumbnail} />
                     <div className="flex flex-col items-start gap-2">
                       <div>{item.title}</div>
                       <div className="font-normal">

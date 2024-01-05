@@ -1,11 +1,11 @@
-import React, {  useRef, useContext } from "react";
+import React, { useRef, useContext } from "react";
 import { Categories } from "../../utils/constants";
 import CategoryContext from "../../context/CategoryContext";
 import { Link } from "react-router-dom";
 export default function CategoriesSection() {
   const category = useRef(null);
-  const {allCategories} = useContext(CategoryContext)
- 
+  const { allCategories } = useContext(CategoryContext);
+
   return (
     <section className="my-10 mx-2 border-b-2 ">
       <div>
@@ -44,13 +44,14 @@ export default function CategoriesSection() {
         {Categories.map((category) => {
           return (
             <Link key={category.name} to={`category/${category.name}`}>
-            <div
-              key={category.name}
-              className="carousel-item btn flex w-40 h-36 flex-col gap-4 items-center justify-center hover:text-white hover:bg-[#DB4444] transition-all cursor-pointer"
-            >
-              <div className="text-4xl font-thin ">{category.icon}</div>
-              <h3 className="text-base">{category.name}</h3>
-            </div></Link>
+              <div
+                key={category.name}
+                className="carousel-item btn flex w-40 h-36 flex-col gap-4 items-center justify-center hover:text-white hover:bg-[#DB4444] transition-all cursor-pointer"
+              >
+                <div className="text-4xl font-thin ">{category.icon}</div>
+                <h3 className="text-base">{category.name}</h3>
+              </div>
+            </Link>
           );
         })}
       </div>
@@ -71,13 +72,25 @@ export default function CategoriesSection() {
             </form>
             <h3 className="font-bold text-lg">All categories</h3>
             <ul className="p-2 w-full join join-vertical">
-              {allCategories.map((category) => {
-                return (
-                  <button key={category} className="btn hover:bg-[#DB4444] active:bg-[#BB232D] hover:text-white  text-base transition-all join-item ">
-                    <Link to={`/category/${category}`} className="hover:text-white">{category}</Link>
-                  </button>
-                );
-              })}
+              {!allCategories ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+                allCategories.map((category) => {
+                  return (
+                    <button
+                      key={category}
+                      className="btn hover:bg-[#DB4444] active:bg-[#BB232D] hover:text-white  text-base transition-all join-item "
+                    >
+                      <Link
+                        to={`/category/${category}`}
+                        className="hover:text-white"
+                      >
+                        {category}
+                      </Link>
+                    </button>
+                  );
+                })
+              )}
             </ul>
             <p className="py-4">Press ESC key or click on ✕ button to close</p>
           </div>

@@ -1,6 +1,7 @@
 from flask import Flask
+from datetime import timedelta
 from flask_jwt_extended import (
-    JWTManager,
+    JWTManager, 
 )
 
 def create_app():
@@ -12,16 +13,18 @@ def create_app():
 
     # jwt configuration
     app.config["JWT_SECRET_KEY"] = "randomKey"
-    # app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
     jwt = JWTManager()
     jwt.init_app(app)
 
     from .products import products
     from .cart import cart
     from .auth import auth
+    from .account import account
 
-    app.register_blueprint(cart, url="/")
-    app.register_blueprint(products, url="/")
+    app.register_blueprint(cart, url_prefix="/")
+    app.register_blueprint(products, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/auth")
+    app.register_blueprint(account, url_prefix="/account")
 
     return app

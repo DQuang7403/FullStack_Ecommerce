@@ -8,6 +8,7 @@ export default function SignUpPage() {
   return (
     <section className="flex items-center justify-evenly my-20">
       <img
+        loading="lazy"
         src={SignUpWebShopping}
         alt="Lets sign up"
         className=" hidden md:block max-w-[40%] bg-blue-200"
@@ -45,6 +46,7 @@ export default function SignUpPage() {
             type="password"
             required
             name="password"
+            autoComplete="on"
             placeholder="Enter your password"
             className="input input-bordered w-full max-w-xs"
           />

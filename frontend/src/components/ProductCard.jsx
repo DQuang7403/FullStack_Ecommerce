@@ -10,7 +10,7 @@ export const ProductCard = ({ product }) => {
     return Number((price / (1 - discount / 100)).toFixed(2));
   };
   return (
-    <div className="card pt-4 w-[270px] bg-base-100 shadow-[0_2px_8px_3px_rgba(0,0,0,0.3)] carousel-item cursor-pointer hover:-translate-y-2 transition-transform">
+    <div className=" card pt-4 w-[270px] bg-base-100 shadow-[0_2px_8px_3px_rgba(0,0,0,0.3)] carousel-item cursor-pointer hover:-translate-y-2 transition-transform">
       <div className="absolute z-10 flex gap-2 right-2 top-2 flex-col">
         <label className="swap btn h-10 bg-[#F5F5F5] aspect-square btn-ghost btn-circle hover:bg-slate-300">
           <input type="checkbox" name="watchList" />
@@ -29,6 +29,7 @@ export const ProductCard = ({ product }) => {
 
         <figure>
           <img
+            loading="lazy"
             src={product?.thumbnail}
             className=" aspect-[1] object-contain w-[190px]"
           />

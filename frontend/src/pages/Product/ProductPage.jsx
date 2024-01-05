@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchAPI } from "../utils/fetchAPI";
-import { StarRating } from "../utils/constants";
+import { fetchAPI } from "../../utils/fetchAPI";
+import { StarRating } from "../../utils/constants";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { FaEye, FaRegEye } from "react-icons/fa";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { GrPowerCycle } from "react-icons/gr";
-import { ProductCard } from "../components/ProductCard";
+import { ProductCard } from "../../components/ProductCard";
 export default function ProductPage() {
   const product = useParams();
   const relatedProduct = useRef(null);
 
   const [related, setRelated] = useState([]);
-  const [added, setAdded] = useState(false);
   const [productDetail, setProductDetail] = useState({});
   const [images, setImages] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
   const [quantity, setQuantity] = useState(1);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,9 +31,7 @@ export default function ProductPage() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        setAdded(true);
-      })
+      .then((data) => {})
       .catch((err) => console.log(err));
   };
 
@@ -49,34 +46,12 @@ export default function ProductPage() {
         return [...current, ...data?.images];
       });
       setSelectedImg(data?.thumbnail);
-      setAdded(false)
     };
     fetchProductDetail();
   }, [product.id]);
 
   return (
     <section className="mx-4 my-10">
-      <div
-        role="alert"
-        className={`alert alert-success mb-4 text-white font-semibold text-lg ${
-          added === true ? "" : "hidden"
-        }`}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span>Product has been added to cart</span>
-      </div>
       <div className="flex lg:flex-row flex-col items-center lg:justify-evenly gap-4">
         <div className="flex flex-wrap order-2 lg:order-first  lg:flex-col items-center gap-2 ">
           {images.map((img) => {
@@ -88,14 +63,14 @@ export default function ProductPage() {
                 }`}
                 onClick={() => setSelectedImg(img)}
               >
-                <img src={img} className="w-full object-cover" />
+                <img loading="lazy" src={img} className="w-full object-cover" />
               </div>
             );
           })}
         </div>
         <div>
           <div className="lg:w-[536px] order-1 lg:order-2 flex lg:p-10 p-2 items-center justify-center aspect-square bg-blue shadow-xl bg-[#F2F2F2] rounded-lg">
-            <img src={selectedImg} className="" />
+            <img loading="lazy" src={selectedImg} />
           </div>
         </div>
         <div className="order-last max-w-[500px]">
@@ -142,6 +117,15 @@ export default function ProductPage() {
               <button
                 className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
                 type="submit"
+                onClick={() => {
+                  Swal.fire({
+                    position: "middle",
+                    icon: "success",
+                    title: "Product added to cart",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                }}
               >
                 Add to cart
               </button>
@@ -150,12 +134,12 @@ export default function ProductPage() {
             <label className="swap btn h-10 bg-[#F5F5F5] aspect-square btn-ghost rounded-lg hover:bg-slate-300">
               <input type="checkbox" />
 
-              <AiFillHeart className="text-lg text-red-500 swap-on  fill-current" />
+              <FaEye className="text-lg text-blue-500 swap-on  fill-current" />
 
-              <AiOutlineHeart className="text-lg swap-off fill-current" />
+              <FaRegEye className="text-lg swap-off fill-current" />
             </label>
           </div>
-          <Link to={"/yourcart"} className="btn mb-4 w-full btn-accent">
+          <Link to={"/yourcart"} className="btn mb-4 w-full btn-accent text-white">
             Go to cart
           </Link>
           <div>

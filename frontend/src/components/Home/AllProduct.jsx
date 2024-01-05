@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 export default function AllProduct() {
   const [OurProducts, setOurProducts] = useState([]);
   const product = useRef(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchResult = async () => {
-      const data = await fetchAPI(
-        `product?limit=8`
-      );
+      const data = await fetchAPI(`product?limit=8`);
       setOurProducts(data);
+      setLoading(false);
     };
     fetchResult();
   }, []);
@@ -50,12 +50,19 @@ export default function AllProduct() {
         ref={product}
         className="custom-caurosel gap-4 lg:flex lg:flex-wrap lg:justify-evenly max-w-full mt-10 carousel-center p-4 rounded-box"
       >
-        {OurProducts.map((product) => {
-          return <ProductCard key={product?.id} product={product} />;
-        })}
+        {loading ? (
+          <span className="loading loading-spinner loading-md"></span>
+        ) : (
+          OurProducts.map((product) => {
+            return <ProductCard key={product?.id} product={product} />;
+          })
+        )}
       </div>
       <div className="flex items-center justify-center">
-        <Link to={"/products/all"} className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10">
+        <Link
+          to={"/products/all"}
+          className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
+        >
           View all products
         </Link>
       </div>

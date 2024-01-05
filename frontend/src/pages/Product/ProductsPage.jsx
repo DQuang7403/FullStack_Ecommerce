@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchAPI } from "../utils/fetchAPI";
-import { ProductCard } from "../components/ProductCard";
+import { fetchAPI } from "../../utils/fetchAPI";
+import { ProductCard } from "../../components/ProductCard";
 export default function ProductsPage() {
   const ProductType = useParams();
   const Search = useParams();
@@ -30,9 +30,11 @@ export default function ProductsPage() {
         </h3>
       </div>
 
-      <div className="custom-caurosel gap-4 md:flex md:flex-wrap md:justify-evenly max-w-full mt-10 carousel-center p-4  bg-neutral rounded-box">
+      <div className="custom-caurosel md:justify-between gap-4 md:flex md:flex-wrap max-w-full mt-10 carousel-center p-4  bg-neutral rounded-box">
         {products.length === 0 ? (
-          <div className="text-white text-2xl text-center my-10">No products found !!! Please try again</div>
+          <div className="text-white text-2xl text-center my-10">
+            No products found !!!
+          </div>
         ) : (
           products.map((product) => {
             return <ProductCard key={product?.id} product={product} />;

@@ -42,9 +42,7 @@ export default function Nav_bar() {
               <div className="drawer-side z-10 ">
                 <label htmlFor="my-drawer" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content menu-open">
-                  <div
-                    className={`flex items-center mb-4 border-b-2 border-gray-500 `}
-                  >
+                  <div className={`flex items-center mb-4`}>
                     <label
                       tabIndex={0}
                       htmlFor="my-drawer"
@@ -53,7 +51,18 @@ export default function Nav_bar() {
                       <BiMenuAltLeft className="text-2xl" />
                     </label>
 
-                    <div className=" font-bold text-2xl ">Exclusive</div>
+                    <div className=" font-bold text-2xl ">TechTopia</div>
+                    <Link
+                      to={"/yourcart"}
+                      className="btn btn-ghost btn-circle flex flex-grow"
+                    >
+                      <div className="indicator z-0">
+                        <AiOutlineShoppingCart className="text-2xl " />
+                        <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white">
+                          {items}
+                        </span>
+                      </div>
+                    </Link>
                   </div>
                   <div
                     className={`mb-4 pb-2 border-b-2 justify-evenly border-gray-500 ${
@@ -62,34 +71,7 @@ export default function Nav_bar() {
                         ? "hidden"
                         : "flex"
                     }`}
-                  >
-                    {/* <div
-                      className="tooltip tooltip-bottom tooltip-info"
-                      data-tip="Favorite"
-                    >
-                      <button className="btn btn-ghost btn-circle ">
-                        <div className="indicator z-0">
-                          <AiOutlineHeart className="text-2xl " />
-                        </div>
-                      </button>
-                    </div> */}
-                    <div
-                      className="tooltip tooltip-bottom tooltip-info"
-                      data-tip="Your cart"
-                    >
-                      <Link
-                        to={"/yourcart"}
-                        className="btn btn-ghost btn-circle flex"
-                      >
-                        <div className="indicator z-0">
-                          <AiOutlineShoppingCart className="text-2xl " />
-                          <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white">
-                            {items}
-                          </span>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
+                  ></div>
                   {navbarCategories.map((category) => {
                     return (
                       <li
@@ -167,7 +149,7 @@ export default function Nav_bar() {
             }`}
           >
             <div
-              className="tooltip tooltip-bottom tooltip-info hidden md:block"
+              className="tooltip tooltip-bottom hidden lg:block"
               data-tip="Your cart"
             >
               <Link to={"/yourcart"} className="btn btn-ghost btn-circle flex">
@@ -180,10 +162,14 @@ export default function Nav_bar() {
               </Link>
             </div>
             {!user ? (
-              <details className="dropdown dropdown-bottom dropdown-end ">
-                <summary className="btn btn-ghost btn-circle">
+              <div className="dropdown dropdown-bottom dropdown-end ">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle"
+                >
                   <BiUserCircle className="text-3xl" />
-                </summary>
+                </div>
                 <ul
                   tabIndex={0}
                   className="dropdown-content z-50 menu p-2 shadow  rounded-box w-52"
@@ -200,12 +186,16 @@ export default function Nav_bar() {
                     <Link to={"/signup"}>Sign Up</Link>
                   </li>
                 </ul>
-              </details>
+              </div>
             ) : (
-              <details className="dropdown dropdown-bottom dropdown-end ">
-                <summary className="btn btn-ghost btn-circle">
+              <div className="dropdown dropdown-bottom dropdown-end ">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle"
+                >
                   <BiUserCircle className="text-3xl" />
-                </summary>
+                </div>
                 <ul
                   tabIndex={0}
                   className="dropdown-content z-50 menu p-2 shadow  rounded-box w-52"
@@ -214,20 +204,41 @@ export default function Nav_bar() {
                     background: "rgb(255, 255, 255)",
                   }}
                 >
-                  <li className="">
-                    <Link>Manage My Account</Link>
+                  <li
+                    onClick={() => setSelectedPage(window.location.pathname)}
+                    className={`${
+                      window.location.pathname === "/account"
+                        ? "bg-secondary rounded-md text-white"
+                        : ""
+                    }  `}
+                  >
+                    <Link to={"/account"}>Manage My Account</Link>
+                  </li>
+                  <li
+                    onClick={() => setSelectedPage(window.location.pathname)}
+                    className={`${
+                      window.location.pathname === "/order"
+                        ? "bg-secondary rounded-md text-white"
+                        : ""
+                    }  `}
+                  >
+                    <Link to={"/order"}>My Order</Link>
+                  </li>
+                  <li
+                    onClick={() => setSelectedPage(window.location.pathname)}
+                    className={`${
+                      window.location.pathname === "/wishlist"
+                        ? "bg-secondary rounded-md text-white"
+                        : ""
+                    } `}
+                  >
+                    <Link to={"/wishlist"}>My Watch list</Link>
                   </li>
                   <li className="">
-                    <Link>My Order</Link>
-                  </li>
-                  <li className="">
-                    <Link>My Watch list</Link>
-                  </li>
-                  <li className="">
-                    <div onClick={logoutUser} >Log Out</div>
+                    <div onClick={logoutUser}>Log Out</div>
                   </li>
                 </ul>
-              </details>
+              </div>
             )}
           </div>
         </div>

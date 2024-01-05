@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchAPI } from "../utils/fetchAPI";
-import { ProductCard } from "../components/ProductCard";
-import CategoryContext from "../context/CategoryContext";
+import { fetchAPI } from "../../utils/fetchAPI";
+import { ProductCard } from "../../components/ProductCard";
+import CategoryContext from "../../context/CategoryContext";
 export default function ProductByCategory() {
   const Category = useParams();
   const product = useRef(null);

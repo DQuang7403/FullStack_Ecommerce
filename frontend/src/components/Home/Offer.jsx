@@ -13,7 +13,7 @@ export default function Offer() {
           Shop Now
         </Link>
       </div>
-      <img src={offer} className="w-full md:w-[50%] " />
+      <img loading="lazy" src={offer} className="w-full md:w-[50%] " />
     </section>
   );
 }

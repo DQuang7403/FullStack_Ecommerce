@@ -28,10 +28,18 @@ export function AuthProvider({ children }) {
     });
     const data = await response.json();
     if (response.status === 201) {
-      alert("Account created successfully");
+      Swal.fire({
+        title: "Good job!",
+        text: "Registration successful. Please login",
+        icon: "success"
+      });
       navigate("/login");
     } else {
-      alert("Something went wrong. Please try again");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
   const loginUser = async (e) => {
@@ -85,13 +93,13 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    const fourMinutes = 1000 * 60 * 4;
+    const expires = 1000 * 60 * 15;
     let interval = setInterval(() => {
       if (authToken) {
         console.log("updated");
         updateToken();
       }
-    }, fourMinutes);
+    }, expires);
     return () => {
       clearInterval(interval);
     };

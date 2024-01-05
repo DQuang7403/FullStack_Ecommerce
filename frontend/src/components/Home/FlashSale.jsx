@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 export default function FlashSale() {
   const [flashSaleProducts, setFlashSaleProducts] = useState([]);
   const flashSaleSlide = useRef(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchResult = async () => {
       const data = await fetchAPI(`sale_products?limit=5`);
       setFlashSaleProducts(data);
+      setLoading(false);
     };
     fetchResult();
   }, []);
@@ -50,9 +52,13 @@ export default function FlashSale() {
         ref={flashSaleSlide}
         className="custom-caurosel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box"
       >
-        {flashSaleProducts.map((product) => {
-          return <ProductCard key={product?.id} product={product} />;
-        })}
+        {loading ? (
+          <span className="loading loading-spinner loading-md"></span>
+        ) : (
+          flashSaleProducts?.map((product) => {
+            return <ProductCard key={product?.id} product={product} />;
+          })
+        )}
       </div>
       <div className="flex items-center justify-center">
         <Link

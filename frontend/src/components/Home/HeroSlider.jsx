@@ -24,18 +24,26 @@ export default function HeroSlider() {
       return index - 1;
     });
   };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      moveRight();
+    }, 3000);
+    return () => clearInterval(interval);
+  });
+
   return (
     <section className="hidden md:block ">
       <div className="flex overflow-x-hidden relative">
         {SliderData.map((slide) => {
           return (
             <img
+            loading="lazy"
               key={slide}
               src={slide}
               className="w-full aspect-[12/4] flex-grow-0 flex-shrink-0 "
               style={{
                 translate: `${-100 * currentSlide}%`,
-                transition: "translate 300ms ease-in-out",
+                transition: "translate 500ms ease-in-out",
               }}
             />
           );
