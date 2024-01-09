@@ -63,11 +63,9 @@ export default function AccountPage() {
     const fetchUser = async () => {
       const data = await fetchAPI(`/account/get_user/${user?.sub}`);
       setUserDetail(data);
-      console.log(data);
       setRefresh(false);
     };
     fetchUser();
-    console.log(userDetail);
   }, [refresh]);
   return (
     <section className="lg:mx-32 md:my-8 mx-4 my-4">

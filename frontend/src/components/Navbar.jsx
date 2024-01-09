@@ -181,7 +181,9 @@ export default function Nav_bar() {
                   <li className="">
                     <Link to={"/login"}>Log In</Link>
                   </li>
-
+                  <li className="">
+                    <Link to={"/wishlist"}>My Wish List</Link>
+                  </li>
                   <li className="">
                     <Link to={"/signup"}>Sign Up</Link>
                   </li>
@@ -204,35 +206,14 @@ export default function Nav_bar() {
                     background: "rgb(255, 255, 255)",
                   }}
                 >
-                  <li
-                    onClick={() => setSelectedPage(window.location.pathname)}
-                    className={`${
-                      window.location.pathname === "/account"
-                        ? "bg-secondary rounded-md text-white"
-                        : ""
-                    }  `}
-                  >
+                  <li>
                     <Link to={"/account"}>Manage My Account</Link>
                   </li>
-                  <li
-                    onClick={() => setSelectedPage(window.location.pathname)}
-                    className={`${
-                      window.location.pathname === "/order"
-                        ? "bg-secondary rounded-md text-white"
-                        : ""
-                    }  `}
-                  >
+                  <li>
                     <Link to={"/order"}>My Order</Link>
                   </li>
-                  <li
-                    onClick={() => setSelectedPage(window.location.pathname)}
-                    className={`${
-                      window.location.pathname === "/wishlist"
-                        ? "bg-secondary rounded-md text-white"
-                        : ""
-                    } `}
-                  >
-                    <Link to={"/wishlist"}>My Watch list</Link>
+                  <li>
+                    <Link to={"/wishlist"}>My Wish list</Link>
                   </li>
                   <li className="">
                     <div onClick={logoutUser}>Log Out</div>

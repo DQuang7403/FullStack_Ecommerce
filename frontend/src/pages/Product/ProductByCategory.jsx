@@ -12,7 +12,6 @@ export default function ProductByCategory() {
     const fetchProducts = async () => {
       const data = await fetchAPI(`products/${Category.name}`);
       setProducts(data);
-      console.log(data);
     };
     fetchProducts();
   }, [Category.name]);

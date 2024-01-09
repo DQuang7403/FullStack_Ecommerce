@@ -45,6 +45,8 @@ export default function SignUpPage() {
           <input
             type="password"
             required
+            onFocus={(e) => (e.target.type = "text")}
+            onBlur={(e) => (e.target.type = "password")}
             name="password"
             autoComplete="on"
             placeholder="Enter your password"

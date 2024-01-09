@@ -21,10 +21,13 @@ def create_app():
     from .cart import cart
     from .auth import auth
     from .account import account
+    from .wishlist import wishlist
 
     app.register_blueprint(cart, url_prefix="/")
     app.register_blueprint(products, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/auth")
+    app.register_blueprint(wishlist, url_prefix="/")
     app.register_blueprint(account, url_prefix="/account")
+    
 
     return app

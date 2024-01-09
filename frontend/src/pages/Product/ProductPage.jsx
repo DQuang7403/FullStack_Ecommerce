@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchAPI } from "../../utils/fetchAPI";
 import { StarRating } from "../../utils/constants";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { FaEye, FaRegEye } from "react-icons/fa";
+
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { GrPowerCycle } from "react-icons/gr";
 import { ProductCard } from "../../components/ProductCard";
+
+import WishListContext from "../../context/WishListContext";
 export default function ProductPage() {
   const product = useParams();
   const relatedProduct = useRef(null);
@@ -16,7 +18,8 @@ export default function ProductPage() {
   const [images, setImages] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
   const [quantity, setQuantity] = useState(1);
-
+  const { toggleWishList, wishList } = useContext(WishListContext);
+  const [isWishList, setIsWishList] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(`http://127.0.0.1:5000/cart/add`, {
@@ -31,11 +34,25 @@ export default function ProductPage() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {})
-      .catch((err) => console.log(err));
+      .then((data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Product added to cart",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((err) =>
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        })
+      );
   };
 
   useEffect(() => {
+    setIsWishList(false);
     const fetchProductDetail = async () => {
       const data = await fetchAPI(`products/${product.id}`);
       const related = await fetchAPI(`products/${data.category}`);
@@ -45,10 +62,13 @@ export default function ProductPage() {
       setImages((current) => {
         return [...current, ...data?.images];
       });
+      setIsWishList(
+        wishList.find((item) => item.id === data?.id) ? true : false
+      );
       setSelectedImg(data?.thumbnail);
     };
     fetchProductDetail();
-  }, [product.id]);
+  }, [product.id, wishList]);
 
   return (
     <section className="mx-4 my-10">
@@ -117,29 +137,31 @@ export default function ProductPage() {
               <button
                 className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
                 type="submit"
-                onClick={() => {
-                  Swal.fire({
-                    position: "middle",
-                    icon: "success",
-                    title: "Product added to cart",
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
-                }}
               >
                 Add to cart
               </button>
             </form>
 
             <label className="swap btn h-10 bg-[#F5F5F5] aspect-square btn-ghost rounded-lg hover:bg-slate-300">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={isWishList ? "checked" : ""}
+                name="watchList"
+                onChange={() => {
+                  setIsWishList(!isWishList);
+                  toggleWishList(productDetail, isWishList);
+                }}
+              />
 
-              <FaEye className="text-lg text-blue-500 swap-on  fill-current" />
+              <AiFillHeart className="text-lg text-red-500 swap-on  fill-current" />
 
-              <FaRegEye className="text-lg swap-off fill-current" />
+              <AiOutlineHeart className="text-lg swap-off fill-current" />
             </label>
           </div>
-          <Link to={"/yourcart"} className="btn mb-4 w-full btn-accent text-white">
+          <Link
+            to={"/yourcart"}
+            className="btn mb-4 w-full btn-accent text-white"
+          >
             Go to cart
           </Link>
           <div>

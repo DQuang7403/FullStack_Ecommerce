@@ -11,15 +11,15 @@ export default {
         mytheme: {
           primary: "#DB4444",
 
-          secondary: "#ef4444",
+          secondary: "#BB232D",
 
           accent: "#0ea5e9",
 
           neutral: "#93c5fd ",
 
-          "base-100": "#f3f4f6",
+          "base-100": "#ffffff",
 
-          info: "#67e8f9",
+          info: "#06b6d4",
 
           success: "#34d399",
 

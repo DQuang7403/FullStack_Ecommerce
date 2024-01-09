@@ -34,6 +34,8 @@ export default function LoginPage() {
             type="password"
             name="password"
             required
+            onFocus={(e) => (e.target.type = "text")}
+            onBlur={(e) => (e.target.type = "password")}
             autoComplete="on"
             placeholder="Enter your password"
             className="input input-bordered w-full max-w-xs"

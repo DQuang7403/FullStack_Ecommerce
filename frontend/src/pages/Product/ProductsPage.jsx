@@ -30,7 +30,7 @@ export default function ProductsPage() {
         </h3>
       </div>
 
-      <div className="custom-caurosel md:justify-between gap-4 md:flex md:flex-wrap max-w-full mt-10 carousel-center p-4  bg-neutral rounded-box">
+      <div className="custom-caurosel md:justify-evenly gap-4 md:flex md:flex-wrap max-w-full mt-10 carousel-center p-4 rounded-box">
         {products.length === 0 ? (
           <div className="text-white text-2xl text-center my-10">
             No products found !!!
@@ -46,7 +46,7 @@ export default function ProductsPage() {
           className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
           onClick={() => setQuantity((prev) => prev + 4)}
         >
-          Load more
+          Load more ...
         </button>
       </div>
     </section>

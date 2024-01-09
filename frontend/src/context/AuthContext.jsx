@@ -59,7 +59,11 @@ export function AuthProvider({ children }) {
       localStorage.setItem("authTokens", JSON.stringify(data));
       navigate("/");
     } else {
-      alert("Something went wrong. Please try again");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please check your credentials",
+      });
     }
   };
   const logoutUser = () => {
@@ -96,7 +100,6 @@ export function AuthProvider({ children }) {
     const expires = 1000 * 60 * 15;
     let interval = setInterval(() => {
       if (authToken) {
-        console.log("updated");
         updateToken();
       }
     }, expires);
