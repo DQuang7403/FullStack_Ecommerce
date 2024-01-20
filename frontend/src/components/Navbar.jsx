@@ -100,21 +100,17 @@ export default function Nav_bar() {
             TechTopia
           </div>
         </div>
-        <ul className="navbar-center gap-4 text-black hidden lg:flex">
+        <ul className="navbar-center tabs tabs-bordered gap-4 text-black hidden lg:flex">
           {navbarCategories.map((category) => {
             return (
               <li
                 key={category.name}
                 onClick={() => setSelectedPage(window.location.pathname)}
+                className={`tab text-black font-semibold text-base ${
+                  category.url === selectedPage ? "tab-active" : ""
+                } `}
               >
-                <Link
-                  to={`${category.url}`}
-                  className={`tab text-black tab-bordered font-semibold text-base ${
-                    category.url === selectedPage ? "tab-active" : ""
-                  } `}
-                >
-                  {category.name}
-                </Link>
+                <Link to={`${category.url}`}>{category.name}</Link>
               </li>
             );
           })}
@@ -124,17 +120,17 @@ export default function Nav_bar() {
             <form
               onSubmit={handleSubmit}
               method="post"
-              className="input-group items-center"
+              className="join items-center"
             >
               <input
                 type="text"
                 placeholder="Search…"
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="input bg-[#F5F5F5] w-36 lg:w-full h-10"
+                className="input join-item bg-[#F5F5F5] w-36 h-12 md:w-full"
               />
               <button
                 type="submit"
-                className="btn btn-ghost bg-[#F5F5F5] min-h-8 h-10"
+                className="btn join-item btn-ghost bg-[#F5F5F5] h-10"
               >
                 <BiSearch className="text-2xl" />
               </button>

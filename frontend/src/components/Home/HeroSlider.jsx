@@ -37,7 +37,7 @@ export default function HeroSlider() {
         {SliderData.map((slide) => {
           return (
             <img
-            loading="lazy"
+              loading="lazy"
               key={slide}
               src={slide}
               className="w-full aspect-[12/4] flex-grow-0 flex-shrink-0 "

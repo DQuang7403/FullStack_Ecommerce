@@ -14,7 +14,7 @@ export default function LoginPage() {
       />
       <form onSubmit={loginUser}>
         <header>
-          <h1 className=" text-4xl font-semibold mb-4">Log in to Exclusive</h1>
+          <h1 className=" text-4xl font-semibold mb-4">Log in to TechTopia</h1>
           <h3 className=" text-xl">Enter your details below</h3>
         </header>
         <div className="form-control mt-6">

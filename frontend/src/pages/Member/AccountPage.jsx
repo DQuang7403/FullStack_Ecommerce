@@ -27,7 +27,7 @@ export default function AccountPage() {
           lastname: userDetail.lastname,
           phone: userDetail.phone,
           address: userDetail.address,
-          password: resetPassword.newPassword || userDetail.password,
+          password: resetPassword.newPassword || "",
         }),
       });
       const data = await response.json();
@@ -181,16 +181,6 @@ export default function AccountPage() {
         </div>
         <div className="flex flex-col gap-3 w-full">
           <label>Password Change:</label>
-          <input
-            readOnly
-            type="password"
-            autoComplete="on"
-            placeholder="Current Password"
-            className="input input-bordered w-full "
-            value={userDetail?.password || ""}
-            onFocus={(e) => (e.target.type = "text")}
-            onBlur={(e) => (e.target.type = "password")}
-          />
           <input
             type="password"
             placeholder="New Password"

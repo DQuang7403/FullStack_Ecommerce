@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, Blueprint, request
+from flask import jsonify, Blueprint, request
 import sqlite3
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash
 
 account = Blueprint("account", __name__)
 sqldbname = "backend/Ecommerce.db"
@@ -32,22 +33,40 @@ def get_user(email):
 def update_user():
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
-    cur.execute(
-        "Update User set username = ?, email = ?, password = ?, firstname = ?, lastname = ?, address = ?, phone = ? where id = ?",
-        (
-            request.json["username"],
-            request.json["email"],
-            request.json["password"],
-            request.json["firstname"],
-            request.json["lastname"],
-            request.json["address"],
-            request.json["phone"],
-            request.json["id"],
-        ),
-    )
+    password = request.json["password"]
+    if password != "":
+        new_password = generate_password_hash(
+            password, method="pbkdf2:sha1", salt_length=8
+        )
+        cur.execute(
+            "Update User set username = ?, email = ?, password = ?, firstname = ?, lastname = ?, address = ?, phone = ? where user_id = ?",
+            (
+                request.json["username"],
+                request.json["email"],
+                new_password,
+                request.json["firstname"],
+                request.json["lastname"],
+                request.json["address"],
+                request.json["phone"],
+                request.json["id"],
+            ),
+        )
+    else:
+        cur.execute(
+            "Update User set username = ?, email = ?, firstname = ?, lastname = ?, address = ?, phone = ? where user_id = ?",
+            (
+                request.json["username"],
+                request.json["email"],
+                request.json["firstname"],
+                request.json["lastname"],
+                request.json["address"],
+                request.json["phone"],
+                request.json["id"],
+            ),
+        )
     conn.commit()
     conn.close()
     if cur.rowcount > 0:
-      return jsonify( {'message':'User updated successfully'}), 200
+        return jsonify({"message": "User updated successfully"}), 200
     else:
-      return 'user not found', 404
+        return "user not found", 404

@@ -9,7 +9,7 @@ export default function FlashSale() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchResult = async () => {
-      const data = await fetchAPI(`sale_products?limit=5`);
+      const data = await fetchAPI(`sale_products?limit=8`);
       setFlashSaleProducts(data);
       setLoading(false);
     };
@@ -26,11 +26,18 @@ export default function FlashSale() {
 
           <div className="flex items-center justify-between grow">
             <Countdown />
-            <div className="hidden items-center gap-2 md:flex transition-all">
+            <div className="flex items-center gap-2 ">
               <button
                 className="btn btn-circle"
                 onClick={() => {
-                  flashSaleSlide.current.scrollLeft -= 270;
+                  let scrollAmount = 0;
+                  const slideTimer = setInterval(() => {
+                    flashSaleSlide.current.scrollLeft -= 20;
+                    scrollAmount += 20;
+                    if (scrollAmount >= 270) {
+                      window.clearInterval(slideTimer);
+                    }
+                  }, 30);
                 }}
               >
                 ❮
@@ -38,7 +45,14 @@ export default function FlashSale() {
               <button
                 className="btn btn-circle"
                 onClick={() => {
-                  flashSaleSlide.current.scrollLeft += 270;
+                  let scrollAmount = 0;
+                  const slideTimer = setInterval(() => {
+                    flashSaleSlide.current.scrollLeft += 30;
+                    scrollAmount += 30;
+                    if (scrollAmount >= 270) {
+                      window.clearInterval(slideTimer);
+                    }
+                  }, 30);
                 }}
               >
                 ❯
@@ -47,7 +61,6 @@ export default function FlashSale() {
           </div>
         </div>
       </div>
-
       <div
         ref={flashSaleSlide}
         className="custom-caurosel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box"

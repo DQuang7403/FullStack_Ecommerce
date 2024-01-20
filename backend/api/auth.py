@@ -10,6 +10,7 @@ from flask_jwt_extended import (
     jwt_required,
     create_refresh_token,
 )
+from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint("auth", __name__)
 sqldbname = "backend/Ecommerce.db"
@@ -44,12 +45,12 @@ def register_user(username, email, password):
     return True
 
 
-def get_user(email, password):
+def get_user(email):
     result = []
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
-    sqlcommand = "Select * from User where email = ? and password = ? "
-    cur.execute(sqlcommand, (email, password))
+    sqlcommand = "Select * from User where email = ?"
+    cur.execute(sqlcommand, (email,))
     obj_user = cur.fetchone()
     if obj_user:
         result = obj_user
@@ -61,8 +62,9 @@ def get_user(email, password):
 def register():
     username = request.json["username"]
     email = request.json["email"]
-    password = request.json["password"]
-    if register_user(username, email, password):
+    password =request.json["password"]
+    hash_password = generate_password_hash(password=password, method='pbkdf2:sha1', salt_length=8)
+    if register_user(username, email, hash_password):
         return jsonify({"msg": "User created successfully"}), 201
     return jsonify({"msg": "Email already exists"}), 409
 
@@ -71,8 +73,8 @@ def register():
 def create_token():
     email = request.json["email"]
     password = request.json["password"]
-    user = get_user(email, password)
-    if not user:
+    user = get_user(email)
+    if not user or not check_password_hash(password=password, pwhash=user[3]):
         return jsonify({"msg": "Please check your login details"}), 401
     access_token = create_access_token(identity=email)
     refresh_token = create_refresh_token(identity=email)
@@ -98,8 +100,8 @@ def refresh_access():
         (jti, datetime.now()),
     )
     conn.commit()
-    # expiry_limit = datetime.datetime.now() - datetime.timedelta(days=30)
-    # cur.execute("DELETE FROM revoked_tokens WHERE blacklisted_on < ?", (expiry_limit,))
+    expiry_limit = datetime.datetime.now() - datetime.timedelta(days=5)
+    cur.execute("DELETE FROM revoked_tokens WHERE blacklisted_on < ?", (expiry_limit,))
     new_access_token = create_access_token(identity=identity)
 
     return jsonify({"access_token": new_access_token}), 200

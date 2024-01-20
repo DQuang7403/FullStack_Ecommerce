@@ -17,11 +17,18 @@ export default function CategoriesSection() {
             Browse By category
           </h1>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="2xl:hidden items-center gap-2 flex">
             <button
               className="btn btn-circle"
               onClick={() => {
-                category.current.scrollLeft -= 270;
+                let scrollAmount = 0;
+                const slideTimer = setInterval(() => {
+                  category.current.scrollLeft -= 20;
+                  scrollAmount += 20;
+                  if (scrollAmount >= 205) {
+                    window.clearInterval(slideTimer);
+                  }
+                });
               }}
             >
               ❮
@@ -29,7 +36,14 @@ export default function CategoriesSection() {
             <button
               className="btn btn-circle"
               onClick={() => {
-                category.current.scrollLeft += 270;
+                let scrollAmount = 0;
+                const slideTimer = setInterval(() => {
+                  category.current.scrollLeft += 20;
+                  scrollAmount += 20;
+                  if (scrollAmount >= 205) {
+                    window.clearInterval(slideTimer);
+                  }
+                });
               }}
             >
               ❯

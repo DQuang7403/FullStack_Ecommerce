@@ -40,7 +40,7 @@ def getproduct(quantity):
 def get_product_by_id(id):
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
-    cur.execute("select * from Products where id = ?", (id,))
+    cur.execute("select * from Products where product_id = ?", (id,))
     product = cur.fetchone()
     return jsonify(
         {

@@ -1,46 +1,35 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useId } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../context/CartContext";
-export default function YourCart() {
-  const [refetch, setReFetch] = useState(true);
-  const [cart, setCart] = useState([]);
-  const { setItems, formatNumberWithCommas} = useContext(CartContext);
-  const [update, setUpdate] = useState(false);
 
-  
-  const calculateTotal = () => {
-    let total = 0;
-    cart.forEach((item) => {
-      total = total + item.price * item.quantity;
-    });
-    return Number(total.toFixed(2)); // Round to two decimal placestotal
-  };
-  useEffect(() => {
-    const fetchResult = () => {
-      fetch("http://127.0.0.1:5000/cart", { credentials: "include" })
-        .then((res) => res.json())
-        .then((data) => {
-          setCart(data);
-          setItems(data.length);
-        });
-    };
-    if (refetch) {
-      fetchResult();
-      setReFetch(!refetch);
-    }
-  }, [refetch]);
-  const removeItem = (id) => {
-    fetch("http://127.0.0.1:5000/cart/remove", {
+export default function YourCart() {
+  const {
+    setItems,
+    formatNumberWithCommas,
+    removeItem,
+    updateCart,
+    cart,
+    setCart,
+    update,
+    refetch,
+    setUpdate,
+    setReFetch,
+
+  } = useContext(CartContext);
+
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    fetch("http://127.0.0.1:5000/checkout/create-checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ cart: cart}),
       credentials: "include",
-      body: JSON.stringify({ product_id: id }),
     })
       .then((res) => res.json())
       .then((data) => {
-        setReFetch(!refetch);
+        window.location = data?.url;
       });
   };
   const changeQuantity = (id, e) => {
@@ -57,22 +46,29 @@ export default function YourCart() {
     });
     setUpdate(true);
   };
-  const updateCart = (e) => {
-    e.preventDefault();
-    fetch("http://127.0.0.1:5000/cart/update", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ cart: cart }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setReFetch(!refetch);
-        setUpdate(false);
-      });
+  const calculateTotal = () => {
+    let total = 0;
+    cart.forEach((item) => {
+      total = total + item.price * item.quantity;
+    });
+    return Number(total.toFixed(2)); // Round to two decimal placestotal
   };
+  useEffect(() => {
+    const fetchResult = () => {
+      fetch(`http://127.0.0.1:5000/cart`, { credentials: "include" })
+        .then((res) => res.json())
+        .then((data) => {
+          setCart(data);
+          setItems(data.length);
+        });
+    };
+    fetchResult();
+    if (refetch) {
+      fetchResult();
+      setReFetch(!refetch);
+    }
+  }, [refetch]);
+
   return (
     <section className="lg:mx-32 md:my-8 mx-1 my-4">
       <div className="overflow-x-auto">
@@ -97,7 +93,11 @@ export default function YourCart() {
               return (
                 <tr key={item.id}>
                   <th className="flex flex-col items-center sm:flex-row gap-2 md:gap-6 w-full">
-                    <img loading="lazy" className="w-14 object-contain" src={item.thumbnail} />
+                    <img
+                      loading="lazy"
+                      className="w-14 object-contain"
+                      src={item.thumbnail}
+                    />
                     <div className="flex flex-col items-start gap-2">
                       <div>{item.title}</div>
                       <div className="font-normal">
@@ -186,9 +186,16 @@ export default function YourCart() {
             <p>Total:</p>
             <p>$ {formatNumberWithCommas(calculateTotal())}</p>
           </div>
-          <button className="btn bg-[#db4444] hover:bg-[#BB232D] text-white rounded-base">
-            Process to checkout
-          </button>
+          <form method="post" onSubmit={handleCheckout}>
+            <button
+              type="submit"
+              className={`btn bg-[#db4444] hover:bg-[#BB232D] text-white rounded-base ${
+                cart.length === 0 && "btn-disabled"
+              }`}
+            >
+              Process to checkout
+            </button>
+          </form>
         </div>
       </div>
     </section>

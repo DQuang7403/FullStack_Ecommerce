@@ -6,12 +6,13 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { GrPowerCycle } from "react-icons/gr";
-import { ProductCard } from "../../components/ProductCard";
 
 import WishListContext from "../../context/WishListContext";
+import CartContext from "../../context/CartContext";
+
+import ProductsCaurosel from "../../components/ProductsCaurosel";
 export default function ProductPage() {
   const product = useParams();
-  const relatedProduct = useRef(null);
 
   const [related, setRelated] = useState([]);
   const [productDetail, setProductDetail] = useState({});
@@ -184,23 +185,35 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-      <div className="lg:mx-32 md:my-8 mx-1 my-8">
-        <h2 className="text-2xl font-semibold">Relates Products</h2>
+      <div role="tablist" className="tabs tabs-lifted my-32 md:mx-4">
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          className="tab text-xl font-semibold text-primary"
+          aria-label="Related"
+          checked
+          readOnly
+        />
         <div
-          ref={relatedProduct}
-          className="custom-caurosel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box"
+          role="tabpanel"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-6 overflow-hidden"
         >
-          {related.map((product) => {
-            return <ProductCard key={product?.id} product={product} />;
-          })}
+          <ProductsCaurosel products={related} />
         </div>
-        <div className="flex items-center justify-center">
-          <Link
-            to={"/products/all"}
-            className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
-          >
-            View all products
-          </Link>
+
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          className={`tab text-xl font-semibold text-accent`}
+          aria-label="Reviews"
+        />
+        <div
+          role="tabpanel"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+        >
+          Tab content 2
         </div>
       </div>
     </section>

@@ -8,7 +8,7 @@ export default function AllProduct() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchResult = async () => {
-      const data = await fetchAPI(`product?limit=8`);
+      const data = await fetchAPI(`product?limit=12`);
       setOurProducts(data);
       setLoading(false);
     };
@@ -25,11 +25,18 @@ export default function AllProduct() {
             Explore Our Products
           </h1>
 
-          <div className="md:hidden items-center gap-2 flex">
+          <div className="flex items-center gap-2 lg:hidden">
             <button
               className="btn btn-circle"
               onClick={() => {
-                product.current.scrollLeft -= 270;
+                let scrollAmount = 0;
+                const slideTimer = setInterval(() => {
+                  product.current.scrollLeft -= 20;
+                  scrollAmount += 20;
+                  if (scrollAmount >= 270) {
+                    window.clearInterval(slideTimer);
+                  }
+                });
               }}
             >
               ❮
@@ -37,7 +44,14 @@ export default function AllProduct() {
             <button
               className="btn btn-circle"
               onClick={() => {
-                product.current.scrollLeft += 270;
+                let scrollAmount = 0;
+                const slideTimer = setInterval(() => {
+                  product.current.scrollLeft -= 20;
+                  scrollAmount -= 20;
+                  if (scrollAmount >= 270) {
+                    window.clearInterval(slideTimer);
+                  }
+                });
               }}
             >
               ❯

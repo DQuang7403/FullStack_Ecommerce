@@ -22,7 +22,7 @@ def add_to_cart():
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
     cursor.execute(
-        "SELECT title, price, thumbnail FROM Products WHERE id = ?", (productId,)
+        "SELECT title, price, thumbnail FROM Products WHERE product_id = ?", (productId,)
     )
     product = cursor.fetchone()
     conn.close()
