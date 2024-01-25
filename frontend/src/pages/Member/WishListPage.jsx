@@ -21,7 +21,7 @@ export default function WishListPage() {
     <section className="lg:mx-32 md:my-8 mx-4 my-4">
       {user && (
         <div className="text-lg text-right my-8">
-          Hello,
+          Hello,{" "}
           <span className="text-[#DB4444] font-semibold">
             {userDetail?.username}
           </span>
@@ -58,7 +58,7 @@ export default function WishListPage() {
           })}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-10 h-44">
+        <div className="flex flex-col items-center gap-10 my-10">
           <h1 className="text-3xl font-semibold">
             You Don't Have Any Items in Your Wishlist Yet
           </h1>

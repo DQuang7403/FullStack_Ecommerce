@@ -12,7 +12,11 @@ export default function AllProduct() {
       setOurProducts(data);
       setLoading(false);
     };
-    fetchResult();
+    try {
+      fetchResult();
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
   return (
     <section className="my-10 mx-2 border-b-2">
@@ -65,8 +69,9 @@ export default function AllProduct() {
         className="custom-caurosel gap-4 lg:flex lg:flex-wrap lg:justify-evenly max-w-full mt-10 carousel-center p-4 rounded-box"
       >
         {loading ? (
-          <span className="loading loading-spinner loading-md"></span>
+          <span className="loading loading-spinner loading-md align-middle"></span>
         ) : (
+          OurProducts &&
           OurProducts.map((product) => {
             return <ProductCard key={product?.id} product={product} />;
           })

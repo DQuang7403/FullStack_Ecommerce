@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import stripe
 import sqlite3
 import json
+import datetime
 
 checkout = Blueprint("checkout", __name__)
 sqldbname = "backend/Ecommerce.db"
@@ -51,7 +52,7 @@ def payment():
     return jsonify({"url": checkoutSession.url}), 200
 
 
-endpoint_secret = "whsec_P5ZiCVDa4aTSBpXPyjpMMoBSqtPJZEb8"
+endpoint_secret = "whsec_XjsopirwivUWb5FI7MBRxM8Qsvr27uOT"
 
 
 @checkout.route("/webhook", methods=["POST"])
@@ -79,32 +80,24 @@ def webhook():
         conn = sqlite3.connect(sqldbname)
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO Orders (username, email, address, phone, status) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO Orders (username, email, address, phone, status, create_at) VALUES (?, ?, ?, ?, ?, ?)",
             (
                 event["data"]["object"]["customer_details"]["name"],
                 event["data"]["object"]["customer_details"]["email"],
                 event["data"]["object"]["customer_details"]["address"]["line1"],
                 event["data"]["object"]["customer_details"]["phone"],
-                1,
+                "Paid",
+                datetime.datetime.now(),
             ),
         )
         conn.commit()
-
-        print(
-            event["data"]["object"]["customer_details"]["name"],
-            event["data"]["object"]["customer_details"]["email"],
-            event["data"]["object"]["customer_details"]["address"]["line1"],
-            event["data"]["object"]["customer_details"]["phone"],
-            flush=True,
-        )
         order_id = cursor.lastrowid
         checkoutSession = stripe.checkout.Session.retrieve(
             event["data"]["object"]["id"],
             expand=["line_items"],
         )
-        # session.pop("cart-fb3d482f-f9b1-4596-8778-2b2693e1c5b0", None)
         line_items = checkoutSession.line_items
-
+        session.pop("cart", None)
         for item in line_items["data"]:
             print(
                 order_id,
@@ -123,9 +116,9 @@ def webhook():
                     item["quantity"],
                 ),
             )
+
         conn.commit()
         conn.close()
-        session.pop("cart", None)
 
     elif event["type"] == "checkout.session.expired":
         checkoutSession = event["data"]["object"]
@@ -133,3 +126,52 @@ def webhook():
         return "Received unknown event type", 400
 
     return jsonify(success=True), 200
+
+
+@checkout.route("/orders/<email>", methods=["GET"])
+def get_orders_by_email(email):
+    order_overview = []
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute(
+        "select Orders.order_id, status, create_at, SUM(price) as Totals   from Orders, Order_details where Order_details.order_id = Orders.order_id and Orders.email = ? GROUP BY Orders.order_id",
+        (email,),
+    )
+    orders = cursor.fetchall()
+    for order in orders:
+        order_overview.append(
+            {
+                "order_id": order[0],
+                "status": order[1],
+                "create_at": order[2],
+                "total": order[3],
+            }
+        )
+    conn.close()
+    return jsonify(order_overview)
+
+
+@checkout.route("/order-details/<int:id>", methods=["GET"])
+def get_order_details(id):
+    order_details = []
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Orders WHERE order_id = ?", (id,))
+    orderOverview = cursor.fetchone()
+    cursor.execute(
+        "SELECT Order_details.price AS order_price, quantity, thumbnail, Products.price AS product_price, title FROM Order_details, Products WHERE Order_details.product_name = Products.title AND Order_details.order_id = ?",
+        (id,),
+    )
+    order = cursor.fetchall()
+    for item in order:
+        order_details.append(
+            {
+                "total_price": item[0],
+                "quantity": item[1],
+                "thumbnail": item[2],
+                "price": item[3],
+                "title": item[4],
+            }
+        )
+    conn.close()
+    return jsonify({"Order_details": order_details, "Order_overview": orderOverview})

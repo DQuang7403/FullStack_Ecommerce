@@ -20,7 +20,7 @@ def add_to_wishlist():
     productId = request.json["product_id"]
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM Products WHERE id = ?", (productId,))
+    cur.execute("SELECT * FROM Products WHERE product_id = ?", (productId,))
     product = cur.fetchone()
     conn.close()
     product_details = {

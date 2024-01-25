@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function ProductsCaurosel({ products }) {
   return (
     <div>
-      <div className="custom-caurosel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box w-full">
+      <div className="custom-caurosel scroll-smooth max-w-full carousel-center md:p-4 p-2 space-x-4 rounded-box w-full">
         {products.map((product) => {
           return <ProductCard key={product?.id} product={product} />;
         })}

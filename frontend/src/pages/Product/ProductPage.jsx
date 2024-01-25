@@ -8,9 +8,10 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { GrPowerCycle } from "react-icons/gr";
 
 import WishListContext from "../../context/WishListContext";
-import CartContext from "../../context/CartContext";
+// import CartContext from "../../context/CartContext";
 
 import ProductsCaurosel from "../../components/ProductsCaurosel";
+import Reviews from "../../components/Reviews";
 export default function ProductPage() {
   const product = useParams();
 
@@ -190,14 +191,14 @@ export default function ProductPage() {
           type="radio"
           name="my_tabs_2"
           role="tab"
-          className="tab text-xl font-semibold text-primary"
+          className="tab text-lg font-semibold text-primary"
           aria-label="Related"
           checked
           readOnly
         />
         <div
           role="tabpanel"
-          className="tab-content bg-base-100 border-base-300 rounded-box p-6 overflow-hidden"
+          className="tab-content bg-base-100 border-base-300 rounded-box md:p-6 overflow-hidden p-0"
         >
           <ProductsCaurosel products={related} />
         </div>
@@ -206,14 +207,14 @@ export default function ProductPage() {
           type="radio"
           name="my_tabs_2"
           role="tab"
-          className={`tab text-xl font-semibold text-accent`}
+          className={`tab text-lg font-semibold text-accent`}
           aria-label="Reviews"
         />
         <div
           role="tabpanel"
-          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-4"
         >
-          Tab content 2
+          <Reviews product_name={productDetail?.title}/>
         </div>
       </div>
     </section>

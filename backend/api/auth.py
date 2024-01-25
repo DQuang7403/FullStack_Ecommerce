@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 import sqlite3
 from functools import wraps
 from flask_cors import CORS
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask_jwt_extended import (
     create_access_token,
     get_jwt,
@@ -31,15 +31,15 @@ def authenticated_user(f):
     return decorated_function
 
 
-def register_user(username, email, password):
+def register_user(username, email, hash_password, password):
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
     cur.execute("Select * from User where email = ?", (email,))
     exsited = cur.fetchone()
     if exsited:
         return False
-    sqlcommand = "Insert into User (username, email, password) values (?, ?, ?)"
-    cur.execute(sqlcommand, (username, email, password))
+    sqlcommand = "Insert into User (username, email, password, pwd) values (?, ?, ?, ?)"
+    cur.execute(sqlcommand, (username, email, hash_password, password))
     conn.commit()
     conn.close()
     return True
@@ -62,9 +62,11 @@ def get_user(email):
 def register():
     username = request.json["username"]
     email = request.json["email"]
-    password =request.json["password"]
-    hash_password = generate_password_hash(password=password, method='pbkdf2:sha1', salt_length=8)
-    if register_user(username, email, hash_password):
+    password = request.json["password"]
+    hash_password = generate_password_hash(
+        password=password, method="pbkdf2:sha1", salt_length=8
+    )
+    if register_user(username, email, hash_password, password):
         return jsonify({"msg": "User created successfully"}), 201
     return jsonify({"msg": "Email already exists"}), 409
 
@@ -100,7 +102,7 @@ def refresh_access():
         (jti, datetime.now()),
     )
     conn.commit()
-    expiry_limit = datetime.datetime.now() - datetime.timedelta(days=5)
+    expiry_limit = datetime.now() - timedelta(days=5)
     cur.execute("DELETE FROM revoked_tokens WHERE blacklisted_on < ?", (expiry_limit,))
     new_access_token = create_access_token(identity=identity)
 

@@ -62,7 +62,7 @@ export function AuthProvider({ children }) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong! Please check your credentials",
+        text: "Something went wrong! Please check your credentials ",
       });
     }
   };

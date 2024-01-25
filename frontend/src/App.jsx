@@ -10,6 +10,7 @@ import ContactPage from "./pages/View/ContactPage";
 import AccountPage from "./pages/Member/AccountPage";
 import OrderPage from "./pages/Member/OrderPage";
 import WishListPage from "./pages/Member/WishListPage";
+import OrderDetails from "./pages/Member/OrderDetails";
 
 import ProductByCategory from "./pages/Product/ProductByCategory";
 import ProductsPage from "./pages/Product/ProductsPage";
@@ -70,6 +71,14 @@ function App() {
                     element={
                       <PrivateRoute>
                         <OrderPage />
+                      </PrivateRoute>
+                    }
+                  ></Route>
+                  <Route
+                    path="order-details/:id"
+                    element={
+                      <PrivateRoute>
+                        <OrderDetails />
                       </PrivateRoute>
                     }
                   ></Route>

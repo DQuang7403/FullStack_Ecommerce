@@ -13,7 +13,11 @@ export default function FlashSale() {
       setFlashSaleProducts(data);
       setLoading(false);
     };
-    fetchResult();
+    try {
+      fetchResult();
+    } catch {
+      console.log(err);
+    }
   }, []);
   return (
     <section className="my-10 mx-2 border-b-2 ">
@@ -66,8 +70,9 @@ export default function FlashSale() {
         className="custom-caurosel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box"
       >
         {loading ? (
-          <span className="loading loading-spinner loading-md"></span>
+          <span className="loading loading-spinner loading-md align-middle"></span>
         ) : (
+          flashSaleProducts &&
           flashSaleProducts?.map((product) => {
             return <ProductCard key={product?.id} product={product} />;
           })
