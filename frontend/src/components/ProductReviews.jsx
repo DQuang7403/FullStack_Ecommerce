@@ -10,7 +10,6 @@ export default function ProductReviews({ product_name }) {
     fetch(`http://127.0.0.1:5000/review/get/${product_name}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setReviews(data);
       });
   }, [product_name]);

@@ -11,10 +11,17 @@ export default function WishListPage() {
   const { wishList } = useContext(WishListContext);
   useEffect(() => {
     const fetchUser = async () => {
-      const data = await fetchAPI(`/account/get_user/${user?.sub}`);
+      const res = await fetch(
+        `http://127.0.0.1:5000/account/get_user/${user?.sub}`
+      );
+      const data = await res.json();
       setUserDetail(data);
     };
-    fetchUser();
+    if(user?.sub !== undefined) {
+      fetchUser();
+    }else{
+      setUserDetail({});
+    }
   }, []);
 
   return (

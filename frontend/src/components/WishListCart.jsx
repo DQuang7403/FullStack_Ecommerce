@@ -4,9 +4,12 @@ import { GoTrash } from "react-icons/go";
 import CartContext from "../context/CartContext";
 import WishListContext from "../context/WishListContext";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 export default function WishListCart({ product }) {
   const { formatNumberWithCommas } = useContext(CartContext);
-  const { toggleWishList, wishList } = useContext(WishListContext);
+  const { user } = useContext(AuthContext);
+  const { toggleWishList, wishList, toggleUserWishList } =
+    useContext(WishListContext);
   const discountPrice = (price, discount) => {
     return Number((price / (1 - discount / 100)).toFixed(2));
   };
@@ -25,7 +28,9 @@ export default function WishListCart({ product }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        toggleWishList(product, true);
+        user
+          ? toggleUserWishList(product, true)
+          : toggleWishList(product, true);
         Swal.fire({
           icon: "success",
           title: "Product added to cart",
@@ -43,16 +48,23 @@ export default function WishListCart({ product }) {
   };
 
   return (
-    <div key={product.id} className="w-[250px] h-[320px] relative justify-self-center">
+    <div
+      key={product.id}
+      className="w-[250px] h-[320px] relative justify-self-center"
+    >
       {product?.discount ? (
-        <div className="absolute  bg-info text-white py-1 px-3 text-sm left-2 top-2 rounded-lg">
+        <div className="absolute bg-info text-white py-1 px-3 text-sm left-2 top-2 rounded-lg">
           - {Math.floor(product?.discount)} %
         </div>
       ) : null}
       <div className="absolute z-10 flex gap-2 right-2 top-2 flex-col">
         <button
           className="btn btn-ghost btn-circle bg-white hover:bg-slate-200"
-          onClick={() => toggleWishList(product, true)}
+          onClick={() => {
+            user
+              ? toggleUserWishList(product, true)
+              : toggleWishList(product, true);
+          }}
         >
           <GoTrash className="text-lg text-red-500 text-bold" />
         </button>

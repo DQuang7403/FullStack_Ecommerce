@@ -31,8 +31,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 function App() {
   return (
     <>
-      <WishListProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <WishListProvider>
           <CartProvider>
             <CategoryProvider>
               <ScrollToTop>
@@ -91,8 +91,8 @@ function App() {
               </ScrollToTop>
             </CategoryProvider>
           </CartProvider>
-        </AuthProvider>
-      </WishListProvider>
+        </WishListProvider>
+      </AuthProvider>
     </>
   );
 }

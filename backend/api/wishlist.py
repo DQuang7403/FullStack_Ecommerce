@@ -7,7 +7,7 @@ sqldbname = "backend/Ecommerce.db"
 CORS(wishlist, origins="http://localhost:5173", supports_credentials=True)
 
 
-@wishlist.route("wishlist", methods=["GET"])
+@wishlist.route("/wishlist", methods=["GET"])
 def get_wishlist():
     wishlist = []
     if "wishlist" in session:
@@ -15,7 +15,7 @@ def get_wishlist():
     return jsonify(wishlist)
 
 
-@wishlist.route("wishlist/add", methods=["POST"])
+@wishlist.route("/wishlist/add", methods=["POST"])
 def add_to_wishlist():
     productId = request.json["product_id"]
     conn = sqlite3.connect(sqldbname)
@@ -51,7 +51,7 @@ def add_to_wishlist():
     )
 
 
-@wishlist.route("wishlist/remove", methods=["POST"])
+@wishlist.route("/wishlist/remove", methods=["POST"])
 def remove_from_wishlist():
     productId = request.json["product_id"]
     wishlist = session.get("wishlist", [])
@@ -69,3 +69,117 @@ def remove_from_wishlist():
         ),
         200,
     )
+
+
+@wishlist.route("/wishlist/user/<email>", methods=["GET"])
+def get_user_wishlist(email):
+    wishlist = []
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute(
+        "Select * from Wishlist, Products where user_email = ? and Wishlist.product_id = Products.product_id",
+        (email,),
+    )
+    wishlistProducts = cursor.fetchall()
+    for product in wishlistProducts:
+        wishlist.append(
+            {
+                "id": product[3],
+                "title": product[4],
+                "price": product[5],
+                "rating": product[6],
+                "stock": product[7],
+                "category": product[8],
+                "thumbnail": product[9],
+                "description": product[10],
+                "totalRating": product[11],
+                "discount": product[12],
+                "images": [product[13], product[14], product[15]],
+            }
+        )
+
+    conn.close()
+    return jsonify(wishlist)
+
+
+@wishlist.route("/wishlist/user/add", methods=["POST"])
+def add_to_user_wishlist():
+    wishlist = []
+    productId = request.json["product_id"]
+    user_email = request.json["user_email"]
+    conn = sqlite3.connect(sqldbname)
+    cur = conn.cursor()
+    cur.execute(
+        "Insert into Wishlist (product_id, user_email) values (?, ?)",
+        (productId, user_email),
+    )
+    conn.commit()
+    cur.execute(
+        "Select * from Wishlist, Products where user_email = ? and Wishlist.product_id = Products.product_id",
+        (user_email,),
+    )
+    wishlistProducts = cur.fetchall()
+    for product in wishlistProducts:
+        wishlist.append(
+            {
+                "id": product[3],
+                "title": product[4],
+                "price": product[5],
+                "rating": product[6],
+                "stock": product[7],
+                "category": product[8],
+                "thumbnail": product[9],
+                "description": product[10],
+                "totalRating": product[11],
+                "discount": product[12],
+                "images": [product[13], product[14], product[15]],
+            }
+        )
+    conn.close()
+    return (
+        jsonify(
+            {
+                "message": "Added to wishlist",
+                "item": wishlist,
+            }
+        ),
+        200,
+    )
+
+
+@wishlist.route("/wishlist/user/remove", methods=["POST"])
+def remove_from_user_wishlist():
+    wishlist = []
+    productId = request.json["product_id"]
+    user_email = request.json["user_email"]
+    conn = sqlite3.connect(sqldbname)
+    cur = conn.cursor()
+    cur.execute(
+        "Delete from Wishlist where product_id = ? and user_email = ?",
+        (productId, user_email),
+    )
+    conn.commit()
+    cur.execute(
+        "Select * from Wishlist, Products where user_email = ? and Wishlist.product_id = Products.product_id",
+        (user_email,),
+    )
+    wishlistProducts = cur.fetchall()
+    for product in wishlistProducts:
+        wishlist.append(
+            {
+                "id": product[3],
+                "title": product[4],
+                "price": product[5],
+                "rating": product[6],
+                "stock": product[7],
+                "category": product[8],
+                "thumbnail": product[9],
+                "description": product[10],
+                "totalRating": product[11],
+                "discount": product[12],
+                "images": [product[13], product[14], product[15]],
+            }
+        )
+    conn.close()
+    conn.close()
+    return jsonify({"message": "Removed from wishlist", "item": wishlist}), 200

@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { StarRating } from "../utils/constants";
 import CartContext from "../context/CartContext";
 import WishListContext from "../context/WishListContext";
+import AuthContext from "../context/AuthContext";
 export const ProductCard = ({ product }) => {
   const { formatNumberWithCommas } = useContext(CartContext);
-  const { wishList, toggleWishList } = useContext(WishListContext);
+  const { user } = useContext(AuthContext);
+  const { wishList, toggleWishList, toggleUserWishList } =
+    useContext(WishListContext);
   const discountPrice = (price, discount) => {
     return Number((price / (1 - discount / 100)).toFixed(2));
   };
@@ -26,7 +29,9 @@ export const ProductCard = ({ product }) => {
             name="watchList"
             onChange={() => {
               setIsWishList(!isWishList);
-              toggleWishList(product, isWishList);
+              user
+                ? toggleUserWishList(product, isWishList)
+                : toggleWishList(product, isWishList);
             }}
           />
 

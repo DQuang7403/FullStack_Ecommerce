@@ -57,16 +57,13 @@ export default function Reviews({ product_name }) {
         .catch((err) => console.log(err));
     }
   };
-  useEffect(() => {
-    console.log(product_name);
-  }, [product_name]);
   return (
     <div>
       <div className="flex md:flex-row flex-col items-start md:gap-7 gap-2">
         <div className="avatar placeholder mt-10">
           <div className="bg-accent text-white rounded-full w-10">
             <span>
-              <BiUserCircle className="text-3xl"/>
+              <BiUserCircle className="text-3xl" />
             </span>
           </div>
         </div>

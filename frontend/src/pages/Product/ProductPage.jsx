@@ -8,19 +8,22 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { GrPowerCycle } from "react-icons/gr";
 
 import WishListContext from "../../context/WishListContext";
+import AuthContext from "../../context/AuthContext";
 // import CartContext from "../../context/CartContext";
 
 import ProductsCaurosel from "../../components/ProductsCaurosel";
 import Reviews from "../../components/Reviews";
+
 export default function ProductPage() {
   const product = useParams();
-
+  const { user } = useContext(AuthContext);
   const [related, setRelated] = useState([]);
   const [productDetail, setProductDetail] = useState({});
   const [images, setImages] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const { toggleWishList, wishList } = useContext(WishListContext);
+  const { toggleWishList, wishList, toggleUserWishList } =
+    useContext(WishListContext);
   const [isWishList, setIsWishList] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -151,7 +154,9 @@ export default function ProductPage() {
                 name="watchList"
                 onChange={() => {
                   setIsWishList(!isWishList);
-                  toggleWishList(productDetail, isWishList);
+                  user
+                    ? toggleUserWishList(productDetail, isWishList)
+                    : toggleWishList(productDetail, isWishList);
                 }}
               />
 
@@ -214,7 +219,7 @@ export default function ProductPage() {
           role="tabpanel"
           className="tab-content bg-base-100 border-base-300 rounded-box p-4"
         >
-          <Reviews product_name={productDetail?.title}/>
+          <Reviews product_name={productDetail?.title} />
         </div>
       </div>
     </section>
