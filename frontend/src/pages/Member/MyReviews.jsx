@@ -59,7 +59,7 @@ export default function MyReviews() {
       <div>
         <div>
           <h3 className="text-xl mt-6 font-semibold text-accent">
-            All reviews:{" "}
+            All my reviews
           </h3>
           <div className="overflow-x-auto mt-5 pb-5">
             {reviews.length > 0 ? (
@@ -106,7 +106,7 @@ export default function MyReviews() {
         </div>
         <div>
           <h3 className="text-xl mt-6 font-semibold text-primary">
-            Reported reviews
+            All reported reviews
           </h3>
           <div className="overflow-x-auto mt-5 pb-5">
             {reportedReviews.length > 0 ? (
@@ -133,7 +133,15 @@ export default function MyReviews() {
                         <th>{index + 1}</th>
                         <td>{review.review_id}</td>
                         <td>{review.reason}</td>
-                        <td className={`font-semibold ${review.status=== "Pending" ? "text-warning" : "text-success"}`}>{review.status}</td>
+                        <td
+                          className={`font-semibold ${
+                            review.status === "Pending"
+                              ? "text-warning"
+                              : "text-success"
+                          }`}
+                        >
+                          {review.status}
+                        </td>
                         <td>{formattedDate}</td>
                       </tr>
                     );
