@@ -17,12 +17,12 @@ export default function WishListPage() {
       const data = await res.json();
       setUserDetail(data);
     };
-    if(user?.sub !== undefined) {
+    if (user?.sub !== undefined) {
       fetchUser();
-    }else{
+    } else {
       setUserDetail({});
     }
-  }, []);
+  }, [user, userDetail]);
 
   return (
     <section className="lg:mx-32 md:my-8 mx-4 my-4">
@@ -36,18 +36,21 @@ export default function WishListPage() {
       )}
       {user && (
         <div role="tablist" className="tabs tabs-boxed">
-          <Link to={"/account"} role="tab" className="tab">
+          <Link to={"/account"} role="tab" className="tab h-14 sm:h-full px-2">
             My Account
           </Link>
-          <Link to="/order" role="tab" className="tab ">
+          <Link to="/order" role="tab" className="tab h-14 sm:h-full px-2">
             My Order
           </Link>
           <Link
             to={"/wishlist"}
             role="tab"
-            className="tab bg-[#DB4444] text-white"
+            className="tab bg-[#DB4444] text-white h-14 sm:h-full px-2"
           >
             My WishList
+          </Link>
+          <Link to={"/my-reviews"} role="tab" className="tab h-14 sm:h-full px-2">
+            My Reviews
           </Link>
         </div>
       )}

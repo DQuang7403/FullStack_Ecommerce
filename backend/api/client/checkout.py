@@ -15,6 +15,7 @@ load_dotenv()
 stripe_keys = {
     "secret_key": os.getenv("STRIPE_SECRET_KEY"),
     "public_key": os.getenv("STRIPE_PUBLIC_KEY"),
+    "endpoint_secret": os.getenv("ENDPOINT_SECRET"),
 }
 stripe.api_key = stripe_keys["secret_key"]
 
@@ -52,7 +53,7 @@ def payment():
     return jsonify({"url": checkoutSession.url}), 200
 
 
-endpoint_secret = "whsec_XjsopirwivUWb5FI7MBRxM8Qsvr27uOT"
+endpoint_secret = stripe_keys["endpoint_secret"]
 
 
 @checkout.route("/webhook", methods=["POST"])

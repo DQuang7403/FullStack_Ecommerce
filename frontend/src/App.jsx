@@ -11,6 +11,7 @@ import AccountPage from "./pages/Member/AccountPage";
 import OrderPage from "./pages/Member/OrderPage";
 import WishListPage from "./pages/Member/WishListPage";
 import OrderDetails from "./pages/Member/OrderDetails";
+import MyReviews from "./pages/Member/MyReviews";
 
 import ProductByCategory from "./pages/Product/ProductByCategory";
 import ProductsPage from "./pages/Product/ProductsPage";
@@ -75,14 +76,21 @@ function App() {
                     }
                   ></Route>
                   <Route
-                    path="order-details/:id"
+                    path="/order-details/:id"
                     element={
                       <PrivateRoute>
                         <OrderDetails />
                       </PrivateRoute>
                     }
                   ></Route>
-
+                  <Route
+                    path="/my-reviews"
+                    element={
+                      <PrivateRoute>
+                        <MyReviews />
+                      </PrivateRoute>
+                    }
+                  ></Route>
                   <Route path="/signup" element={<SignUpPage />}></Route>
                   <Route path="/login" element={<LoginPage />}></Route>
                   <Route path="/yourcart" element={<YourCart />}></Route>

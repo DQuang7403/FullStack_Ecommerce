@@ -3,7 +3,7 @@ from datetime import timedelta
 from flask_jwt_extended import (
     JWTManager, 
 )
-
+from api.client import client_routes
 def create_app():
     app = Flask(__name__)
     # session configuration
@@ -17,20 +17,7 @@ def create_app():
     jwt = JWTManager()
     jwt.init_app(app)
 
-    from .products import products
-    from .cart import cart
-    from .auth import auth
-    from .account import account
-    from .wishlist import wishlist
-    from .checkout import checkout
-    from .review import review
-
-    app.register_blueprint(cart, url_prefix="/")
-    app.register_blueprint(products, url_prefix="/")
-    app.register_blueprint(auth, url_prefix="/auth")
-    app.register_blueprint(account, url_prefix="/account")
-    app.register_blueprint(checkout, url_prefix="/checkout")
-    app.register_blueprint(wishlist, url_prefix="/")
-    app.register_blueprint(review, url_prefix="/")
+    client_routes(app)
+    
 
     return app

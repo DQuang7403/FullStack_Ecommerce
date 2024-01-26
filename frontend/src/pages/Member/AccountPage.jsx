@@ -66,7 +66,7 @@ export default function AccountPage() {
       setRefresh(false);
     };
     fetchUser();
-  }, [refresh]);
+  }, [refresh, user]);
   return (
     <section className="lg:mx-32 md:my-8 mx-4 my-4">
       <div className="text-lg text-right my-8">
@@ -75,19 +75,22 @@ export default function AccountPage() {
           {userDetail?.username}
         </span>
       </div>
-      <div role="tablist" className="tabs tabs-boxed">
+      <div role="tablist" className="tabs tabs-boxed ">
         <Link
           to={"/account"}
           role="tab"
-          className="tab bg-[#DB4444] text-white"
+          className="tab bg-[#DB4444] text-white h-14 sm:h-full px-2"
         >
           My Account
         </Link>
-        <Link to={"/order"} role="tab" className="tab ">
+        <Link to={"/order"} role="tab" className="tab h-14 sm:h-full px-2">
           My Order
         </Link>
-        <Link to={"/wishlist"} role="tab" className="tab">
+        <Link to={"/wishlist"} role="tab" className="tab h-14 sm:h-full px-2">
           My WishList
+        </Link>
+        <Link to={"/my-reviews"} role="tab" className="tab h-14 sm:h-full px-2">
+          My Reviews
         </Link>
       </div>
       <form
