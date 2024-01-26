@@ -81,3 +81,48 @@ def report_review():
     conn.commit()
     conn.close()
     return jsonify({"message": "Reported successfully"}), 200
+
+
+@review.route("/review/report/get/<email>", methods=["GET"])
+def get_review_reports(email):
+    user_reported_reviews = []
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute("Select * from Reported_reviews where user_email = ?", (email,))
+    reports = cursor.fetchall()
+    for row in reports:
+        user_reported_reviews.append(
+            {
+                "id": row[0],
+                "review_id": row[1],
+                "email": row[2],
+                "reason": row[3],
+                "status": row[4],
+                "report_timestamp": row[5],
+            }
+        )
+    conn.close()
+    return jsonify(user_reported_reviews)
+
+
+@review.route("/review/user/get/<email>", methods=["GET"])
+def get_user_reviews(email):
+    user_reviews = []
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute("Select * from Reviews where email = ?", (email,))
+    reviews = cursor.fetchall()
+    for row in reviews:
+        user_reviews.append(
+            {
+                "id": row[0],
+                "email": row[1],
+                "product_name": row[2],
+                "rating": row[3],
+                "comment": row[4],
+                "create_at": row[5],
+                "product_id": row[6],
+            }
+        )
+    conn.close()
+    return jsonify(user_reviews)
