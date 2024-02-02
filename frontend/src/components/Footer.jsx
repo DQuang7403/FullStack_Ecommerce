@@ -1,19 +1,21 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 
 export default function Footer() {
-  const [email, setEmail] = useState('')
-  const EmailSubmit = (e) =>{
+  const [email, setEmail] = useState("");
+  const EmailSubmit = (e) => {
     e.preventDefault();
     if (email === "") return;
     setEmail("");
-  }
+  };
   return (
     <footer className="pt-10 bg-black text-white flex flex-col items-center">
       <div className="footer justify-evenly">
         <form onSubmit={EmailSubmit}>
           <header>
-            <h1 className=" font-bold mb-4 text-2xl">TechTopia </h1>
+            <h1 className=" font-bold mb-4 text-2xl">
+              <span className="text-primary">Tech</span>Topia{" "}
+            </h1>
             <p className="text-xl">Subscribe</p>
           </header>
           <div className="form-control w-60 gap-2">
@@ -31,7 +33,6 @@ export default function Footer() {
                 value={email}
               />
               <button
-                
                 type="submit"
                 className="btn absolute top-0 right-0 rounded-l-none bg-transparent border-none hover:text-black text-white"
               >

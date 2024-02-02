@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navbarCategories } from "../utils/constants";
-import { Link, Outlet } from "react-router-dom";
-import { BiUserCircle, BiBell, BiSearch, BiMenuAltLeft } from "react-icons/bi";
-import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { BiUserCircle, BiSearch, BiMenuAltLeft } from "react-icons/bi";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import CartContext from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
@@ -51,14 +51,16 @@ export default function Nav_bar() {
                       <BiMenuAltLeft className="text-2xl" />
                     </label>
 
-                    <div className=" font-bold text-2xl ">TechTopia</div>
+                    <div className=" font-bold text-2xl ">
+                      <span className="text-primary">Tech</span>Topia
+                    </div>
                     <Link
                       to={"/yourcart"}
                       className="btn btn-ghost btn-circle flex flex-grow"
                     >
                       <div className="indicator z-0">
                         <AiOutlineShoppingCart className="text-2xl " />
-                        <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white">
+                        <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white py-2">
                           {items}
                         </span>
                       </div>
@@ -97,7 +99,7 @@ export default function Nav_bar() {
             </div>
           </div>
           <div className="text-black font-bold text-2xl hidden lg:ml-20 min-[425px]:flex ">
-            TechTopia
+            <span className="text-primary">Tech</span>Topia
           </div>
         </div>
         <ul className="navbar-center tabs tabs-bordered gap-4 text-black hidden lg:flex">
@@ -151,7 +153,7 @@ export default function Nav_bar() {
               <Link to={"/yourcart"} className="btn btn-ghost btn-circle flex">
                 <div className="indicator z-0">
                   <AiOutlineShoppingCart className="text-2xl " />
-                  <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white">
+                  <span className="badge badge-xs bg-red-500 border-red-500 indicator-item text-white py-2">
                     {items}
                   </span>
                 </div>
