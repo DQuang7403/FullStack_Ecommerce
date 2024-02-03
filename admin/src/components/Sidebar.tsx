@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavbarFirstSection } from "./Navbar";
 import {
   sidebarSmall,
@@ -16,9 +15,7 @@ type SidebarProps = {
 };
 export default function Sidebar() {
   const { isSmallOpen, isLargeOpen, close } = useSidebarContext();
-  const [selectedPageURL, setSelectedPageURL] = useState<string>(
-    window.location.pathname,
-  );
+  const {selectedPageURL, setSelectedPageURL} = useSidebarContext()
   return (
     <>
       <aside

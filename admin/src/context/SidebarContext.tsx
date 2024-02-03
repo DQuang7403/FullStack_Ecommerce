@@ -14,11 +14,16 @@ type SidebarContextType = {
   isSmallOpen: boolean;
   toggle: () => void;
   close: () => void;
+  selectedPageURL: string;
+  setSelectedPageURL: (url: string) => void;
 };
 const SidebarContext = createContext<SidebarContextType | null>(null);
 export function SidebarProvider({ children }: ContextProviderProps) {
   const [isLargeOpen, setIsLargeOpen] = useState(true);
   const [isSmallOpen, setIsSmallOpen] = useState(false);
+  const [selectedPageURL, setSelectedPageURL] = useState<string>(
+    window.location.pathname,
+  );
   const isSmallScreen = () => {
     return window.innerWidth < 1024;
   };
@@ -53,6 +58,8 @@ export function SidebarProvider({ children }: ContextProviderProps) {
         isSmallOpen,
         toggle,
         close,
+        selectedPageURL,
+        setSelectedPageURL,
       }}
     >
       {children}

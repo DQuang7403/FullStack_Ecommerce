@@ -12,7 +12,7 @@ import BestSelling from "../components/Graphs/BestSelling";
 import TrendingProduct from "../components/Graphs/TrendingProduct";
 export default function Dashboard() {
   return (
-    <div className="grid gap-6 grid-cols-1 p-4 grid-grow-0 overflow-auto lg:grid-cols-3 md:grid-cols-2">
+    <div className="grid gap-6 grid-cols-1 p-4 grid-grow-0 overflow-auto lg:grid-cols-3 md:grid-cols-2 ">
       <Widget
         title="Total Order"
         stat={23578}
@@ -24,7 +24,7 @@ export default function Dashboard() {
         title="Total User"
         stat={23578}
         icon={<FaUsers className="text-2xl text-blue-600" />}
-        url={"/customers"}
+        url={"/user"}
         data={UserStat}
       />
       <Widget
@@ -33,6 +33,7 @@ export default function Dashboard() {
         icon={<FaMoneyBill1Wave className="text-2xl text-green-600" />}
         url={"/transactions"}
         data={ProfitStat}
+        view={false}
       />
       <RevenueGraph />
       <TodayOrderGraph />

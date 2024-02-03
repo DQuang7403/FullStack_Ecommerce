@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Line, LineChart, Tooltip, XAxis } from "recharts";
+import useSidebarContext from "../../context/SidebarContext";
 type WidgetProps = {
   title: string;
   stat: number;
@@ -10,8 +11,17 @@ type WidgetProps = {
     name: string;
     pv: number;
   }[];
+  view?: boolean;
 };
-export default function Widget({ title, stat, icon, url, data }: WidgetProps) {
+export default function Widget({
+  title,
+  stat,
+  icon,
+  url,
+  data,
+  view = true,
+}: WidgetProps) {
+  const { setSelectedPageURL } = useSidebarContext();
   return (
     <div className="bg-white rounded-lg p-6 flex flex-shrink-0 col-span-1 justify-evenly">
       <div className="flex flex-col gap-2">
@@ -21,9 +31,15 @@ export default function Widget({ title, stat, icon, url, data }: WidgetProps) {
         </div>
         <div className="text-sm text-slate-400">Last 7 days</div>
         <div className="text-3xl font-bold">{stat.toLocaleString("de-DE")}</div>
-        <Link to={url} className="link link-hover mt-auto">
-          View All &gt;&gt;
-        </Link>
+        {view && (
+          <Link
+            to={url}
+            onClick={() => setSelectedPageURL(url)}
+            className="link link-hover mt-auto"
+          >
+            View All &gt;&gt;
+          </Link>
+        )}
       </div>
       <LineChart
         width={200}

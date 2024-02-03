@@ -3,9 +3,9 @@ import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineShoppingCart, MdAddCircleOutline } from "react-icons/md";
 import { LuUsers } from "react-icons/lu";
 import { BsBoxSeam } from "react-icons/bs";
-import { BiCategoryAlt } from "react-icons/bi";
 import { RiBillLine, RiAdminLine } from "react-icons/ri";
 import { GoGear } from "react-icons/go";
+import { MdOutlineRateReview } from "react-icons/md";
 type SidebarProps = {
   name: string;
   url: string;
@@ -20,16 +20,16 @@ type SidebarLargeProps = {
 export const sidebarSmall: SidebarProps[] = [
   { name: "Dashboard", url: "/", icon: AiOutlineHome },
   { name: "Orders", url: "/orders", icon: MdOutlineShoppingCart },
-  { name: "Customer", url: "/customer", icon: LuUsers },
+  { name: "User", url: "/user", icon: LuUsers },
   { name: "Product", url: "/product", icon: BsBoxSeam },
 ];
 
 export const mainMenuItem: SidebarLargeProps[] = [
   { name: "Dashboard", url: "/", icon: AiOutlineHome },
   { name: "Order Management", url: "/orders", icon: MdOutlineShoppingCart },
-  { name: "Customer", url: "/customer", icon: LuUsers },
-  { name: "Categories", url: "/categories", icon: BiCategoryAlt },
-  { name: "Transactions", url: "/transactions", icon: RiBillLine },
+  { name: "User", url: "/user", icon: LuUsers },
+  { name: "Reviews", url: "/reviews", icon: MdOutlineRateReview },
+  { name: "Revenue", url: "/revenue", icon: RiBillLine },  
 ];
 export const productItem: SidebarLargeProps[] = [
   { name: "Product List", url: "/product", icon: BsBoxSeam },
@@ -44,6 +44,30 @@ export const adminItem: SidebarLargeProps[] = [
   { name: "Settings", url: "/settings", icon: GoGear },
 ];
 
+export const OrderTitle: string[] = [
+  "Order ID",
+  "Customer",
+  "Date",
+  "Total",
+  "Status",
+  "Action",
+];
+export const UserTitle: string[] = [
+  "User ID",
+  "Name",
+  "Phone",
+  "Create At",
+  "Action",
+]
+export const ProductTitle: string[] = [
+  "ID",
+  "Image",
+  "Title",
+  "Price",
+  "Category",
+  "In Stock",
+  "Action",
+]
 export const OrdersStat = [
   {
     name: "Page A",

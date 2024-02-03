@@ -1,7 +1,8 @@
-
+import useSidebarContext from "../../context/SidebarContext";
 import { LastestTransaction } from "../../utils/constants";
 import { Link } from "react-router-dom";
 export default function LastTransaction() {
+  const { setSelectedPageURL } = useSidebarContext();
   return (
     <div className="bg-white rounded-lg col-span-1 md:col-span-2 p-6 flex flex-col gap-4">
       <h3 className="font-bold text-lg">Last Transaction</h3>
@@ -31,6 +32,7 @@ export default function LastTransaction() {
                   <td>
                     <Link
                       to={`/transactions/${item.id}`}
+                      onClick={() => setSelectedPageURL(`/transactions`)}
                       className="link link-hover text-blue-500 font-semibold"
                     >
                       View Details
