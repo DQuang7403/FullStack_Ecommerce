@@ -8,6 +8,7 @@ import OrderManagement from "./pages/OrderManagement";
 import User from "./pages/User";
 import Product from "./pages/Products";
 import Revenue from "./pages/Revenue";
+import AddProducts from "./pages/AddProducts";
 function App() {
   return (
     <SidebarProvider>
@@ -19,7 +20,10 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/orders" element={<OrderManagement />} />
             <Route path="/user" element={<User />} />
+
             <Route path="/product" element={<Product />} />
+            <Route path="/product/add-product" element={<AddProducts />} />
+
             <Route path="/revenue" element={<Revenue />}></Route>
           </Routes>
         </div>

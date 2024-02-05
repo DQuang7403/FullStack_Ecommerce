@@ -6,7 +6,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { FaRegTrashCan, FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import useSidebarContext from "../context/SidebarContext";
 export default function Products() {
+  const { setSelectedPageURL } = useSidebarContext();
   const ProductData = [
     {
       ProductID: 1,
@@ -40,7 +42,7 @@ export default function Products() {
                 placeholder={`Search ...`}
               />
             </div>
-            <Link to="/product/add-product" className="btn btn-sm">
+            <Link to="/product/add-product" onClick={() => setSelectedPageURL("/product/add-product")} className="btn btn-sm">
               Add Product +
             </Link>
           </div>
