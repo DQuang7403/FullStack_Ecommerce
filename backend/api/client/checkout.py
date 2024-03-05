@@ -135,7 +135,7 @@ def get_orders_by_email(email):
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
     cursor.execute(
-        "select Orders.order_id, status, create_at, SUM(price) as Totals   from Orders, Order_details where Order_details.order_id = Orders.order_id and Orders.email = ? GROUP BY Orders.order_id",
+        "select Orders.order_id, status, create_at, SUM(price) as Totals from Orders, Order_details where Order_details.order_id = Orders.order_id and Orders.email = ? GROUP BY Orders.order_id",
         (email,),
     )
     orders = cursor.fetchall()
@@ -176,3 +176,4 @@ def get_order_details(id):
         )
     conn.close()
     return jsonify({"Order_details": order_details, "Order_overview": orderOverview})
+

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
 .custom-caurosel::-webkit-scrollbar {
   height: 0.5rem;
 }

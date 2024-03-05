@@ -39,7 +39,7 @@ def update_user():
             password, method="pbkdf2:sha1", salt_length=8
         )
         cur.execute(
-            "Update User set username = ?, email = ?, password = ?, firstname = ?, lastname = ?, address = ?, phone = ? where user_id = ?",
+            "Update User set username = ?, email = ?, password = ?, firstname = ?, lastname = ?, address = ?, phone = ?, pwd = ? where user_id = ?",
             (
                 request.json["username"],
                 request.json["email"],
@@ -49,6 +49,7 @@ def update_user():
                 request.json["address"],
                 request.json["phone"],
                 request.json["id"],
+                password,
             ),
         )
     else:

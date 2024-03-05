@@ -1,16 +1,6 @@
 import { createContext, useState, useEffect, useId } from "react";
-import { v4 as uuidv4 } from "uuid";
 const CartContext = createContext();
 export function CartProvider({ children }) {
-  // const [cartId, setCartId] = useState(() => {
-  //   if (localStorage.getItem("cartId")) {
-  //     return localStorage.getItem("cartId");
-  //   } else {
-  //     const id = uuidv4();
-  //     localStorage.setItem("cartId", id);
-  //     return id;
-  //   }
-  // });
   const [items, setItems] = useState(0);
   const [update, setUpdate] = useState(false);
   const [refetch, setReFetch] = useState(true);

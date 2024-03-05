@@ -4,6 +4,7 @@ from flask_jwt_extended import (
     JWTManager, 
 )
 from api.client import client_routes
+from api.admin import admin_routes
 def create_app():
     app = Flask(__name__)
     # session configuration
@@ -18,6 +19,6 @@ def create_app():
     jwt.init_app(app)
 
     client_routes(app)
-    
+    admin_routes(app)
 
     return app

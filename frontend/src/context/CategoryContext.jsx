@@ -7,7 +7,7 @@ export function CategoryProvider({children}) {
   const [allCategories, setAllCategories] = useState(null);
   useEffect(() => {
     const fetchCategory = async () => {
-      const data = await fetchAPI("/products/category");
+      const data = await fetchAPI("products/category");
       setAllCategories(data);
     };
     fetchCategory();

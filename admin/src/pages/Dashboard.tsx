@@ -36,13 +36,10 @@ export default function Dashboard() {
         view={false}
       />
       <RevenueGraph />
-      <TodayOrderGraph />
+      <TrendingProduct />
 
       <TopSellingGraph />
-      <LastTransaction />
-
       <BestSelling />
-      <TrendingProduct />
     </div>
   );
 }

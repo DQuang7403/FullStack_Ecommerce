@@ -29,7 +29,7 @@ export const mainMenuItem: SidebarLargeProps[] = [
   { name: "Order Management", url: "/orders", icon: MdOutlineShoppingCart },
   { name: "User", url: "/user", icon: LuUsers },
   { name: "Reviews", url: "/reviews", icon: MdOutlineRateReview },
-  { name: "Revenue", url: "/revenue", icon: RiBillLine },  
+  { name: "Revenue", url: "/revenue", icon: RiBillLine },
 ];
 export const productItem: SidebarLargeProps[] = [
   { name: "Product List", url: "/product", icon: BsBoxSeam },
@@ -58,7 +58,7 @@ export const UserTitle: string[] = [
   "Phone",
   "Create At",
   "Action",
-]
+];
 export const ProductTitle: string[] = [
   "ID",
   "Image",
@@ -67,7 +67,7 @@ export const ProductTitle: string[] = [
   "Category",
   "In Stock",
   "Action",
-]
+];
 export const OrdersStat = [
   {
     name: "Page A",
@@ -313,3 +313,18 @@ export const TopSellingProduct = [
     price: 749.99,
   },
 ];
+type RatingProp = {
+  star: number;
+};
+export const StarRating = ({ star }: RatingProp) => {
+  const rate: JSX.Element[] = [];
+  for (let i = 0; i < star; i++) {
+    rate.push(<span key={i} className="fa fa-star text-[#FFAD33]"></span>);
+  }
+  if (star < 5) {
+    for (let i = star; i < 5; i++) {
+      rate.push(<span key={i} className="fa fa-star text-[#F5F5F5]"></span>);
+    }
+  }
+  return <>{rate}</>;
+};

@@ -40,3 +40,4 @@ export default function TopSellingGraph() {
     </div>
   );
 }
+// select product_name, count(*) from Order_details group by product_name order by  count(*) DESC limit 0, 4

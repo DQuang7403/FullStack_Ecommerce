@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { fetchAPI } from "../utils/fetchAPI";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -13,6 +14,7 @@ export function AuthProvider({ children }) {
   const [authToken, setAuthToken] = useState(() => {
     return localAuth ? JSON.parse(localAuth) : null;
   });
+  const [userDetail, setUserDetail] = useState({});
   const SignupUser = async (e) => {
     e.preventDefault();
     let response = await fetch("http://127.0.0.1:5000/auth/register", {
@@ -31,7 +33,7 @@ export function AuthProvider({ children }) {
       Swal.fire({
         title: "Good job!",
         text: "Registration successful. Please login",
-        icon: "success"
+        icon: "success",
       });
       navigate("/login");
     } else {
@@ -91,11 +93,11 @@ export function AuthProvider({ children }) {
     } else {
       logoutUser();
     }
-    // if (loading) {
-    //   setLoading(false);
-    // }
   };
-
+  const fetchUser = async () => {
+    const data = await fetchAPI(`account/get_user/${user?.sub}`);
+    setUserDetail(data);
+  };
   useEffect(() => {
     const expires = 1000 * 60 * 15;
     let interval = setInterval(() => {
@@ -107,6 +109,9 @@ export function AuthProvider({ children }) {
       clearInterval(interval);
     };
   }, [authToken]);
+  useEffect(() => {
+    fetchUser();
+  }, [user]);
 
   const contextData = {
     authToken: authToken,
@@ -114,6 +119,7 @@ export function AuthProvider({ children }) {
     loginUser: loginUser,
     logoutUser: logoutUser,
     SignupUser: SignupUser,
+    userDetail: userDetail,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

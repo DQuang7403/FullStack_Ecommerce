@@ -7,6 +7,7 @@ from .auth import authenticated_user
 products = Blueprint("products", __name__)
 sqldbname = "backend/Ecommerce.db"
 CORS(products, origins="http://localhost:5173")
+CORS(products, origins="http://localhost:3000")
 
 
 @products.route("/products/all/<int:quantity>", methods=["GET"])

@@ -180,7 +180,7 @@ export default function Nav_bar() {
                     <Link to={"/login"}>Log In</Link>
                   </li>
                   <li className="">
-                    <Link to={"/wishlist"}>My Wish List</Link>
+                    <Link to={"/account/wishlist"}>My Wish List</Link>
                   </li>
                   <li className="">
                     <Link to={"/signup"}>Sign Up</Link>
@@ -205,13 +205,13 @@ export default function Nav_bar() {
                   }}
                 >
                   <li>
-                    <Link to={"/account"}>Manage My Account</Link>
+                    <Link to={"/account/my_account"}>Manage My Account</Link>
                   </li>
                   <li>
-                    <Link to={"/order"}>My Order</Link>
+                    <Link to={"/account/order"}>My Order</Link>
                   </li>
                   <li>
-                    <Link to={"/wishlist"}>My Wish list</Link>
+                    <Link to={"/account/wishlist"}>My Wish list</Link>
                   </li>
                   <li className="">
                     <div onClick={logoutUser}>Log Out</div>

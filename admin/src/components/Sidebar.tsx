@@ -15,11 +15,11 @@ type SidebarProps = {
 };
 export default function Sidebar() {
   const { isSmallOpen, isLargeOpen, close } = useSidebarContext();
-  const {selectedPageURL, setSelectedPageURL} = useSidebarContext()
+  const { selectedPageURL, setSelectedPageURL } = useSidebarContext();
   return (
     <>
       <aside
-        className={`bg-white sticky top-0 overflow-auto pb-0 flex flex-col ml-1 gap-3  ${
+        className={`bg-white sticky top-0 overflow-auto pb-0 flex flex-col ml-1 gap-3 h-[calc(100vh-64px)]  ${
           isLargeOpen ? "lg:hidden" : "lg:flex"
         }`}
       >

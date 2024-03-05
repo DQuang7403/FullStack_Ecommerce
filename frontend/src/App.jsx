@@ -29,6 +29,7 @@ import { WishListProvider } from "./context/WishListContext";
 //import ultils
 import ScrollToTop from "./utils/srollToTop";
 import PrivateRoute from "./utils/PrivateRoute";
+import AccountLayout from "./utils/AccountLayout";
 function App() {
   return (
     <>
@@ -57,24 +58,7 @@ function App() {
                     path="/products/search/:search"
                     element={<ProductsPage />}
                   ></Route>
-                  <Route path="/wishlist" element={<WishListPage />}></Route>
 
-                  <Route
-                    path="/account"
-                    element={
-                      <PrivateRoute>
-                        <AccountPage />
-                      </PrivateRoute>
-                    }
-                  ></Route>
-                  <Route
-                    path="/order"
-                    element={
-                      <PrivateRoute>
-                        <OrderPage />
-                      </PrivateRoute>
-                    }
-                  ></Route>
                   <Route
                     path="/order-details/:id"
                     element={
@@ -83,14 +67,34 @@ function App() {
                       </PrivateRoute>
                     }
                   ></Route>
-                  <Route
-                    path="/my-reviews"
-                    element={
-                      <PrivateRoute>
-                        <MyReviews />
-                      </PrivateRoute>
-                    }
-                  ></Route>
+
+                  <Route path="/account" element={<AccountLayout />}>
+                    <Route
+                      path="my_account"
+                      element={
+                        <PrivateRoute>
+                          <AccountPage />
+                        </PrivateRoute>
+                      }
+                    ></Route>
+                    <Route
+                      path="order"
+                      element={
+                        <PrivateRoute>
+                          <OrderPage />
+                        </PrivateRoute>
+                      }
+                    ></Route>
+                    <Route path="wishlist" element={<WishListPage />}></Route>
+                    <Route
+                      path="my-reviews"
+                      element={
+                        <PrivateRoute>
+                          <MyReviews />
+                        </PrivateRoute>
+                      }
+                    ></Route>
+                  </Route>
                   <Route path="/signup" element={<SignUpPage />}></Route>
                   <Route path="/login" element={<LoginPage />}></Route>
                   <Route path="/yourcart" element={<YourCart />}></Route>

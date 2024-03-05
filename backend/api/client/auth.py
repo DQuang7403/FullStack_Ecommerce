@@ -34,12 +34,13 @@ def authenticated_user(f):
 def register_user(username, email, hash_password, password):
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
+    create_at = datetime.now()
     cur.execute("Select * from User where email = ?", (email,))
     exsited = cur.fetchone()
     if exsited:
         return False
-    sqlcommand = "Insert into User (username, email, password, pwd) values (?, ?, ?, ?)"
-    cur.execute(sqlcommand, (username, email, hash_password, password))
+    sqlcommand = "Insert into User (username, email, password, pwd, create_at) values (?, ?, ?, ?, ?)"
+    cur.execute(sqlcommand, (username, email, hash_password, password, create_at))
     conn.commit()
     conn.close()
     return True

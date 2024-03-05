@@ -19,8 +19,8 @@ type SidebarContextType = {
 };
 const SidebarContext = createContext<SidebarContextType | null>(null);
 export function SidebarProvider({ children }: ContextProviderProps) {
-  const [isLargeOpen, setIsLargeOpen] = useState(true);
-  const [isSmallOpen, setIsSmallOpen] = useState(false);
+  const [isLargeOpen, setIsLargeOpen] = useState<boolean>(true);
+  const [isSmallOpen, setIsSmallOpen] = useState<boolean>(false);
   const [selectedPageURL, setSelectedPageURL] = useState<string>(
     window.location.pathname,
   );
