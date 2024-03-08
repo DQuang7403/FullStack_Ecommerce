@@ -29,7 +29,7 @@ export const mainMenuItem: SidebarLargeProps[] = [
   { name: "Order Management", url: "/orders", icon: MdOutlineShoppingCart },
   { name: "User", url: "/user", icon: LuUsers },
   { name: "Reviews", url: "/reviews", icon: MdOutlineRateReview },
-  { name: "Revenue", url: "/revenue", icon: RiBillLine },
+  // { name: "Revenue", url: "/revenue", icon: RiBillLine },
 ];
 export const productItem: SidebarLargeProps[] = [
   { name: "Product List", url: "/product", icon: BsBoxSeam },
@@ -162,45 +162,39 @@ export const ProfitStat = [
 export const data = [
   {
     name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
+    uv: 2400,
+    pv: 4000,
   },
   {
     name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
+    uv: 1398,
+    pv: 3000,
   },
   {
     name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
+    uv: 4000,
+    pv: 7800,
   },
   {
     name: "Page D",
     uv: 2780,
     pv: 3908,
-    amt: 2000,
   },
   {
     name: "Page E",
     uv: 1890,
     pv: 4800,
-    amt: 2181,
   },
   {
     name: "Page F",
     uv: 2390,
     pv: 3800,
-    amt: 2500,
   },
   {
     name: "Page G",
     uv: 3490,
     pv: 4300,
-    amt: 2100,
+
   },
 ];
 export const TodayOrder = [
@@ -230,12 +224,6 @@ export const TodayOrder = [
   },
 ];
 
-export const CategoryStat = [
-  { name: "Phone", value: 400, color: "#00C49F" },
-  { name: "Laptop", value: 300, color: "#FFBB28" },
-  { name: "Tablet", value: 300, color: "#0088FE" },
-  { name: "Watch", value: 200, color: "#FF8042" },
-];
 
 export const LastestTransaction = [
   {
@@ -267,50 +255,6 @@ export const LastestTransaction = [
     id: 6,
     date: "2024-01-12 20:45:10.241472",
     totals: 2000.0,
-  },
-];
-export const TopSellingProduct = [
-  {
-    id: 1,
-    name: "Iphone 15 Pro",
-    stock: 5,
-    totalOrder: 506,
-    price: 1200.0,
-  },
-  {
-    id: 2,
-    name: "Galaxy Z Flip5",
-    stock: 5,
-    totalOrder: 219,
-    price: 600.0,
-  },
-  {
-    id: 3,
-    name: "Galaxy Tab S8",
-    stock: 80,
-    totalOrder: 100,
-    price: 699.99,
-  },
-  {
-    id: 4,
-    name: "Yoga Book 9i (13″ Intel)",
-    stock: 5,
-    totalOrder: 90,
-    price: 2000.0,
-  },
-  {
-    id: 5,
-    name: "Apple Watch Ultra 2",
-    stock: 0,
-    totalOrder: 78,
-    price: 799.0,
-  },
-  {
-    id: 6,
-    name: "75” Class X77L 4K HDR LED Google TV (2023)",
-    stock: 10,
-    totalOrder: 60,
-    price: 749.99,
   },
 ];
 type RatingProp = {

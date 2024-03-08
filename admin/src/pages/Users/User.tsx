@@ -43,7 +43,7 @@ export default function User() {
       }
     });
   }, [query, users]);
-  
+
   const rowsDisplay = useMemo(() => {
     return filterUsers.map((item) => {
       const day = new Date(item.create_at);
@@ -135,7 +135,7 @@ export const deleteUser = async (id: number) => {
         },
       );
       const data = await res.json();
-      if (res.status === 201) {
+      if (res.status === 200) {
         Swal.fire({
           icon: "success",
           title: data.message,

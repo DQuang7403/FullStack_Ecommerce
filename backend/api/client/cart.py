@@ -22,7 +22,8 @@ def add_to_cart():
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
     cursor.execute(
-        "SELECT title, price, thumbnail FROM Products WHERE product_id = ?", (productId,)
+        "SELECT title, price, thumbnail, stocks FROM Products WHERE product_id = ?",
+        (productId,),
     )
     product = cursor.fetchone()
     conn.close()
@@ -36,9 +37,11 @@ def add_to_cart():
     cart = session.get("cart", [])
     found = False
     for item in cart:
-        if item["id"] == productId:
+        if item["id"] == productId and item["quantity"] + quantity <= product[3]:
             item["quantity"] += quantity
             found = True
+        else: 
+            return jsonify({"message": "Not enough stock"}), 400
     if not found:
         cart.append(product_details)
     session["cart"] = cart
@@ -57,8 +60,18 @@ def remove_item():
     session["cart"] = new_cart
     return jsonify({"message": "Product removed from cart successfully"}), 200
 
+
 @cart.route("/cart/update", methods=["POST"])
 def update_cart():
     cart = request.json["cart"]
+    
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    for item in cart:
+        cursor.execute("select stocks from Products where title = ?", (item["title"],))
+        stock = cursor.fetchone()
+        if stock[0] < item["quantity"]:
+            return jsonify({"message": "Not enough stock"}), 400
+    conn.close()
     session["cart"] = cart
     return jsonify({"message": "Cart updated successfully"}), 200

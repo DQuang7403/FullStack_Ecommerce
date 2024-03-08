@@ -8,6 +8,8 @@ import {
 import { Link } from "react-router-dom";
 import { IconType } from "react-icons/lib";
 import useSidebarContext from "../context/SidebarContext";
+import { MdLogout } from "react-icons/md";
+import useAuthContext from "../context/AuthContext";
 type SidebarProps = {
   name: string;
   url: string;
@@ -16,6 +18,7 @@ type SidebarProps = {
 export default function Sidebar() {
   const { isSmallOpen, isLargeOpen, close } = useSidebarContext();
   const { selectedPageURL, setSelectedPageURL } = useSidebarContext();
+  const { logoutUser } = useAuthContext();
   return (
     <>
       <aside
@@ -33,6 +36,15 @@ export default function Sidebar() {
             setSelectedPageURL={setSelectedPageURL}
           />
         ))}
+        <button
+          onClick={() => logoutUser()}
+          className={`btn btn-ghost btn-lg w-16 font-normal mr-2 `}
+        >
+          <div className="flex flex-col gap-2 items-center">
+            <MdLogout className="text-2xl" />
+            <div className="text-xs">Log out</div>
+          </div>
+        </button>
       </aside>
       {isSmallOpen && (
         <div
@@ -81,6 +93,15 @@ export default function Sidebar() {
             setSelectedPageURL={setSelectedPageURL}
           />
         ))}
+        <button
+          onClick={() => logoutUser()}
+          className={`btn btn-ghost justify-start font-semibold`}
+        >
+          <div className="flex gap-4 items-center justify-start">
+            <MdLogout className="text-2xl" />
+            <div className="text-md">Log out</div>
+          </div>
+        </button>
       </aside>
     </>
   );

@@ -27,6 +27,14 @@ export default function ProductPage() {
   const [isWishList, setIsWishList] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (productDetail.stock < quantity) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Look like we don't have that many in stock",
+      });
+      return;
+    }
     fetch(`http://127.0.0.1:5000/cart/add`, {
       method: "POST",
       headers: {
@@ -38,21 +46,33 @@ export default function ProductPage() {
         quantity: quantity,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 400) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Look like we don't have that many in stock",
+          });
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
-        Swal.fire({
-          icon: "success",
-          title: "Product added to cart",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        if (data !== undefined) {
+          Swal.fire({
+            icon: "success",
+            title: "Product added to cart",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       })
       .catch((err) =>
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
-        })
+        }),
       );
   };
 
@@ -68,9 +88,10 @@ export default function ProductPage() {
         return [...current, ...data?.images];
       });
       setIsWishList(
-        wishList.find((item) => item.id === data?.id) ? true : false
+        wishList.find((item) => item.id === data?.id) ? true : false,
       );
       setSelectedImg(data?.thumbnail);
+      console.log(data);
     };
     fetchProductDetail();
   }, [product.id, wishList]);
@@ -191,37 +212,42 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-      <div role="tablist" className="tabs tabs-lifted my-32 md:mx-4">
-        <input
-          type="radio"
-          name="my_tabs_2"
-          role="tab"
-          className="tab text-lg font-semibold text-primary"
-          aria-label="Related"
-          checked
-          readOnly
-        />
-        <div
-          role="tabpanel"
-          className="tab-content bg-base-100 border-base-300 rounded-box md:p-6 overflow-hidden p-0"
-        >
-          <ProductsCaurosel products={related} />
-        </div>
-
-        <input
-          type="radio"
-          name="my_tabs_2"
-          role="tab"
-          className={`tab text-lg font-semibold text-accent`}
-          aria-label="Reviews"
-        />
-        <div
-          role="tabpanel"
-          className="tab-content bg-base-100 border-base-300 rounded-box p-4"
-        >
-          <Reviews product_name={productDetail?.title} />
-        </div>
-      </div>
+      <ReviewSection related={related} title={productDetail?.title} />
     </section>
   );
 }
+const ReviewSection = ({ related, title }) => {
+  return (
+    <div role="tablist" className="tabs tabs-lifted my-32 md:mx-4">
+      <input
+        type="radio"
+        name="my_tabs_2"
+        role="tab"
+        className="tab text-lg font-semibold text-primary"
+        aria-label="Related"
+        checked
+        readOnly
+      />
+      <div
+        role="tabpanel"
+        className="tab-content bg-base-100 border-base-300 rounded-box md:p-6 overflow-hidden p-0"
+      >
+        <ProductsCaurosel products={related} />
+      </div>
+
+      <input
+        type="radio"
+        name="my_tabs_2"
+        role="tab"
+        className={`tab text-lg font-semibold text-accent`}
+        aria-label="Reviews"
+      />
+      <div
+        role="tabpanel"
+        className="tab-content bg-base-100 border-base-300 rounded-box p-4"
+      >
+        <Reviews product_name={title} />
+      </div>
+    </div>
+  );
+};

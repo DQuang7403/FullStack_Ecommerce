@@ -18,8 +18,10 @@ stripe_keys = {
     "endpoint_secret": os.getenv("ENDPOINT_SECRET"),
 }
 stripe.api_key = stripe_keys["secret_key"]
-
-
+def connect_db():
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    return conn, cursor
 def map_items(current_cart):
     return [
         {
@@ -78,8 +80,7 @@ def webhook():
     # Handle the event
     if event["type"] == "checkout.session.completed":
         print("Webhook received!", flush=True)
-        conn = sqlite3.connect(sqldbname)
-        cursor = conn.cursor()
+        conn, cursor = connect_db()
         cursor.execute(
             "INSERT INTO Orders (username, email, address, phone, status, create_at) VALUES (?, ?, ?, ?, ?, ?)",
             (
@@ -116,8 +117,10 @@ def webhook():
                     (item["amount_total"] / 100),
                     item["quantity"],
                 ),
+            )  
+            cursor.execute(
+                "Update Products set stocks = stocks - ? where title = ?", (item["quantity"], item["description"]),
             )
-
         conn.commit()
         conn.close()
 
@@ -132,8 +135,7 @@ def webhook():
 @checkout.route("/orders/<email>", methods=["GET"])
 def get_orders_by_email(email):
     order_overview = []
-    conn = sqlite3.connect(sqldbname)
-    cursor = conn.cursor()
+    conn, cursor = connect_db()
     cursor.execute(
         "select Orders.order_id, status, create_at, SUM(price) as Totals from Orders, Order_details where Order_details.order_id = Orders.order_id and Orders.email = ? GROUP BY Orders.order_id",
         (email,),
@@ -155,8 +157,7 @@ def get_orders_by_email(email):
 @checkout.route("/order-details/<int:id>", methods=["GET"])
 def get_order_details(id):
     order_details = []
-    conn = sqlite3.connect(sqldbname)
-    cursor = conn.cursor()
+    conn, cursor = connect_db()
     cursor.execute("SELECT * FROM Orders WHERE order_id = ?", (id,))
     orderOverview = cursor.fetchone()
     cursor.execute(

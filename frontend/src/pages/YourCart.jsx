@@ -34,7 +34,6 @@ export default function YourCart() {
   };
   const changeQuantity = (id, e) => {
     const value = e.target.value.replace(/\D/g, "");
-    // if value is not blank, then test the regex
 
     setCart((current) => {
       return current.map((item) => {

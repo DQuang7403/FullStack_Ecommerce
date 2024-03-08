@@ -54,3 +54,20 @@ def get_best_selling():
         )
     conn.close()
     return jsonify(product_list)
+
+
+@graphInfo.route("/top_category", methods=["GET"])
+def get_top_category():
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    sqlcommand = """
+    SELECT category, count(category) as total from Products where Products.title in(SELECT product_name from Order_details)
+    group by category order by count(category) desc LIMIT 4
+    """
+    cursor.execute(sqlcommand)
+    products = cursor.fetchall()
+    product_list = []
+    for product in products:
+        product_list.append({"category": product[0], "total_order": product[1]})
+    conn.close()
+    return jsonify(product_list)

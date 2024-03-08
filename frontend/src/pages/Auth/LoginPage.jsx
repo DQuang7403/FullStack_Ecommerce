@@ -10,7 +10,7 @@ export default function LoginPage() {
         loading="lazy"
         src={SignUpWebShopping}
         alt="Lets sign up"
-        className=" hidden md:block max-w-[40%] bg-blue-200"
+        className=" hidden md:block max-w-[40%]"
       />
       <form onSubmit={loginUser}>
         <header>

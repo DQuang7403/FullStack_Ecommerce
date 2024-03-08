@@ -8,7 +8,7 @@ import AuthContext from "../context/AuthContext";
 export default function WishListCart({ product }) {
   const { formatNumberWithCommas } = useContext(CartContext);
   const { user } = useContext(AuthContext);
-  const { toggleWishList, wishList, toggleUserWishList } =
+  const { toggleWishList,  toggleUserWishList } =
     useContext(WishListContext);
   const discountPrice = (price, discount) => {
     return Number((price / (1 - discount / 100)).toFixed(2));

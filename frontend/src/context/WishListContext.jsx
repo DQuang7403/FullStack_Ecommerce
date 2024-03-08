@@ -33,7 +33,7 @@ export const WishListProvider = ({ children }) => {
       }
     };
     fetchWishList();
-  }, [user]);
+  }, []);
   const toggleWishList = async (product, onWishList) => {
     if (onWishList) {
       const res = await fetch("http://127.0.0.1:5000/wishlist/remove", {

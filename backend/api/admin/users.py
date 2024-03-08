@@ -56,6 +56,7 @@ def get_user_by_id(id):
             "create_at": user[8],
         }
         return jsonify(data), 200
+    conn.close()
     return jsonify({"message": "User not found"}), 404
 
 

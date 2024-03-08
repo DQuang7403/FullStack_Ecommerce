@@ -15,34 +15,110 @@ import OrderDetails from "./pages/Order/OrderDetails";
 import Reviews from "./pages/Reviews";
 import EditProduct from "./pages/Products/EditProduct";
 import EditUser from "./pages/Users/EditUser";
+import Login from "./pages/Login";
+import useAuthContext from "./context/AuthContext";
+import PrivateRoute from "./utils/privateRoute";
 function App() {
+  const { url } = useAuthContext();
   return (
     <SidebarProvider>
       <ProductsProvider>
         <div className="max-h-screen flex flex-col ">
           <Navbar />
           <div className="grid grid-cols-[auto,1fr] flex-grow-1 overflow-auto bg-[#F5F5F5]">
-            <Sidebar />
+            {url !== "/login" && <Sidebar />}
+
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route
+                path="/"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
               <Route path="/orders">
-                <Route index element={<OrderManagement />} />
-                <Route path=":id" element={<OrderDetails />}></Route>
+                <Route
+                  index
+                  element={
+                    <PrivateRoute>
+                      <OrderManagement />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path=":id"
+                  element={
+                    <PrivateRoute>
+                      <OrderDetails />
+                    </PrivateRoute>
+                  }
+                ></Route>
               </Route>
 
               <Route path="/user">
-                <Route index element={<User />}></Route>
-                <Route path=":id" element={<EditUser />}></Route>
+                <Route
+                  index
+                  element={
+                    <PrivateRoute>
+                      <User />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  path=":id"
+                  element={
+                    <PrivateRoute>
+                      <EditUser />
+                    </PrivateRoute>
+                  }
+                ></Route>
               </Route>
 
               <Route path="/product">
-                <Route index element={<Product />} />
-                <Route path="add-product" element={<AddProducts />} />
-                <Route path=":id" element={<EditProduct />} />
+                <Route
+                  index
+                  element={
+                    <PrivateRoute>
+                      <Product />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="add-product"
+                  element={
+                    <PrivateRoute>
+                      <AddProducts />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path=":id"
+                  element={
+                    <PrivateRoute>
+                      <EditProduct />
+                    </PrivateRoute>
+                  }
+                />
               </Route>
 
-              <Route path="/reviews" element={<Reviews />}></Route>
-              <Route path="/revenue" element={<Revenue />}></Route>
+              <Route
+                path="/reviews"
+                element={
+                  <PrivateRoute>
+                    <Reviews />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                path="/revenue"
+                element={
+                  <PrivateRoute>
+                    <Revenue />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route path="/login" element={<Login />}></Route>
               <Route path="/*" element={<h1>Not found</h1>}></Route>
             </Routes>
           </div>

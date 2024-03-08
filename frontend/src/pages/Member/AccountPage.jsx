@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { fetchAPI } from "../../utils/fetchAPI";
 import AuthContext from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
 export default function AccountPage() {
   const [userDetail, setUserDetail] = useState({});
   const [refresh, setRefresh] = useState(false);
@@ -66,7 +65,7 @@ export default function AccountPage() {
       setRefresh(false);
     };
     fetchUser();
-  }, [refresh, user]);
+  }, [refresh]);
   return (
     <form
       onSubmit={handleUpdate}

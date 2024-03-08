@@ -59,6 +59,7 @@ export function AuthProvider({ children }) {
       setAuthToken(data);
       setUser(jwtDecode(data.access_token));
       localStorage.setItem("authTokens", JSON.stringify(data));
+      window.location.reload();
       navigate("/");
     } else {
       Swal.fire({

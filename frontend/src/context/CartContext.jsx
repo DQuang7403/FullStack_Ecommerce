@@ -15,7 +15,7 @@ export function CartProvider({ children }) {
     // Format the integer part with commas
     const formattedIntegerPart = integerPart.replace(
       /\B(?=(\d{3})+(?!\d))/g,
-      ","
+      ",",
     );
 
     // Combine the formatted integer part and the decimal part
@@ -30,7 +30,7 @@ export function CartProvider({ children }) {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ product_id: id}),
+      body: JSON.stringify({ product_id: id }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -45,9 +45,19 @@ export function CartProvider({ children }) {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ cart: cart}),
+      body: JSON.stringify({ cart: cart }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 400) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Look like we don't have that many in stock",
+          });
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
         setReFetch(!refetch);
         setUpdate(false);
