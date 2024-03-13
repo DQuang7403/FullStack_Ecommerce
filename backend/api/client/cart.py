@@ -40,8 +40,10 @@ def add_to_cart():
         if item["id"] == productId and item["quantity"] + quantity <= product[3]:
             item["quantity"] += quantity
             found = True
-        else: 
+        elif item["id"] == productId and item["quantity"] + quantity > product[3]:
             return jsonify({"message": "Not enough stock"}), 400
+        else:
+            continue
     if not found:
         cart.append(product_details)
     session["cart"] = cart

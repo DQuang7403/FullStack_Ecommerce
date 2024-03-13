@@ -17,7 +17,8 @@ import EditProduct from "./pages/Products/EditProduct";
 import EditUser from "./pages/Users/EditUser";
 import Login from "./pages/Login";
 import useAuthContext from "./context/AuthContext";
-import PrivateRoute from "./utils/privateRoute";
+import PrivateRoute from "./utils/PrivateRoute";
+import AdminManage from "./pages/AdminManage";
 function App() {
   const { url } = useAuthContext();
   return (
@@ -115,6 +116,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Revenue />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin"
+                element={
+                  <PrivateRoute>
+                    <AdminManage />
                   </PrivateRoute>
                 }
               ></Route>
