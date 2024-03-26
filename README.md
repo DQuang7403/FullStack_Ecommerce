@@ -37,7 +37,7 @@ TechTopia is an ecommerce platform developed using full-stack technologies. It p
 
 ## Screenshots
 
-Here are some screenshots showcasing the UI of TechHub:
+Here are some screenshots showcasing the UI of TechTopia:
 1. **Home Page**:
 ![Home Page](Screenshot/HomePage.png)
 
