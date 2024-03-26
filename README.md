@@ -1,7 +1,7 @@
 
 # FullStack Ecommerce TechTopia
 
-This repository contains the source code for a FullStack Ecommerce project called TechTopia.
+This repository contains the source code for a FullStack Ecommerce project called TechTopia using ReactJS and Flask.
 
 ## Introduction
 
@@ -20,7 +20,7 @@ TechTopia is an ecommerce platform developed using full-stack technologies. It p
 
 - **Frontend**:
   - HTML/CSS
-  - JavaScript, TypeScript (React.js)
+  - JavaScript, TypeScript (ReactJS)
   - DaisyUI (styling components for TailwindCSS)
   - TailwindCSS (for styling)
 
@@ -54,12 +54,12 @@ Here are some screenshots showcasing the UI of TechHub:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/DQuang7403/FullStack_Ecommerce_TechHub.git
+git clone https://github.com/DQuang7403/FullStack_Ecommerce.git
 ```
 2. Install Dependencies
 - Navigate to the cloned repository directory:
     ```bash
-    cd FullStack_Ecommerce_TechHub
+    cd FullStack_Ecommerce
     ```
 - Install frontend dependencies
     ```bash
