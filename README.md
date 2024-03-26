@@ -1,11 +1,11 @@
 
-# FullStack Ecommerce TechHub
+# FullStack Ecommerce TechTopia
 
-This repository contains the source code for a FullStack Ecommerce project called TechHub.
+This repository contains the source code for a FullStack Ecommerce project called TechTopia.
 
 ## Introduction
 
-TechHub is an ecommerce platform developed using full-stack technologies. It provides a platform for users to browse, purchase, and sell tech-related products. The project aims to demonstrate the implementation of essential ecommerce functionalities and showcase proficiency in various web development technologies.
+TechTopia is an ecommerce platform developed using full-stack technologies. It provides a platform for users to browse, purchase, and sell tech-related products. The project aims to demonstrate the implementation of essential ecommerce functionalities and showcase proficiency in various web development technologies.
 
 ## Features
 
