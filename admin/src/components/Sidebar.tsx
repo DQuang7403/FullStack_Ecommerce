@@ -22,7 +22,7 @@ export default function Sidebar() {
   return (
     <>
       <aside
-        className={`bg-white sticky top-0 overflow-auto pb-0 flex flex-col ml-1 gap-3 h-[calc(100vh-64px)]  ${
+        className={`bg-white sticky top-0 overflow-auto pb-0 sm:flex flex-col ml-1 gap-3 h-[calc(100vh-64px)] hidden  ${
           isLargeOpen ? "lg:hidden" : "lg:flex"
         }`}
       >

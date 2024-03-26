@@ -69,7 +69,7 @@ export default function YourCart() {
   }, [refetch]);
 
   return (
-    <section className="lg:mx-32 md:my-8 mx-1 my-4">
+    <section className="lg:mx-32 md:my-8 mx-1 my-4 ">
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           <thead>
@@ -104,7 +104,7 @@ export default function YourCart() {
                       </div>{" "}
                       <input type="hidden" name="product_id" value={item?.id} />
                       <button
-                        className=" text-[#db4444] hover:text-[#BB232D]"
+                        className=" text-primary hover:text-primary_hover"
                         onClick={() => removeItem(item.id)}
                       >
                         Remove
@@ -166,7 +166,7 @@ export default function YourCart() {
           />
           <button
             type="submit"
-            className="btn bg-[#db4444] hover:bg-[#BB232D] text-white rounded-base"
+            className="btn bg-primary hover:bg-primary_hover text-white rounded-base"
           >
             Apply Coupon
           </button>
@@ -188,7 +188,7 @@ export default function YourCart() {
           <form method="post" onSubmit={handleCheckout}>
             <button
               type="submit"
-              className={`btn bg-[#db4444] hover:bg-[#BB232D] text-white rounded-base ${
+              className={`btn bg-primary hover:bg-primary_hover text-white rounded-base ${
                 cart.length === 0 && "btn-disabled"
               }`}
             >

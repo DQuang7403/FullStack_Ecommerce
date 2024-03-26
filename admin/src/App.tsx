@@ -26,7 +26,7 @@ function App() {
       <ProductsProvider>
         <div className="max-h-screen flex flex-col ">
           <Navbar />
-          <div className="grid grid-cols-[auto,1fr] flex-grow-1 overflow-auto bg-[#F5F5F5]">
+          <div className="sm:grid grid-cols-[auto,1fr] flex-grow-1 overflow-auto bg-[#F5F5F5] min-h-[calc(100vh-64px)]">
             {url !== "/login" && <Sidebar />}
 
             <Routes>

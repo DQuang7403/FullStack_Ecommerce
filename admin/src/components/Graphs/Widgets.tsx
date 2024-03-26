@@ -9,7 +9,7 @@ type WidgetProps = {
   url: string;
   data: {
     name: string;
-    pv: number;
+    stat: number;
   }[];
   view?: boolean;
 };
@@ -47,9 +47,9 @@ export default function Widget({
         data={data}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
-        <XAxis />
+        <XAxis dataKey="name"/>
         <Tooltip />
-        <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="stat" stroke="#82ca9d" />
       </LineChart>
     </div>
   );

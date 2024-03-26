@@ -111,7 +111,7 @@ export default function OrderDetails() {
 
         <Link
           to={"/order"}
-          className={`btn bg-[#db4444] hover:bg-[#BB232D] text-white rounded-base w-full mt-6`}
+          className={`btn bg-primary hover:bg-primary_hover text-white rounded-base w-full mt-6`}
         >
           Back to Order
         </Link>

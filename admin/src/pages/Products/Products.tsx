@@ -78,7 +78,7 @@ export default function Products() {
   }, [filteredProducts]);
 
   return (
-    <div className="overflow-auto bg-white m-6">
+    <div className="overflow-auto bg-white sm:m-6">
       <TopSection query={query} setQuery={setQuery} titleRef={titleRef} />
       <Table title={ProductTitle} RowsDisplay={rowsDisplay} />
     </div>
@@ -92,10 +92,10 @@ type TopSectionProps = {
 function TopSection(props: TopSectionProps) {
   const { setSelectedPageURL } = useSidebarContext();
   return (
-    <div className="flex items-center justify-between sm:m-4 flex-wrap gap-4">
-      <div className="flex items-center gap-6 flex-wrap">
-        <div className="flex items-center gap-2 border-b-2 ">
-          <IoMdSearch className="text-2xl rounded-lg" />
+    <div className="flex items-center justify-between m-4 flex-wrap gap-2">
+      <div className="flex items-center gap-2  flex-wrap">
+        <div className="flex items-center gap-2 border-b-2">
+          <IoMdSearch className="text-2xl rounded-lg hidden sm:block" />
           <input
             onChange={(e) => props.setQuery(e.target.value)}
             type="search"

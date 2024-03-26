@@ -43,8 +43,14 @@ export default function Reviews({ product_name }) {
               icon: "success",
               title: "Thank you for your review!",
               text: "We appreciate your feedback!",
+              timer: 3000,
+              showConfirmButton: true,
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+                setComment("");
+              }
             });
-            setComment("");
           }
           if (res.status === 400) {
             Swal.fire({

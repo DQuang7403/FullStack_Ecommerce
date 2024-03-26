@@ -77,7 +77,7 @@ export default function User() {
     });
   }, [filterUsers]);
   return (
-    <div className="overflow-auto bg-white m-6">
+    <div className="overflow-auto bg-white sm:m-6">
       <TopSection query={query} setQuery={setQuery} titleRef={titleRef} />
       <Table title={UserTitle} RowsDisplay={rowsDisplay} />
     </div>
@@ -91,9 +91,9 @@ type TopSectionProps = {
 };
 function TopSection(props: TopSectionProps) {
   return (
-    <div className="flex items-center justify-between m-4 flex-wrap">
+    <div className="flex items-center justify-between m-4 flex-wrap gap-2">
       <div className="flex items-center gap-2 border-b-2 flex-wrap">
-        <IoMdSearch className="text-2xl rounded-lg" />
+        <IoMdSearch className="text-2xl rounded-lg hidden sm:block" />
         <input
           type="search"
           onChange={(e) => props.setQuery(e.target.value)}
@@ -138,9 +138,13 @@ export const deleteUser = async (id: number) => {
       if (res.status === 200) {
         Swal.fire({
           icon: "success",
-          title: data.message,
+          title: "User deleted!",
+          timer: 1500,
+          showConfirmButton: false,
         });
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       } else {
         Swal.fire({
           icon: "error",

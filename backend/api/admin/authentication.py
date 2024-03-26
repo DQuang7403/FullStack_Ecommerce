@@ -32,14 +32,19 @@ def get_employee(email):
     return False
 
 
-def register_employee(email, hash_password, password):
+def register_employee(
+    email, hash_password, password, address, phone, firstname, lastname
+):
     conn, cursor = connect_db()
     cursor.execute("Select * from Employee where email = ?", (email,))
     exsited = cursor.fetchone()
     if exsited:
         return False
-    sqlcommand = "Insert into Employee (email, password, pwd) values (?, ?, ?)"
-    cursor.execute(sqlcommand, (email, hash_password, password))
+    sqlcommand = "Insert into Employee (email, password, pwd, address, phone, firstname, lastname) values (?, ?, ?, ?, ?, ?, ?)"
+    cursor.execute(
+        sqlcommand,
+        (email, hash_password, password, address, phone, firstname, lastname),
+    )
     conn.commit()
     conn.close()
     return True
@@ -86,13 +91,88 @@ def refresh_access():
     )
 
 
-@adminAuth.route("/create_employee", methods=["POST"])
+@adminAuth.route("/add_employee", methods=["POST"])
 def create_new_employee():
+    email = request.json["eEmail"]
+    password = request.json["ePassword"]
+    address = request.json["address"]
+    phone = request.json["phone"]
+    firstname = request.json["Fname"]
+    lastname = request.json["Lname"]
+    hash_password = generate_password_hash(
+        password=password, method="pbkdf2:sha1", salt_length=8
+    )
+    if register_employee(
+        email, hash_password, password, address, phone, firstname, lastname
+    ):
+        return jsonify({"msg": "Employee created successfully"}), 201
+    return jsonify({"msg": "Email already exists"}), 409
+
+
+@adminAuth.route("/get_employee", methods=["GET"])
+def get_employee_details():
+    conn, cursor = connect_db()
+    cursor.execute("Select * from Employee")
+    employees = cursor.fetchall()
+    employee_list = []
+    for employee in employees:
+        employee_list.append(
+            {
+                "employee_id": employee[0],
+                "email": employee[1],
+                "address": employee[6],
+                "phone": employee[7],
+                "firstname": employee[4],
+                "lastname": employee[5],
+                "password": employee[3],
+            }
+        )
+    conn.close()
+    return jsonify(employee_list)
+
+
+@adminAuth.route("/delete_employee/<int:id>", methods=["DELETE"])
+def delete_employee(id):
+    conn, cursor = connect_db()
+    cursor.execute("Delete from Employee where employee_id = ?", (id,))
+    conn.commit()
+    conn.close()
+    if cursor.rowcount > 0:
+        return jsonify({"message": "Employee deleted successfully"}), 201
+    return "Employee not found", 404
+
+
+@adminAuth.route("/edit_employee/<int:id>", methods=["PUT"])
+def edit_employee(id):
+    conn, cursor = connect_db()
     email = request.json["email"]
+    address = request.json["address"]
+    phone = request.json["phone"]
+    firstname = request.json["firstname"]
+    lastname = request.json["lastname"]
     password = request.json["password"]
     hash_password = generate_password_hash(
         password=password, method="pbkdf2:sha1", salt_length=8
     )
-    if register_employee(email, hash_password, password):
-        return jsonify({"msg": "User created successfully"}), 201
-    return jsonify({"msg": "Email already exists"}), 409
+    cursor.execute("Select * from Employee where employee_id = ?", (id,))
+    exsited = cursor.fetchone()
+    if exsited:
+        sqlcommand = "Update Employee set email = ?, address = ?, phone = ?, firstname = ?, lastname = ? , pwd = ?, password = ? where employee_id = ?"
+        cursor.execute(
+            sqlcommand,
+            (
+                email,
+                address,
+                phone,
+                firstname,
+                lastname,
+                password,
+                hash_password,
+                id,
+            ),
+        )
+        conn.commit()
+        conn.close()
+        return jsonify({"message": "Employee updated successfully"}), 201
+    else:
+        return "Employee not found", 404

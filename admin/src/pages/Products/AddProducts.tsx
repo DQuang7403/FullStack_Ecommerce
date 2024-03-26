@@ -1,21 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useSidebarContext from "../../context/SidebarContext";
 import useProductsContext from "../../context/ProductsContext";
+import { useForm } from "react-hook-form";
+type FormValues = {
+  title: string;
+  price: number;
+  category: string;
+  stock: number;
+  description: string;
+  discount: number;
+  thumbnail: string;
+  images1: string;
+  images2: string;
+  images3: string;
+};
 export default function AddProducts() {
   const { setSelectedPageURL } = useSidebarContext();
   const { addProducts } = useProductsContext();
   const [category, setCategory] = useState<string[]>([]);
-  const titleRef = useRef<HTMLInputElement>(null);
-  const priceRef = useRef<HTMLInputElement>(null);
-  const categoryRef = useRef<HTMLSelectElement>(null);
-  const stockRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const discountRef = useRef<HTMLInputElement>(null);
-  const thumbnailRef = useRef<HTMLInputElement>(null);
-  const images1Ref = useRef<HTMLInputElement>(null);
-  const images2Ref = useRef<HTMLInputElement>(null);
-  const images3Ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     setCategory([
       "smartphones",
@@ -26,36 +29,15 @@ export default function AddProducts() {
       "accessories",
     ]);
   }, []);
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const title: string = titleRef.current?.value as string;
-    const price: number = Number(priceRef.current?.value);
-    const stock: number = Number(stockRef.current?.value);
-    const category: string = categoryRef.current?.value as string;
-    const description: string = descriptionRef.current?.value as string;
-    const discount: number = Number(discountRef.current?.value);
-    const thumbnail: string = thumbnailRef.current?.value as string;
-    const images1: string = images1Ref.current?.value as string;
-    const images2: string = images2Ref.current?.value as string;
-    const images3: string = images3Ref.current?.value as string;
-    addProducts({
-      title,
-      price,
-      category,
-      stock,
-      description,
-      discount,
-      thumbnail,
-      images1,
-      images2,
-      images3,
-    });
+  const { register, handleSubmit } = useForm<FormValues>();
+  const onSubmit = (data: FormValues) => {
+    addProducts(data);
   };
   return (
-    <section className="overflow-x-auto bg-white md:m-6  overflow-auto rounded-md">
+    <section className="overflow-auto bg-white md:m-6 rounded-md">
       <h1 className="text-2xl p-6 font-semibold">Add New Products</h1>
       <form
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="p-6 grid grid-cols-1 md:grid-cols-2 gap-3"
       >
         <div className="form-control col-span-1">
@@ -66,13 +48,8 @@ export default function AddProducts() {
             required
             type="text"
             placeholder="Product Name"
-            name="title"
+            {...register("title")}
             className="input input-bordered"
-            defaultValue={titleRef.current?.value}
-            ref={titleRef}
-            onChange={(e) => {
-              if (titleRef.current) titleRef.current.value = e.target.value;
-            }}
           />
         </div>
         <div className="form-control">
@@ -83,13 +60,8 @@ export default function AddProducts() {
             required
             type="text"
             placeholder="Product Price"
-            name="price"
+            {...register("price")}
             className="input input-bordered"
-            ref={priceRef}
-            defaultValue={priceRef?.current?.value}
-            onChange={(e) => {
-              if (priceRef.current) priceRef.current.value = e.target.value;
-            }}
           />
         </div>
         <div className="form-control">
@@ -100,13 +72,8 @@ export default function AddProducts() {
             required
             type="text"
             placeholder="Product Stock"
-            name="stock"
             className="input input-bordered"
-            ref={stockRef}
-            defaultValue={stockRef?.current?.value}
-            onChange={(e) => {
-              if (stockRef.current) stockRef.current.value = e.target.value;
-            }}
+            {...register("stock")}
           />
         </div>
         <div className="flex items-center gap-4">
@@ -115,8 +82,7 @@ export default function AddProducts() {
               <span className="label-text">Category: </span>
             </label>
             <select
-              ref={categoryRef}
-              defaultValue={categoryRef?.current?.value}
+              {...register("category")}
               className="select select-bordered w-full max-w-xs min-w-10"
             >
               {category.map((item) => {
@@ -131,16 +97,11 @@ export default function AddProducts() {
           <div className="form-control min-w-10">
             <label className="label">Discount: </label>
             <input
-              ref={discountRef}
               type="number"
               className="input input-bordered"
               placeholder="Discount"
-              name="discount"
+              {...register("discount")}
               defaultValue={0}
-              onChange={(e) => {
-                if (discountRef.current)
-                  discountRef.current.value = e.target.value;
-              }}
             />
           </div>
         </div>
@@ -150,14 +111,8 @@ export default function AddProducts() {
             required
             type="text"
             className="input input-bordered"
-            name="thumbnail"
+            {...register("thumbnail")}
             placeholder="Insert Image URL"
-            ref={thumbnailRef}
-            defaultValue={thumbnailRef?.current?.value}
-            onChange={(e) => {
-              if (thumbnailRef.current)
-                thumbnailRef.current.value = e.target.value;
-            }}
           />
         </div>
         <div className="form-control">
@@ -166,13 +121,8 @@ export default function AddProducts() {
             required
             type="text"
             className="input input-bordered"
-            name="thumbnail2"
+            {...register("images1")}
             placeholder="Insert Image URL"
-            ref={images1Ref}
-            defaultValue={images1Ref?.current?.value}
-            onChange={(e) => {
-              if (images1Ref.current) images1Ref.current.value = e.target.value;
-            }}
           />
         </div>
         <div className="form-control">
@@ -181,13 +131,8 @@ export default function AddProducts() {
             required
             type="text"
             className="input input-bordered"
-            name="thumbnail3"
+            {...register("images2")}
             placeholder="Insert Image URL"
-            ref={images2Ref}
-            defaultValue={images2Ref?.current?.value}
-            onChange={(e) => {
-              if (images2Ref.current) images2Ref.current.value = e.target.value;
-            }}
           />
         </div>
         <div className="form-control">
@@ -196,13 +141,8 @@ export default function AddProducts() {
             required
             type="text"
             className="input input-bordered"
-            name="thumbnail4"
             placeholder="Insert Image URL"
-            ref={images3Ref}
-            defaultValue={images3Ref?.current?.value}
-            onChange={(e) => {
-              if (images3Ref.current) images3Ref.current.value = e.target.value;
-            }}
+            {...register("images3")}
           />
         </div>
 
@@ -211,15 +151,9 @@ export default function AddProducts() {
           <textarea
             required
             className="textarea textarea-bordered"
-            name="description"
+            {...register("description")}
             placeholder="Insert description for the product"
             rows={5}
-            ref={descriptionRef}
-            defaultValue={descriptionRef?.current?.value}
-            onChange={(e) => {
-              if (descriptionRef.current)
-                descriptionRef.current.value = e.target.value;
-            }}
           />
         </div>
         <div className="flex items-center gap-4">

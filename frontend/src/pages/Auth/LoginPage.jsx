@@ -44,7 +44,7 @@ export default function LoginPage() {
         <div className="flex items-center justify-center">
           <button
             type="submit"
-            className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white w-full my-10"
+            className="btn bg-primary hover:bg-primary_hover text-white w-full my-10"
           >
             Log in
           </button>

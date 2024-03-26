@@ -7,11 +7,13 @@ def admin_routes(app):
   from .users import users
   from .graph import graphInfo
   from .authentication import adminAuth
+  from .reviews import reviews
 
   app.register_blueprint(admin_products, url_prefix="/admin")
   app.register_blueprint(admin_order, url_prefix="/admin")
   app.register_blueprint(users, url_prefix="/admin")
   app.register_blueprint(graphInfo, url_prefix="/admin")
   app.register_blueprint(adminAuth, url_prefix="/admin")
+  app.register_blueprint(reviews, url_prefix="/admin")
 
   

@@ -89,7 +89,7 @@ export function AuthProvider({ children }: ContextProps) {
     }
   };
   useEffect(() => {
-    const expires = 1000 * 60 * 15;
+    const expires = 1000 * 60 * 30;
     const interval = setInterval(() => {
       if (authToken) {
         updateToken();

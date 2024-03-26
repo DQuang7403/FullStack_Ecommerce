@@ -71,3 +71,20 @@ def update_user():
         return jsonify({"message": "User updated successfully"}), 200
     else:
         return "user not found", 404
+
+
+@account.route("/contact", methods=["POST"])
+def contact():
+    conn = sqlite3.connect(sqldbname)
+    cur = conn.cursor()
+    email = request.json["email"]
+    name = request.json["name"]
+    message = request.json["message"]
+    phone = request.json["phone"]
+    cur.execute(
+        "INSERT INTO Contact (email, message, name, phone) VALUES (?, ?, ?, ?)",
+        (email, message, name, phone),
+    )
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Contact created successfully"}), 201

@@ -40,7 +40,7 @@ export default function WishListPage() {
           })}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-10 my-10">
+        <div className="flex flex-col items-center gap-10 my-20">
           <h1 className="text-3xl font-semibold">
             You Don't Have Any Items in Your Wishlist Yet
           </h1>

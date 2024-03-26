@@ -71,7 +71,7 @@ export default function CategoriesSection() {
       </div>
       <div className="flex items-center justify-center my-10">
         <button
-          className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white"
+          className="btn bg-primary hover:bg-primary_hover text-white"
           onClick={() => document.getElementById("my_modal_3").showModal()}
         >
           View All Categories
@@ -93,7 +93,7 @@ export default function CategoriesSection() {
                   return (
                     <button
                       key={category}
-                      className="btn hover:bg-[#DB4444] active:bg-[#BB232D] hover:text-white  text-base transition-all join-item "
+                      className="btn hover:bg-primary active:bg-primary_hover hover:text-white  text-base transition-all join-item "
                     >
                       <Link
                         to={`/category/${category}`}

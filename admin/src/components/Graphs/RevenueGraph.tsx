@@ -13,7 +13,7 @@ export default function RevenueGraph() {
   return (
     <div className="bg-white rounded-lg md:col-span-2 p-6 flex flex-col gap-3 col-span-1">
       <div className="flex gap-4 items-center">
-        <TbChartInfographic className="text-2xl text-purple-500" />
+        <TbChartInfographic className="text-2xl text-teal-500" />
         <h3 className="font-bold text-lg">Revenue Analytics</h3>
       </div>
       <ResponsiveContainer width="99%" height={250}>

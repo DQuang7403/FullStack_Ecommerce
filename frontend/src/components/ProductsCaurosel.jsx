@@ -12,7 +12,7 @@ export default function ProductsCaurosel({ products }) {
       <div className="flex items-center justify-center">
         <Link
           to={"/products/all"}
-          className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
+          className="btn bg-[#DB4444] hover:bg-primary_hover text-white my-10"
         >
           View all products
         </Link>

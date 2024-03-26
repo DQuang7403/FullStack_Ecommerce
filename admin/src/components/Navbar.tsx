@@ -5,9 +5,9 @@ import { FaMoon } from "react-icons/fa";
 import { useEffect, useState } from "react";
 export default function Navbar() {
   return (
-    <div className="flex gap-10 lg:gap-20 justify-between pt-2 mb-2 mx-4 sticky">
+    <div className="flex lg:gap-20 sm:justify-between pt-2 mb-2 mx-4 sticky">
       <NavbarFirstSection visible={false} />
-      <div className="flex flex-shrink-0 md:gap-4">
+      <div className="flex flex-shrink-0 md:gap-4 gap-2">
         <button className=" btn btn-ghost btn-circle">
           <div className="indicator z-0">
             <BiBell className="text-2xl " />

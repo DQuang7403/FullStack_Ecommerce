@@ -65,7 +65,9 @@ export default function MyReviews() {
               </tbody>
             </table>
           ) : (
-            <div>You have no reviews</div>
+            <h2 className="text-xl mt-6 font-semibold text-center">
+              You haven't reviewed any products
+            </h2>
           )}
         </div>
       </div>
@@ -115,7 +117,7 @@ export default function MyReviews() {
             </table>
           ) : (
             <h2 className="text-xl mt-6 font-semibold text-center">
-              You haven't reported any reviews
+              You haven't reported any reviews or it has already been resolved
             </h2>
           )}
         </div>

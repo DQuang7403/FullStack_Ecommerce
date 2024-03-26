@@ -9,7 +9,7 @@ export default function Offer() {
         <div className="text-4xl font-semibold">
           Limited Time Offers -<br /> Get a New Laptop for the Holidays!
         </div>
-        <Link to={"/category/laptop"} className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white w-32 border-none">
+        <Link to={"/category/laptop"} className="btn bg-primary hover:bg-primary_hover text-white w-32 border-none">
           Shop Now
         </Link>
       </div>

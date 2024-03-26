@@ -43,10 +43,10 @@ export default function ProductsPage() {
       </div>
       <div className="flex items-center justify-center">
         <button
-          className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
+          className="btn bg-[#DB4444] hover:bg-primary_hover text-white my-10"
           onClick={() => setQuantity((prev) => prev + 4)}
         >
-          Load more ...
+          Load more 
         </button>
       </div>
     </section>

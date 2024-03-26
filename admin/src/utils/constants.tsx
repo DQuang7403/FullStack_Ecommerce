@@ -3,9 +3,11 @@ import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineShoppingCart, MdAddCircleOutline } from "react-icons/md";
 import { LuUsers } from "react-icons/lu";
 import { BsBoxSeam } from "react-icons/bs";
-import { RiBillLine, RiAdminLine } from "react-icons/ri";
+import { RiAdminLine } from "react-icons/ri";
 import { GoGear } from "react-icons/go";
 import { MdOutlineRateReview } from "react-icons/md";
+
+
 type SidebarProps = {
   name: string;
   url: string;
@@ -41,7 +43,7 @@ export const productItem: SidebarLargeProps[] = [
 ];
 export const adminItem: SidebarLargeProps[] = [
   { name: "Manage Admins", url: "/admin", icon: RiAdminLine },
-  { name: "Settings", url: "/settings", icon: GoGear },
+  // { name: "Settings", url: "/settings", icon: GoGear },
 ];
 
 export const OrderTitle: string[] = [
@@ -68,95 +70,37 @@ export const ProductTitle: string[] = [
   "In Stock",
   "Action",
 ];
-export const OrdersStat = [
-  {
-    name: "Page A",
-    pv: 2400,
-  },
-  {
-    name: "Page B",
-    pv: 1398,
-  },
-  {
-    name: "Page C",
-    pv: 9800,
-  },
-  {
-    name: "Page D",
-    pv: 3908,
-  },
-  {
-    name: "Page E",
-    pv: 4800,
-  },
-  {
-    name: "Page F",
-    pv: 3800,
-  },
-  {
-    name: "Page G",
-    pv: 4300,
-  },
-];
-export const UserStat = [
-  {
-    name: "Page A",
-    pv: 4000,
-  },
-  {
-    name: "Page B",
-    pv: 3000,
-  },
-  {
-    name: "Page C",
-    pv: 2000,
-  },
-  {
-    name: "Page D",
-    pv: 2780,
-  },
-  {
-    name: "Page E",
-    pv: 1890,
-  },
-  {
-    name: "Page F",
-    pv: 2390,
-  },
-  {
-    name: "Page G",
-    pv: 3490,
-  },
-];
+
+
 
 export const ProfitStat = [
   {
     name: "Page A",
-    pv: 2400,
+    stat: 2400,
   },
   {
     name: "Page B",
-    pv: 2210,
+    stat: 2210,
   },
   {
     name: "Page C",
-    pv: 2290,
+    stat: 2290,
   },
   {
     name: "Page D",
-    pv: 1500,
+    stat: 1500,
   },
   {
     name: "Page E",
-    pv: 2181,
+    stat: 2181,
   },
   {
     name: "Page F",
-    pv: 2500,
+    stat: 2500,
   },
   {
     name: "Page G",
-    pv: 3000,
+    stat: 3000,
   },
 ];
 export const data = [

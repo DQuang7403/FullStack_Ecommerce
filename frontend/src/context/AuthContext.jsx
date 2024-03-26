@@ -59,7 +59,6 @@ export function AuthProvider({ children }) {
       setAuthToken(data);
       setUser(jwtDecode(data.access_token));
       localStorage.setItem("authTokens", JSON.stringify(data));
-      window.location.reload();
       navigate("/");
     } else {
       Swal.fire({
@@ -100,7 +99,7 @@ export function AuthProvider({ children }) {
     setUserDetail(data);
   };
   useEffect(() => {
-    const expires = 1000 * 60 * 15;
+    const expires = 1000 * 60 * 30;
     let interval = setInterval(() => {
       if (authToken) {
         updateToken();

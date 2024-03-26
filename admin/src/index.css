@@ -32,11 +32,21 @@ html,
   border-radius: 100vw;
 }
 scrollbar-hidden::-webkit-scrollbar-track {
-  @apply bg-slate-50;
+  @apply bg-transparent;
 }
 .scrollbar-hidden::-webkit-scrollbar-thumb {
   @apply bg-transparent;
 }
 .scrollbar-hidden:hover::-webkit-scrollbar-thumb {
   background: #a3a3a3;
+}
+
+@layer components {
+  .scale-hover:hover {
+    scale: 1.01;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    
+  }
+  
 }

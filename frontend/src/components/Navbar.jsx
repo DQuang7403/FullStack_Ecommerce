@@ -28,7 +28,6 @@ export default function Nav_bar() {
             <div className="drawer z-50">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
-                {/* Page content here */}
                 <div className="tooltip tooltip-bottom" data-tip="Menu">
                   <label
                     tabIndex={0}
@@ -41,7 +40,7 @@ export default function Nav_bar() {
               </div>
               <div className="drawer-side z-10 ">
                 <label htmlFor="my-drawer" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content menu-open">
+                <ul className="menu p-4 w-80 min-h-full bg-white text-base-content menu-open">
                   <div className={`flex items-center mb-4`}>
                     <label
                       tabIndex={0}

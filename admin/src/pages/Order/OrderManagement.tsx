@@ -72,7 +72,7 @@ export default function OrderManagement() {
     });
   }, [filterOrders]);
   return (
-    <div className="overflow-auto bg-white m-6">
+    <div className="overflow-auto bg-white sm:m-6">
       <TopSection query={query} setQuery={setQuery} titleRef={titleRef} />
       <Table title={OrderTitle} RowsDisplay={rowsDisplay} />
     </div>
@@ -85,9 +85,9 @@ type TopSectionProps = {
 };
 const TopSection = (props: TopSectionProps) => {
   return (
-    <div className="flex items-center justify-between m-4">
-      <div className="flex items-center gap-2 border-b-2">
-        <IoMdSearch className="text-2xl rounded-lg" />
+    <div className="flex items-center justify-between m-4 flex-wrap gap-2">
+      <div className="flex items-center gap-2 border-b-2 flex-wrap">
+        <IoMdSearch className="text-2xl rounded-lg hidden sm:block" />
         <input
           type="text"
           className="h-8 focus:outline-none "

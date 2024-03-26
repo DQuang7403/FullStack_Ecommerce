@@ -91,7 +91,6 @@ export default function ProductPage() {
         wishList.find((item) => item.id === data?.id) ? true : false,
       );
       setSelectedImg(data?.thumbnail);
-      console.log(data);
     };
     fetchProductDetail();
   }, [product.id, wishList]);
@@ -109,7 +108,7 @@ export default function ProductPage() {
                 }`}
                 onClick={() => setSelectedImg(img)}
               >
-                <img loading="lazy" src={img} className="w-full object-cover" />
+                <img loading="lazy" src={img} className=" h-full object-cover" />
               </div>
             );
           })}
@@ -129,7 +128,7 @@ export default function ProductPage() {
             {productDetail?.stock > 0 ? (
               <span className="text-success"> In Stock</span>
             ) : (
-              <span className="text-error"> | Out of Stock</span>
+              <span className="text-error"> Out of Stock</span>
             )}
           </div>
           <div className="text-2xl ">${productDetail?.price}</div>
@@ -161,7 +160,9 @@ export default function ProductPage() {
             </div>
             <form onSubmit={handleSubmit} method="POST">
               <button
-                className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-10"
+                className={`btn bg-primary hover:bg-primary_hover text-white my-10 ${
+                  productDetail?.stock > 0 ? "" : "btn-disabled"
+                }`}
                 type="submit"
               >
                 Add to cart

@@ -12,7 +12,19 @@ def get_trending_products():
     conn = sqlite3.connect(sqldbname)
     cur = conn.cursor()
     product_list = []
-    sqlcommand = "SELECT product_id, title, stocks, price from Products where Products.title in (select DISTINCT product_name from Order_details group by product_name order by  count(*) DESC limit 0, 6)"
+    sqlcommand = """
+    SELECT product_id, title, price, stocks, 
+        (SELECT COUNT(product_name) FROM Order_details WHERE product_name = Products.title) AS totalOrder
+    FROM Products
+    WHERE title IN (
+        SELECT product_name 
+        FROM Order_details 
+        GROUP BY product_name 
+        ORDER BY COUNT(*) DESC 
+        LIMIT 6
+    )
+    ORDER BY totalOrder DESC;
+    """
     cur.execute(sqlcommand)
     products = cur.fetchall()
     for product in products:
@@ -34,10 +46,16 @@ def get_best_selling():
     cursor = conn.cursor()
     sqlcommand = """
     SELECT product_id, title, price, stocks, 
-    (SELECT COUNT(product_name) FROM Order_details WHERE product_name = Products.title) AS totalOrder
+       (SELECT COUNT(product_name) FROM Order_details WHERE product_name = Products.title) AS totalOrder
     FROM Products
     WHERE title IN (
-    SELECT product_name FROM Order_details GROUP BY product_name ORDER BY COUNT(*) DESC LIMIT 6 )
+        SELECT product_name 
+        FROM Order_details 
+        GROUP BY product_name 
+        ORDER BY COUNT(*) DESC 
+        LIMIT 6
+    )
+    ORDER BY totalOrder DESC;
     """
     cursor.execute(sqlcommand)
     products = cursor.fetchall()
@@ -71,3 +89,54 @@ def get_top_category():
         product_list.append({"category": product[0], "total_order": product[1]})
     conn.close()
     return jsonify(product_list)
+
+
+@graphInfo.route("/total_users", methods=["GET"])
+def get_users():
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute(
+        "select STRFTIME('%d/%m', create_at), count(*) as user_list from User group by date(create_at) limit 6"
+    )
+    users = cursor.fetchall()
+    user_list = []
+    for user in users:
+        user_list.append({"name": user[0], "stat": user[1]})
+    cursor.execute("select count(*) as total_user from User")
+    totals = cursor.fetchone()
+    conn.close()
+    return jsonify({"user_list": user_list, "total_user": totals[0]})
+
+
+@graphInfo.route("/total_profit", methods=["GET"])
+def get_profit():
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute(
+        "select  STRFTIME('%d/%m',Orders.order_id), sum(price) as totalProfit from Order_details, Orders where Order_details.order_id = Orders.order_id group by create_at ORDER by create_at LIMIT 7"
+    )
+    profit = cursor.fetchall()
+    profit_by_days = []
+    for day in profit:
+        profit_by_days.append({"name": day[0], "stat": day[1]})
+    cursor.execute("select round(sum(price)) as totalProfit from Order_details")
+    totals = cursor.fetchone()
+    conn.close()
+    return jsonify({"profit_by_days": profit_by_days, "total_profit": totals[0]})
+
+
+@graphInfo.route("/total_order", methods=["GET"])
+def get_order():
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    cursor.execute(
+        "select STRFTIME('%d/%m',Orders.order_id), count(*) from Order_details, Orders where Order_details.order_id = Orders.order_id group by create_at ORDER by create_at LIMIT 7"
+    )
+    totals = cursor.fetchall()
+    order_by_days = []
+    for day in totals:
+        order_by_days.append({"name": day[0], "stat": day[1]})
+    cursor.execute("select count(*) from Order_details")
+    totals = cursor.fetchone()
+    conn.close()
+    return jsonify({"order_by_days": order_by_days, "total_order": totals[0]})

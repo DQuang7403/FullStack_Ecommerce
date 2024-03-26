@@ -14,7 +14,7 @@ export default function OrderPage() {
     fetchOrder();
   }, []);
   return (
-    <div className="overflow-x-auto mt-10 pb-5">
+    <div className="overflow-x-auto my-20 pb-5 ">
       <table className="table table-lg table-pin-rows table-pin-cols">
         <thead>
           <tr>

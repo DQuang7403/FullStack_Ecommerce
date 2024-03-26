@@ -147,9 +147,12 @@ export function ProductsProvider({ children }: ContextProviderProps) {
         if (res.status === 201) {
           Swal.fire({
             icon: "success",
-            title: data.message,
+            title: "Product deleted successfully",
+            timer: 1500,
           });
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         } else {
           Swal.fire({
             icon: "error",

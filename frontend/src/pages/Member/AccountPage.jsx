@@ -192,13 +192,13 @@ export default function AccountPage() {
       <div className="">
         <div
           onClick={() => setRefresh(!refresh)}
-          className="btn btn-outline border-0 text-black hover:bg-inherit hover:text-[#DB4444]"
+          className="btn btn-outline border-0 text-black hover:bg-inherit hover:text-primary"
         >
           Cancel
         </div>
         <button
           type="submit"
-          className="btn bg-[#DB4444] hover:bg-[#BB232D] text-white my-4 px-10"
+          className="btn bg-primary hover:bg-primary_hover text-white my-4 px-10"
         >
           Save Changes
         </button>
