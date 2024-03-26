@@ -8,7 +8,7 @@ import json
 import datetime
 
 checkout = Blueprint("checkout", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(checkout, origins="http://localhost:5173", supports_credentials=True)
 
 load_dotenv()

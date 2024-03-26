@@ -4,7 +4,7 @@ from flask_cors import CORS
 import datetime
 
 review = Blueprint("review", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(review, origins="http://localhost:5173", supports_credentials=True)
 
 

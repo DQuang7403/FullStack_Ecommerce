@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required
 from .auth import authenticated_user
 
 products = Blueprint("products", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(products, origins="http://localhost:5173")
 CORS(products, origins="http://localhost:3000")
 

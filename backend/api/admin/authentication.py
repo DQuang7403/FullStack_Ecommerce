@@ -12,7 +12,7 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
 adminAuth = Blueprint("adminAuth", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(adminAuth, origins="http://localhost:3000", supports_credentials=True)
 
 

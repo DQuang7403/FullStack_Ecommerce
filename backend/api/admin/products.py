@@ -3,7 +3,7 @@ import sqlite3
 from flask_cors import CORS, cross_origin
 
 admin_products = Blueprint("admin_products", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(admin_products, origins="http://localhost:3000", supports_credentials=True)
 
 

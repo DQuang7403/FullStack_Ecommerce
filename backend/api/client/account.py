@@ -4,7 +4,7 @@ from flask_cors import CORS
 from werkzeug.security import generate_password_hash
 
 account = Blueprint("account", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(account, origins="http://localhost:5173", supports_credentials=True)
 
 

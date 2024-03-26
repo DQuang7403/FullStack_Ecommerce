@@ -3,7 +3,7 @@ from flask_cors import CORS
 import sqlite3
 
 admin_order = Blueprint("admin_order", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(admin_order, origins="http://localhost:3000", supports_credentials=True)
 
 

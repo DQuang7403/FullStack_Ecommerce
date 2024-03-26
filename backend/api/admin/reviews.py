@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify, request
 from flask_cors import CORS
 
 reviews = Blueprint("reviews", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(reviews, origins="http://localhost:3000", supports_credentials=True)
 
 

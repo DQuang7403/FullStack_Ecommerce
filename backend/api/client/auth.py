@@ -13,7 +13,7 @@ from flask_jwt_extended import (
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint("auth", __name__)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 CORS(auth, origins="http://localhost:5173", supports_credentials=True)
 
 

@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash
 
 users = Blueprint("users", __name__)
 CORS(users, origins="http://localhost:3000", supports_credentials=True)
-sqldbname = "backend/Ecommerce.db"
+sqldbname = "Ecommerce.db"
 
 
 @users.route("/users", methods=["GET"])
