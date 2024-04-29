@@ -52,7 +52,7 @@ Here are some screenshots showcasing the UI of TechTopia:
 4. **Admin Dashboard**:
 ![Admin Dashboard](Screenshot/AdminDashboard.png)
   
-- See more on the screenshot folder
+- See more in the screenshot folder
 
 ## Installation
 
