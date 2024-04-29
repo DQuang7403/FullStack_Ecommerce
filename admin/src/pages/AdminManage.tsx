@@ -53,7 +53,7 @@ export default function AdminManage() {
             credentials: "include",
           },
         );
-        const data = await res.json();
+        // const data = await res.json();
         if (res.status === 201) {
           Swal.fire({
             icon: "success",
@@ -71,9 +71,24 @@ export default function AdminManage() {
       }
     });
   };
-
+  const filterEmployees: EmployeeType[] = useMemo(() => {
+    return employees.filter((employee) => {
+      const title = titleRef.current?.value;
+      switch (title) {
+        case "employee_id":
+          return employee.employee_id.toString().includes(query);
+        case "email":
+          return employee.email.toLowerCase().includes(query.toLowerCase());
+        default:
+          return (
+            employee.firstname.toLowerCase().includes(query.toLowerCase()) ||
+            employee.lastname.toLowerCase().includes(query.toLowerCase())
+          );
+      }
+    });
+  }, [query, employees]);
   const rowsDisplay = useMemo(() => {
-    return employees.map((employee: EmployeeType) => {
+    return filterEmployees.map((employee: EmployeeType) => {
       return (
         <tr key={employee.employee_id} className={` font-semibold`}>
           <td>{employee.employee_id}</td>
@@ -99,7 +114,7 @@ export default function AdminManage() {
         </tr>
       );
     });
-  }, [employees]);
+  }, [filterEmployees]);
 
   return (
     <div className="overflow-auto bg-white sm:m-6 ">
@@ -135,9 +150,9 @@ function TopSection(props: TopSectionProps) {
           />
         </div>
         <select ref={props.titleRef}>
-          <option value="title">Name</option>
-          <option value="productId">ID</option>
-          <option value="price">Email</option>
+          <option value="name">Name</option>
+          <option value="employee_id">ID</option>
+          <option value="email">Email</option>
         </select>
         <button className="btn btn-sm" onClick={() => props.setOpen(true)}>
           Add New +

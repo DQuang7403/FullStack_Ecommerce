@@ -7,7 +7,7 @@
   --ligth-gray: #F2F2F2,
 }
 
-.custom-caurosel{
+.custom-carousel{
   display: inline-flex;
   overflow-x: scroll;
   /* scroll-snap-type: x mandatory; */
@@ -15,7 +15,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.custom-caurosel::-webkit-scrollbar{
+.custom-carousel::-webkit-scrollbar{
   height: .5rem;
 }
 ::-webkit-scrollbar {

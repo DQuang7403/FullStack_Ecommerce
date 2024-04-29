@@ -49,7 +49,7 @@ export default function ProductByCategory() {
 
       <div
         ref={product}
-        className="custom-caurosel gap-4 md:flex md:flex-wrap md:justify-evenly max-w-full mt-10 carousel-center p-4  bg-neutral rounded-box"
+        className="custom-carousel gap-4 md:flex md:flex-wrap md:justify-evenly max-w-full mt-10 carousel-center p-4  bg-neutral rounded-box"
       >
         {products.map((product) => {
           return <ProductCard key={product?.id} product={product} />;

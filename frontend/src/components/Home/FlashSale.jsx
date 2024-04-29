@@ -67,7 +67,7 @@ export default function FlashSale() {
       </div>
       <div
         ref={flashSaleSlide}
-        className="custom-caurosel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box"
+        className="custom-carousel scroll-smooth max-w-full carousel-center p-4 space-x-4 rounded-box"
       >
         {loading ? (
           <span className="loading loading-spinner loading-md align-middle"></span>

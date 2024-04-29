@@ -66,7 +66,7 @@ export default function AllProduct() {
 
       <div
         ref={product}
-        className="custom-caurosel gap-4 lg:flex lg:flex-wrap lg:justify-evenly max-w-full mt-10 carousel-center p-4 rounded-box"
+        className="custom-carousel gap-4 lg:flex lg:flex-wrap lg:justify-evenly max-w-full mt-10 carousel-center p-4 rounded-box"
       >
         {loading ? (
           <span className="loading loading-spinner loading-md align-middle"></span>

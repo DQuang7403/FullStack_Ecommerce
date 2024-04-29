@@ -53,7 +53,7 @@ export default function CategoriesSection() {
       </div>
       <div
         ref={category}
-        className="flex items-center justify-between gap-4 py-3 mt-10 custom-caurosel max-w-full carousel-center"
+        className="flex items-center justify-between gap-4 py-3 mt-10 custom-carousel max-w-full carousel-center"
       >
         {Categories.map((category) => {
           return (

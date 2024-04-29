@@ -45,7 +45,7 @@ export function SidebarProvider({ children }: ContextProviderProps) {
   useEffect(() => {
     const handler = () => {
       if (!isSmallScreen()) {
-        setIsLargeOpen(false);
+        setIsSmallOpen(false);
       }
       window.addEventListener("resize", handler);
     };

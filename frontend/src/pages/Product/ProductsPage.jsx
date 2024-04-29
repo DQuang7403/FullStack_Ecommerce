@@ -30,7 +30,7 @@ export default function ProductsPage() {
         </h3>
       </div>
 
-      <div className="custom-caurosel md:justify-evenly gap-4 md:flex md:flex-wrap max-w-full mt-10 carousel-center p-4 rounded-box">
+      <div className="custom-carousel md:justify-evenly gap-4 md:flex md:flex-wrap max-w-full mt-10 carousel-center p-4 rounded-box">
         {products.length === 0 ? (
           <div className="text-white text-2xl text-center my-10">
             No products found !!!

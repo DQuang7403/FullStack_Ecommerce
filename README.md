@@ -15,6 +15,7 @@ TechTopia is an ecommerce platform developed using full-stack technologies. It p
 - **Checkout Process**: Secure payment gateway integration for seamless transactions.
 - **Seller Dashboard**: Sellers can manage their product listings, inventory, and orders.
 - **Admin Panel**: Admin can manage users, products, categories, and monitor system activities.
+- **Mobile-friendly**: Provide responsive interfaces that are easy to navigate and interact with on smaller screens.
 
 ## Technologies Used
 
@@ -23,6 +24,7 @@ TechTopia is an ecommerce platform developed using full-stack technologies. It p
   - JavaScript, TypeScript (ReactJS)
   - DaisyUI (styling components for TailwindCSS)
   - TailwindCSS (for styling)
+  - Recharts, sweetalert2, ...
 
 - **Backend**:
   - Flask
@@ -49,6 +51,9 @@ Here are some screenshots showcasing the UI of TechTopia:
 
 4. **Admin Dashboard**:
 ![Admin Dashboard](Screenshot/AdminDashboard.png)
+  
+- See more on the screenshot folder
+
 ## Installation
 
 1. Clone the repository:

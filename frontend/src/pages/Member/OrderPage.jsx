@@ -20,8 +20,8 @@ export default function OrderPage() {
           <tr>
             <th></th>
             <td>Order ID</td>
-            <td>Order Date</td>
             <td>Satus</td>
+            <td>Order Date</td>
             <td>Order Total</td>
             <td>View Details</td>
           </tr>

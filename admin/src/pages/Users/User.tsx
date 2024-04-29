@@ -134,7 +134,7 @@ export const deleteUser = async (id: number) => {
           credentials: "include",
         },
       );
-      const data = await res.json();
+      // const data = await res.json();
       if (res.status === 200) {
         Swal.fire({
           icon: "success",

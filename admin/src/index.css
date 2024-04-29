@@ -10,7 +10,7 @@ html,
   padding: 0;
 }
 
-.custom-caurosel::-webkit-scrollbar {
+.custom-carousel::-webkit-scrollbar {
   height: 0.5rem;
 }
 ::-webkit-scrollbar {
